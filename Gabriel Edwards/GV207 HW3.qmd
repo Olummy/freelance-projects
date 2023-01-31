@@ -1,0 +1,30 @@
+---
+title: "GV207 HW3"
+author: "Gabriel Edwards"
+format: docx
+editor: visual
+---
+
+# Question 1: Hypothesis
+
+* Null hypothesis ($H_0$): The effect of number of years of compulsory primary and secondary education on GDP per capita is zero.
+
+* Alternative hypothesis ($H_1$): The effect of number of years of compulsory primary and secondary education on GDP per capita is not zero.
+
+
+# Question 2: Dependent variable and Measurement
+
+* The dependent variable (DV) is the GDP per capita. It's a national indicator that is measured annually and can be sourced from the world bank data repository which is available as a package in R dubbed `WDI`. The level of measurement for the GDP per capita is **continuous**.
+
+# Question 3: Independent variable and Measurement
+
+* The independent variable (IV) is the number of years of compulsory primary and secondary education. It's a national statistic that is made public by UNESCO. It's also available as an indicator in the R package called `WDI`. The level of measurment for the independent variable is **integer** which is a subset of continuous scale of measurement.
+
+# Question 4: Statistical Test
+
+* Linear regresssion would be used to estatblish a functional relationship between the dependent variable and the independent variable. Thereafter, a `linear hypothesis` procedure would be carried out to test the hypothesis.
+
+
+# Question 5: Test Statistic
+
+* The **F** statistic from the linear hypothesis procedure is the test statistic that would be used to determine whether or not the relationship between X and Y is significant.

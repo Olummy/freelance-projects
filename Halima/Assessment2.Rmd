@@ -1,0 +1,90 @@
+---
+title: "Assessment 2"
+author: "Halimah"
+date: "`r Sys.Date()`"
+output: 
+  word_document: 
+    highlight: tango
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE, comment = "")
+```
+
+
+
+```{r packages}
+library(tidyverse)
+library(DescTools)
+library(mice)
+library(stargazer)
+library(car)
+options(scipen = 999, digits = 2)
+```
+
+
+## Question 2
+
+```{r}
+DiabetesData_Q2 <- read_rds("DiabetesData_Assignment_Q2.RData")
+```
+
+
+### (A) Data Summary
+
+```{r}
+DiabetesData_Q2 %>% 
+  select(-ID) %>% 
+  Desc(.)
+```
+
+* The dataset contains 11742 observations with 11 variables. Only 5851(49.8%) complete cases were found in the dataset. 
+
+* The `Gender` variable has no missing value. On the other hand, the `BMI` variable has the most missing values with 3936 (33.5%) missing values.
+
+
+### (B) Missing Values Imputation
+
+```{r message=FALSE}
+set.seed(3333)
+
+new_q2_df <- mice(DiabetesData_Q2, method = "rf") %>% 
+  complete()
+```
+
+## Question 3
+
+```{r}
+DiabetesData_Q3 <- read_rds("DiabetesData_Assignment_Q3.RData") %>% complete()
+```
+
+
+### (A) Fitting a model
+
+**Hypothesis**
+
+* Null hypothesis: $\beta_{MetforminTreatment} = 0$
+* Alternative hypothesis:  $\beta_{MetforminTreatment} \neq 0$
+
+```{r}
+model1 <- lm(HbA1c ~ MetforminTreatment, data = DiabetesData_Q3)
+
+stargazer(model1, type = "text")
+```
+
+**Hypothesis Testing**
+
+```{r}
+linearHypothesis(model1, "MetforminTreatment=0")
+```
+
+
+### (B) Model Discussion
+
+
+* The linear hypothesis test result suggests that the estimate of `MetforminTreatment` is significantly different from zero. This implies that `MetforminTreatment` has a causal effect on `HbA1c`. 
+* For the missing value imputation, it is assume that the missing data are missing at Random (MAR), which mean that the probability that a value is missing depends only on observed value and can be predicted using them.
+
+
+
+

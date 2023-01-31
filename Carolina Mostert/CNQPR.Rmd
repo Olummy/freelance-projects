@@ -1,0 +1,190 @@
+---
+title: "CNQP3"
+output: pdf_document
+date: "2023-01-03"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, comment = "")
+```
+
+# Load packages
+
+```{r}
+library(tidyverse)
+library(scales)
+library(performance)
+library(stargazer)
+options(scipen = 999, digits = 2)
+```
+
+
+# Read dataset
+
+```{r}
+brazil <- read.csv("brazil.csv")
+```
+
+
+# Question 1
+
+## 1a.
+
+```{r}
+sum(is.na(brazil$council.age))
+```
+* The author have no data on the age of the health council for 99 of the municipalities.
+
+
+## 1b
+
+```{r, fig.cap="Boxplot of the health council age"}
+
+ggplot(data = brazil, aes(x = 1, y = council.age)) +
+  geom_boxplot(outlier.fill = "red", outlier.colour = "red") +
+  labs(title = "Boxplot of the health council age",
+       y = "Age",
+       x = "") +
+  theme_minimal() +
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        plot.title =element_text(size = 14) ) 
+  
+```
+
+* The boxplot of the health council age above implies a median of 12 and 1st quartile and 3rd quartile values of 8 and 14 respectively.
+
+* Two noticeable outliers were observed in the boxplot. The outliers are indicated with a red filled color.
+
+## 1c.
+
+```{r}
+summary(brazil$corruption)
+```
+* The mean and median of the `corruption` variable was observed to be 19 and 17 respectively.
+
+* The mean is somewhat higher than the median as it would take into consideration all the values in the sample. As a result, the mean can be easily affected by an outlier. On the other hand, the median is a robust statistic as it's not easily affected by outliers.
+
+* The estimate of the median implies that on the average, the corruption index of the municipalities that the author considered can be taken to be 17.
+
+
+# Question 2
+
+## 2a.
+
+```{r, fig.cap= "Simple linear regression"}
+model1 <- lm(corruption ~ council.age, data = brazil)
+stargazer::stargazer(model1, type = "text")
+```
+
+## 2b.
+
+* From the output of the simple linear regression above, it could be deduced that both the intercept and the `council.age` variates are significant at 5% level of significant.
+
+* The estimate of the `council.age` implies that there would be on the average a 0.340 reduction in the corruption index as the age of the health council increases by a unit.
+
+* On the other hand, the corruption index for a health council with age of zero is expected to be 23.0. This is the estimate of the intercept.
+
+* The model is significant at 5% level of significant as the p-value of the F-statistic is less than 0.05.
+
+
+## 2c.
+
+We can interpret the regression coefficient as the average effect of council age on corruption under the following assumptions:
+
+* Linear relationship: The relationship between `corruption` and `council.age` is expected to be linear.
+
+* Independence: Observations are independent of each other
+
+* Homoscedasticity: The variance of the residual is the same for any value of `council.age`.
+
+* Normality: For any fixed value of corruption, council.age is normally distributed.
+
+
+# Question 3
+
+## 3a.
+
+```{r, fig.cap="Multiple and simple linear models"}
+model2 <- lm(corruption ~ council.age + margin + reelected + poverty, data = brazil)
+
+stargazer(model1, model2, type = "text")
+
+```
+
+## 3b.
+
+* The estimated coefficient for margin in the model above is 0.050. This implies an increase in the corruption index for any elected major with a wide margin over the runner-up candidate in the previous election. 
+
+* Thus, the wider the margin between the elected major and the runner-up candidate, the higher the average corruption index.
+
+## 3c.
+
+* The model fit for the multiple linear regression seems to be a better fit than the simple linear regression as the adjusted $R^2$ for the multiple linear regression (0.033 0r 3.3%) is significantly higher than the simple linear regression (0.005 or 0.5%). Both models are significant at 5% level of significant.
+
+
+## 3d.
+
+```{r}
+test_df <- data.frame(council.age = c(10),
+                      reelected = c(1),
+                      margin = c(12),
+                      poverty = c(50))
+
+predict(model2, newdata = test_df)
+```
+
+* The predicted corruption index score for a municipality health council that is 10 years old, that has a re-elected Major, where the Major won the last election by 12 percentage points, and where the poverty level is 50 is **19**.
+
+
+# Question 4
+
+## 4a.
+
+```{r, fig.cap="Multiple linear model with interaction"}
+model3 <- lm(corruption ~ council.age + margin + reelected + poverty + council.age*reelected, data = brazil)
+
+stargazer(model2, model3, type = "text")
+```
+
+## 4b.
+
+* The estimated coefficient for margin in the model above is 0.054. This implies an increase in the corruption index for any elected major with a wide margin over the runner-up candidate in the previous election. 
+
+* Thus, the wider the margin between the elected major and the runner-up candidate, the higher the average corruption index.
+
+
+## 4c.
+
+```{r}
+confint(model3, "poverty")
+```
+
+* For the multiple model with interaction, the 95% confidence interval for the estimate of `poverty` is obtained to be (0.095, 0.21).
+
+## 4d.
+
+```{r}
+cor.test(brazil$corruption, brazil$council.age)
+```
+
+* From the Pearson product-moment correlation above, it could be deduced that there exist a low negative linear relationship between `corruption` and `council.age`.
+
+## 4e.
+
+```{r}
+test_df2 <- data.frame(council.age = c(0,20),
+                      reelected = c(1,0),
+                      margin = c(10, 10),
+                      poverty = c(50, 50))
+
+predict(model3, newdata = test_df2)
+
+plot(predict(model3, newdata = test_df2), ylab = "Predicted Corruption Index", xlab = "")
+```
+
+* The plot above also shows that as the `council.age` increases, the corruption index decreases. This is evident as the corruption index for `council.age == 0` is 24 and the corruption index for `council.age == 20` is 19.
+
+
+
+

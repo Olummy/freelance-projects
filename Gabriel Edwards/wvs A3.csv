@@ -1,0 +1,1001 @@
+year,nation,peoptrust,lifesat,decision,marital,war,leftrigh,religious,divorce,suicide,proud,sex,age,education,ethnic
+1990,France,careful,7,6,married,yes,3,relig,7,3,quite,male,55,16,not applicable
+1990,Britain,careful,8,5,married,yes,5,not rel,never,never,very,female,60,14,not applicable
+1990,Britain,careful,6,4,married,no,left,not rel,never,never,very,female,59,14,not applicable
+1990,USA,careful,8,8,widow,yes,8,relig,5,never,very,male,53,21,white
+1990,Sweden,careful,8,8,married,yes,4,relig,4,never,very,female,33,19,not applicable
+1990,Sweden,trusted,satisf,grt deal,married,yes,3,not rel,never,never,quite,female,38,"dk, na",not applicable
+1990,Britain,trusted,7,3,married,yes,7,atheist,8,never,quite,male,37,"dk, na",not applicable
+1990,France,careful,4,4,divorced,yes,5,relig,6,never,quite,female,54,16,not applicable
+1990,Britain,trusted,9,8,single,yes,4,not rel,5,never,very,male,30,16,not applicable
+1990,USA,careful,satisf,grt deal,single,yes,5,relig,6,3,very,female,21,"dk, na",white
+1990,USA,trusted,satisf,9,married,yes,9,relig,never,never,very,male,62,15,white
+1990,France,trusted,3,5,married,yes,5,not rel,never,never,notatall,male,71,14,not applicable
+1990,France,careful,8,8,married,yes,5,relig,5,never,quite,female,54,12,not applicable
+1990,Britain,trusted,7,8,married,yes,3,relig,4,2,not very,male,31,17,not applicable
+1990,Britain,trusted,3,5,married,no,4,not rel,7,6,quite,female,56,18,not applicable
+1990,France,careful,7,9,single,yes,3,not rel,5,5,very,male,32,17,not applicable
+1990,France,careful,dissatis,3,widow,no,4,atheist,5,never,quite,male,82,13,not applicable
+1990,France,careful,satisf,6,married,yes,6,not rel,never,never,quite,male,65,14,not applicable
+1990,Sweden,trusted,7,7,single,no,6,relig,5,5,quite,male,22,19,not applicable
+1990,USA,trusted,9,9,married,no,5,relig,8,never,very,female,32,21,white
+1990,Britain,trusted,5,3,married,yes,left,relig,never,never,not very,male,42,16,not applicable
+1990,France,careful,8,7,as marr,yes,5,not rel,4,2,very,male,36,17,not applicable
+1990,France,trusted,7,5,single,no,4,atheist,8,5,not very,female,25,21,not applicable
+1990,Britain,careful,5,6,as marr,yes,left,not rel,5,3,quite,female,19,16,not applicable
+1990,France,careful,5,8,single,no,7,atheist,5,2,quite,male,22,21,not applicable
+1990,USA,trusted,8,8,divorced,yes,6,relig,7,5,very,female,38,21,white
+1990,Britain,careful,7,3,married,yes,6,relig,5,5,very,female,29,16,not applicable
+1990,USA,careful,5,6,single,yes,6,relig,6,7,very,male,41,19,black
+1990,Britain,careful,7,7,married,yes,7,not rel,always,2,very,female,33,16,not applicable
+1990,Britain,careful,5,6,widow,yes,5,not rel,2,6,very,female,59,14,not applicable
+1990,Britain,careful,satisf,9,single,yes,6,relig,6,never,very,female,53,15,not applicable
+1990,USA,careful,5,7,separat,yes,5,relig,5,4,very,female,52,17,white
+1990,Sweden,trusted,satisf,9,married,yes,5,relig,never,never,very,female,44,"dk, na",not applicable
+1990,USA,trusted,satisf,9,married,yes,7,relig,5,never,very,female,54,21,white
+1990,USA,careful,satisf,5,married,no,right,relig,5,never,very,female,30,18,white
+1990,USA,careful,satisf,grt deal,married,yes,5,relig,always,never,very,female,42,21,white
+1990,USA,trusted,8,6,married,yes,6,relig,5,never,very,male,75,17,white
+1990,Britain,trusted,7,7,widow,yes,3,relig,2,never,quite,male,81,12,not applicable
+1990,USA,careful,9,grt deal,married,no,5,relig,7,never,quite,female,45,12,black
+1990,Britain,careful,9,7,married,yes,2,relig,never,never,very,male,79,14,not applicable
+1990,Britain,careful,dk,grt deal,married,yes,5,relig,5,never,not very,female,41,16,not applicable
+1990,USA,trusted,satisf,9,married,yes,3,relig,never,never,very,male,50,18,white
+1990,USA,careful,7,6,as marr,yes,5,relig,always,never,very,male,31,16,white
+1990,Sweden,trusted,5,5,divorced,yes,6,not rel,always,2,quite,female,53,21,not applicable
+1990,Britain,trusted,8,8,married,yes,right,relig,never,never,very,male,74,16,not applicable
+1990,Britain,careful,9,8,married,yes,right,relig,never,never,very,female,71,12,not applicable
+1990,France,careful,9,7,single,yes,6,relig,5,5,very,female,39,17,not applicable
+1990,USA,trusted,9,9,single,no,3,relig,5,never,quite,female,22,21,white
+1990,USA,careful,7,grt deal,married,yes,8,not rel,5,never,very,male,33,"dk, na",white
+1990,USA,trusted,8,6,married,yes,3,not rel,5,2,very,male,28,20,white
+1990,France,careful,5,grt deal,married,yes,right,not rel,5,5,not very,female,40,21,not applicable
+1990,USA,trusted,9,5,married,no,5,relig,3,4,very,male,71,21,white
+1990,USA,trusted,8,8,married,no,5,relig,6,never,very,female,45,21,white
+1990,USA,trusted,satisf,none,widow,yes,5,relig,6,8,very,female,47,21,white
+1990,Britain,trusted,8,9,married,yes,5,relig,5,never,very,female,33,16,not applicable
+1990,France,careful,6,5,married,no,3,relig,8,8,quite,female,42,14,not applicable
+1990,USA,trusted,8,grt deal,married,yes,6,relig,5,never,very,male,31,21,white
+1990,Britain,trusted,8,grt deal,widow,yes,left,relig,5,never,very,female,75,14,not applicable
+1990,Britain,trusted,6,7,married,no,3,not rel,6,never,quite,female,54,16,not applicable
+1990,Sweden,careful,satisf,none,widow,yes,5,not rel,7,never,very,female,62,"dk, na",not applicable
+1990,Britain,trusted,7,4,married,yes,9,not rel,7,7,very,female,29,18,not applicable
+1990,Britain,trusted,dissatis,none,married,yes,4,relig,8,5,very,female,59,14,not applicable
+1990,Britain,careful,satisf,grt deal,single,yes,5,relig,9,8,very,female,21,21,not applicable
+1990,USA,careful,8,6,single,no,left,not rel,9,5,not very,male,49,21,black
+1990,USA,careful,9,8,married,yes,8,relig,7,never,very,male,54,16,black
+1990,Britain,trusted,satisf,8,married,yes,5,relig,5,7,very,female,51,17,not applicable
+1990,USA,careful,5,7,married,no,9,relig,never,2,very,male,71,17,white
+1990,USA,careful,8,5,divorced,yes,4,relig,6,never,very,male,61,17,white
+1990,USA,trusted,7,9,single,yes,2,relig,always,5,very,female,24,21,white
+1990,USA,trusted,9,8,married,yes,5,relig,8,2,very,male,59,17,white
+1990,Britain,careful,8,8,divorced,yes,8,relig,6,never,very,female,72,15,not applicable
+1990,Britain,trusted,7,5,married,yes,6,relig,5,never,very,female,30,18,not applicable
+1990,France,trusted,8,none,single,no,3,relig,3,never,not very,male,25,"dk, na",not applicable
+1990,Sweden,trusted,8,7,married,yes,5,relig,4,never,very,male,50,"dk, na",not applicable
+1990,France,careful,8,5,single,no,6,relig,5,5,very,female,64,21,not applicable
+1990,Britain,careful,6,grt deal,single,no,5,not rel,6,5,quite,male,18,15,not applicable
+1990,USA,trusted,8,8,single,no,9,relig,5,never,quite,male,38,19,black
+1990,Britain,careful,5,6,married,yes,8,not rel,never,never,very,male,55,15,not applicable
+1990,USA,careful,5,6,single,no,5,not rel,2,2,not very,female,22,18,white
+1990,Sweden,careful,8,6,married,yes,6,not rel,9,4,quite,male,49,"dk, na",not applicable
+1990,USA,trusted,6,7,widow,yes,5,relig,5,5,very,female,45,18,white
+1990,USA,trusted,satisf,8,widow,yes,right,relig,4,never,very,female,79,16,white
+1990,Britain,careful,8,8,married,no,5,relig,5,never,quite,female,27,16,not applicable
+1990,Britain,careful,5,2,married,yes,5,not rel,8,4,very,female,40,17,not applicable
+1990,USA,trusted,8,8,married,yes,6,not rel,9,5,very,male,53,17,white
+1990,USA,trusted,9,grt deal,single,yes,6,relig,3,2,very,male,21,21,white
+1990,Sweden,trusted,8,8,married,yes,8,not rel,always,8,quite,male,74,"dk, na",not applicable
+1990,Britain,trusted,9,7,widow,no,8,not rel,9,2,very,female,54,16,not applicable
+1990,France,trusted,9,8,married,yes,7,relig,5,4,quite,male,25,21,not applicable
+1990,Britain,careful,5,7,widow,yes,6,not rel,5,5,very,female,90,16,not applicable
+1990,France,careful,5,5,as marr,yes,5,not rel,7,5,quite,female,26,21,not applicable
+1990,Britain,careful,9,9,married,yes,5,not rel,2,never,very,female,57,15,not applicable
+1990,USA,careful,satisf,9,married,yes,right,relig,never,never,very,female,37,20,black
+1990,USA,careful,7,6,single,no,5,relig,5,never,quite,female,21,21,white
+1990,Britain,trusted,7,grt deal,single,yes,7,not rel,7,never,very,female,19,20,not applicable
+1990,Britain,careful,8,8,widow,yes,4,relig,4,2,very,female,67,14,not applicable
+1990,USA,careful,satisf,9,as marr,yes,9,not rel,6,never,very,male,19,17,white
+1990,USA,trusted,9,9,married,yes,5,relig,9,3,very,male,61,18,white
+1990,Sweden,careful,6,grt deal,widow,yes,5,not rel,5,3,very,female,67,"dk, na",not applicable
+1990,France,trusted,6,5,separat,yes,8,relig,7,never,very,male,68,12,not applicable
+1990,Sweden,careful,8,7,married,yes,8,relig,6,2,not very,female,35,21,not applicable
+1990,Britain,trusted,8,5,married,no,5,not rel,5,never,quite,female,18,16,not applicable
+1990,USA,careful,7,9,married,yes,5,not rel,5,never,very,male,33,20,white
+1990,Britain,careful,7,7,single,no,3,relig,never,never,very,male,29,16,not applicable
+1990,USA,trusted,7,7,married,yes,7,relig,2,never,very,female,58,"dk, na",white
+1990,Britain,trusted,8,7,single,yes,4,relig,8,never,quite,female,59,16,not applicable
+1990,USA,careful,9,5,married,no,6,relig,never,never,quite,female,25,18,white
+1990,Sweden,trusted,7,7,divorced,yes,3,relig,9,6,not very,female,45,19,not applicable
+1990,France,careful,8,8,married,yes,5,relig,5,never,quite,male,25,18,not applicable
+1990,USA,trusted,9,grt deal,married,yes,9,relig,4,never,very,female,34,20,white
+1990,Britain,careful,9,9,married,yes,8,relig,5,never,very,male,54,21,not applicable
+1990,France,trusted,9,8,married,yes,left,relig,5,5,very,male,35,20,not applicable
+1990,Britain,trusted,8,8,married,yes,8,not rel,5,2,very,male,48,15,not applicable
+1990,USA,careful,7,8,separat,yes,7,relig,4,3,quite,male,38,21,white
+1990,Britain,careful,satisf,5,married,yes,right,relig,always,never,very,male,76,14,not applicable
+1990,USA,careful,7,8,married,yes,7,relig,2,2,quite,female,35,18,white
+1990,Britain,careful,9,9,married,yes,right,atheist,6,6,very,male,50,15,not applicable
+1990,Britain,careful,8,7,married,yes,5,relig,5,6,quite,female,57,17,not applicable
+1990,Britain,trusted,5,5,married,no,5,relig,5,never,quite,female,45,15,not applicable
+1990,USA,careful,7,7,widow,yes,6,relig,7,never,very,male,62,18,white
+1990,Britain,trusted,3,3,married,no,5,relig,never,never,quite,female,83,14,not applicable
+1990,USA,trusted,8,9,single,yes,3,not rel,6,3,very,male,31,21,black
+1990,Sweden,trusted,8,6,married,yes,7,relig,5,never,very,female,59,"dk, na",not applicable
+1990,Britain,trusted,9,8,single,yes,3,not rel,always,8,very,female,27,16,not applicable
+1990,France,careful,6,6,married,yes,9,relig,always,2,quite,female,43,14,not applicable
+1990,USA,trusted,8,9,married,no,7,relig,5,never,quite,female,27,21,white
+1990,USA,trusted,9,6,married,yes,7,relig,never,never,very,female,61,18,white
+1990,Sweden,careful,7,6,divorced,yes,5,not rel,5,6,quite,male,61,"dk, na",not applicable
+1990,Sweden,trusted,8,9,married,yes,8,not rel,9,never,not very,male,47,"dk, na",not applicable
+1990,USA,trusted,8,7,married,yes,7,relig,7,3,very,male,52,16,white
+1990,Britain,careful,satisf,3,married,yes,4,relig,6,7,quite,male,54,15,not applicable
+1990,Britain,careful,7,7,single,yes,5,not rel,7,never,very,female,26,16,not applicable
+1990,USA,trusted,satisf,9,married,yes,7,relig,5,never,very,male,61,21,white
+1990,Sweden,trusted,9,9,as marr,yes,8,relig,5,never,very,female,29,"dk, na",not applicable
+1990,France,trusted,4,7,single,no,3,not rel,always,6,quite,female,28,"dk, na",not applicable
+1990,USA,trusted,9,8,married,yes,5,relig,5,4,very,female,39,21,white
+1990,USA,trusted,satisf,grt deal,married,yes,5,relig,never,never,very,male,28,21,white
+1990,USA,careful,9,6,married,yes,6,relig,never,never,very,male,39,21,white
+1990,Britain,careful,8,none,married,no,left,not rel,always,never,quite,female,73,16,not applicable
+1990,USA,trusted,4,9,married,yes,5,relig,3,never,very,male,45,21,white
+1990,Sweden,trusted,9,8,divorced,yes,right,not rel,always,5,quite,female,41,21,not applicable
+1990,Britain,trusted,8,grt deal,single,yes,8,relig,always,5,very,male,65,13,not applicable
+1990,Britain,careful,2,5,married,no,7,relig,5,3,very,male,69,14,not applicable
+1990,Sweden,trusted,8,7,as marr,yes,4,not rel,5,6,quite,male,30,21,not applicable
+1990,USA,trusted,8,grt deal,married,yes,8,relig,never,never,very,female,61,"dk, na",white
+1990,USA,careful,8,8,married,yes,5,relig,5,5,very,male,51,17,white
+1990,Britain,trusted,7,6,married,no,4,not rel,7,never,not very,female,27,16,not applicable
+1990,USA,careful,3,9,divorced,yes,3,not rel,8,never,very,male,63,13,white
+1990,Britain,trusted,9,grt deal,married,yes,8,not rel,always,7,quite,male,51,16,not applicable
+1990,Sweden,trusted,9,8,married,yes,8,not rel,7,8,not very,male,68,21,not applicable
+1990,France,trusted,7,6,married,yes,7,not rel,5,3,very,female,60,20,not applicable
+1990,USA,trusted,4,6,divorced,yes,7,not rel,always,never,quite,female,45,20,white
+1990,France,careful,9,5,married,yes,8,not rel,never,6,very,female,30,17,not applicable
+1990,USA,careful,9,8,married,yes,5,relig,5,2,very,female,32,17,white
+1990,USA,trusted,satisf,8,divorced,no,6,relig,9,5,very,female,40,18,white
+1990,Britain,trusted,5,none,as marr,yes,6,not rel,always,always,quite,male,58,14,not applicable
+1990,USA,trusted,5,7,divorced,yes,3,relig,6,4,quite,female,50,21,white
+1990,USA,trusted,8,6,married,yes,5,relig,6,never,very,female,68,16,white
+1990,France,careful,5,4,married,no,5,relig,never,never,quite,male,35,16,not applicable
+1990,Sweden,trusted,7,4,single,yes,7,not rel,8,never,quite,male,39,"dk, na",not applicable
+1990,USA,careful,6,8,married,yes,8,relig,3,never,very,female,25,18,white
+1990,France,careful,5,5,married,yes,3,not rel,8,never,very,male,36,13,not applicable
+1990,USA,trusted,8,7,married,no,5,relig,8,never,very,male,33,18,white
+1990,Britain,careful,7,8,widow,yes,2,not rel,5,never,quite,female,80,"dk, na",not applicable
+1990,Sweden,careful,9,6,as marr,yes,2,relig,4,never,not very,female,33,21,not applicable
+1990,USA,trusted,satisf,9,married,yes,5,relig,4,never,very,male,73,"dk, na",white
+1990,Britain,trusted,8,8,as marr,yes,3,not rel,8,3,not very,female,29,20,not applicable
+1990,USA,careful,8,8,married,yes,right,relig,never,2,very,male,67,21,white
+1990,USA,careful,9,7,married,no,6,relig,3,3,very,male,67,"dk, na",white
+1990,USA,trusted,9,9,married,yes,6,relig,5,never,quite,male,70,14,white
+1990,Sweden,trusted,7,8,married,no,4,relig,7,3,quite,female,48,21,not applicable
+1990,USA,trusted,9,8,married,yes,5,relig,9,never,very,male,65,17,black
+1990,USA,careful,satisf,9,married,yes,9,relig,never,never,very,female,59,18,white
+1990,USA,careful,satisf,7,married,yes,5,not rel,6,never,very,male,57,19,white
+1990,Britain,trusted,7,5,married,yes,7,not rel,5,2,quite,male,32,21,not applicable
+1990,France,careful,9,9,married,yes,9,relig,2,never,quite,female,56,18,not applicable
+1990,USA,careful,9,6,married,yes,5,relig,never,never,very,male,71,18,white
+1990,Britain,trusted,8,7,married,yes,7,not rel,9,2,very,male,55,17,not applicable
+1990,Britain,trusted,3,3,single,yes,5,not rel,never,never,quite,male,32,16,not applicable
+1990,Sweden,trusted,7,5,married,yes,3,not rel,5,never,quite,male,62,"dk, na",not applicable
+1990,Britain,trusted,satisf,6,married,yes,6,relig,7,never,very,male,71,14,not applicable
+1990,France,careful,7,none,as marr,yes,2,relig,8,never,quite,female,29,16,not applicable
+1990,Sweden,careful,9,8,married,yes,5,not rel,6,4,very,female,52,"dk, na",not applicable
+1990,France,careful,5,2,divorced,no,4,atheist,5,6,very,female,40,16,not applicable
+1990,USA,trusted,8,7,married,yes,5,relig,3,never,very,female,86,18,white
+1990,France,trusted,7,7,single,no,6,not rel,always,9,quite,female,18,17,not applicable
+1990,France,careful,6,9,single,yes,5,not rel,8,never,very,male,31,21,not applicable
+1990,France,careful,9,grt deal,widow,yes,9,relig,4,5,quite,female,61,16,not applicable
+1990,USA,trusted,8,4,married,yes,4,relig,5,never,very,male,34,21,white
+1990,USA,careful,9,8,widow,no,8,relig,5,2,very,female,89,21,white
+1990,Sweden,trusted,8,5,married,yes,4,not rel,5,never,very,male,23,18,not applicable
+1990,USA,careful,5,5,married,yes,5,relig,7,4,very,male,37,"dk, na",black
+1990,USA,careful,4,6,divorced,no,5,relig,9,3,quite,male,54,18,white
+1990,USA,trusted,9,9,single,yes,6,relig,7,never,very,male,30,19,white
+1990,Sweden,careful,9,9,divorced,yes,9,not rel,9,5,very,male,45,"dk, na",not applicable
+1990,Sweden,trusted,8,grt deal,married,yes,4,not rel,always,7,very,male,43,21,not applicable
+1990,France,careful,7,5,married,yes,4,relig,5,never,very,female,62,12,not applicable
+1990,Britain,careful,5,8,widow,yes,left,relig,5,5,quite,female,87,14,not applicable
+1990,USA,careful,8,7,single,yes,5,relig,never,never,quite,male,19,21,white
+1990,USA,trusted,8,8,single,no,7,relig,6,never,very,female,21,18,white
+1990,USA,careful,8,7,married,yes,7,relig,6,never,very,male,50,21,white
+1990,France,careful,7,8,single,no,9,not rel,5,2,quite,male,19,18,not applicable
+1990,USA,trusted,7,grt deal,married,yes,3,relig,9,never,very,male,40,21,white
+1990,USA,trusted,8,8,married,yes,5,relig,6,never,very,female,32,18,not applicable
+1990,Sweden,trusted,8,6,married,yes,4,not rel,2,2,quite,male,62,"dk, na",not applicable
+1990,Sweden,careful,6,3,married,no,5,relig,5,never,not very,female,28,21,not applicable
+1990,Britain,careful,8,7,single,no,5,atheist,6,5,notatall,female,18,16,not applicable
+1990,Britain,careful,8,8,married,yes,5,relig,7,never,quite,male,55,15,not applicable
+1990,USA,careful,5,4,widow,yes,right,relig,never,never,very,female,70,12,white
+1990,France,careful,8,5,married,no,left,relig,2,3,quite,female,25,16,not applicable
+1990,Britain,careful,5,5,married,yes,2,not rel,always,7,very,female,19,16,not applicable
+1990,USA,trusted,8,3,single,yes,7,relig,3,never,very,male,22,21,white
+1990,Sweden,trusted,7,6,single,yes,9,atheist,always,always,not very,male,22,21,not applicable
+1990,Britain,trusted,8,4,divorced,yes,2,not rel,9,3,very,female,36,16,not applicable
+1990,USA,trusted,7,9,married,yes,5,not rel,5,3,quite,male,37,"dk, na",white
+1990,Sweden,trusted,7,8,married,yes,6,not rel,8,6,quite,female,30,21,not applicable
+1990,Britain,trusted,6,6,married,yes,7,relig,never,never,very,male,61,14,not applicable
+1990,USA,trusted,9,9,single,yes,3,relig,always,7,very,male,36,21,white
+1990,USA,trusted,8,5,married,yes,5,relig,5,never,very,male,39,19,white
+1990,USA,trusted,8,7,married,no,5,relig,6,6,very,female,58,21,white
+1990,Sweden,trusted,8,8,married,yes,8,not rel,8,2,notatall,male,47,21,not applicable
+1990,Britain,careful,satisf,8,married,no,left,relig,5,never,very,female,34,15,not applicable
+1990,USA,careful,4,3,married,no,left,relig,2,2,quite,male,40,21,white
+1990,Britain,trusted,7,6,married,yes,7,relig,5,5,very,male,41,17,not applicable
+1990,Sweden,careful,9,9,divorced,yes,left,not rel,always,never,very,female,62,"dk, na",not applicable
+1990,USA,trusted,8,9,married,yes,6,relig,8,5,very,male,40,18,white
+1990,USA,trusted,4,3,married,yes,6,relig,7,5,quite,female,38,21,white
+1990,USA,trusted,satisf,grt deal,married,yes,5,relig,always,always,very,female,43,21,white
+1990,USA,careful,4,5,widow,yes,5,relig,never,never,very,female,67,18,white
+1990,France,careful,9,grt deal,married,yes,left,not rel,5,2,quite,male,68,14,not applicable
+1990,USA,careful,8,grt deal,married,yes,8,relig,never,never,very,female,31,18,white
+1990,USA,trusted,7,8,married,yes,7,not rel,always,2,very,male,57,21,white
+1990,Britain,trusted,8,5,married,yes,6,relig,5,3,very,female,48,17,not applicable
+1990,Sweden,careful,6,8,single,yes,6,not rel,6,4,not very,female,26,21,not applicable
+1990,Britain,trusted,7,7,widow,yes,right,not rel,5,never,quite,female,72,21,not applicable
+1990,USA,trusted,dissatis,3,married,yes,5,relig,always,5,very,female,68,18,white
+1990,Britain,trusted,8,8,married,yes,8,relig,5,never,quite,female,38,21,not applicable
+1990,USA,careful,7,7,married,yes,6,relig,5,never,very,male,33,18,white
+1990,USA,trusted,8,8,married,yes,5,relig,always,never,very,female,31,19,white
+1990,Britain,careful,8,9,married,yes,8,not rel,5,2,quite,male,27,21,not applicable
+1990,Britain,careful,8,3,married,no,5,not rel,7,8,very,female,56,15,not applicable
+1990,Britain,trusted,9,8,married,yes,5,not rel,9,never,very,female,58,12,not applicable
+1990,Sweden,trusted,9,8,married,yes,8,relig,4,never,very,male,43,16,not applicable
+1990,Britain,trusted,satisf,8,married,yes,6,atheist,6,4,quite,male,33,16,not applicable
+1990,Sweden,careful,satisf,7,married,yes,3,not rel,5,never,quite,male,38,"dk, na",not applicable
+1990,USA,trusted,satisf,grt deal,married,yes,5,relig,2,never,very,male,55,17,white
+1990,France,careful,7,6,married,yes,3,relig,6,2,very,male,31,17,not applicable
+1990,USA,careful,7,7,married,yes,5,relig,6,never,very,male,72,18,white
+1990,Sweden,trusted,8,6,married,yes,7,not rel,3,3,very,female,26,18,not applicable
+1990,France,careful,7,8,married,yes,5,not rel,8,5,very,male,28,21,not applicable
+1990,USA,trusted,6,8,married,yes,5,relig,5,5,quite,male,26,17,white
+1990,Britain,careful,5,5,single,yes,5,relig,5,4,not very,female,23,17,not applicable
+1990,Britain,careful,satisf,grt deal,widow,yes,right,relig,never,never,very,male,64,14,not applicable
+1990,France,careful,8,7,married,yes,7,relig,never,never,very,male,45,16,not applicable
+1990,USA,careful,8,6,married,no,5,relig,4,never,very,female,44,17,white
+1990,USA,trusted,9,9,married,yes,8,relig,5,3,very,female,48,18,black
+1990,Britain,careful,9,8,married,yes,6,relig,7,3,very,male,85,14,not applicable
+1990,USA,careful,9,7,married,yes,5,relig,never,never,very,female,35,21,white
+1990,Britain,careful,satisf,8,married,yes,5,relig,5,never,very,female,55,16,not applicable
+1990,France,careful,5,5,single,yes,4,relig,8,never,very,female,28,20,not applicable
+1990,Sweden,careful,8,8,married,yes,9,relig,3,never,quite,female,35,21,not applicable
+1990,Britain,careful,satisf,8,married,yes,6,atheist,always,5,very,male,34,16,not applicable
+1990,Britain,trusted,6,4,married,yes,3,relig,never,3,very,female,82,13,not applicable
+1990,USA,trusted,7,8,married,no,5,not rel,8,5,very,female,32,21,white
+1990,Sweden,trusted,9,8,married,yes,4,relig,5,never,quite,male,38,"dk, na",not applicable
+1990,Sweden,trusted,7,8,divorced,yes,7,atheist,8,9,quite,female,51,21,not applicable
+1990,France,careful,9,6,married,yes,4,relig,8,5,quite,female,29,21,not applicable
+1990,France,careful,7,7,single,yes,6,relig,5,5,very,male,20,"dk, na",not applicable
+1990,USA,careful,9,7,married,yes,6,relig,9,7,quite,male,30,21,white
+1990,Britain,careful,6,grt deal,single,no,8,not rel,7,never,quite,female,25,16,not applicable
+1990,Britain,trusted,8,5,married,yes,6,not rel,5,4,quite,male,28,14,not applicable
+1990,USA,trusted,9,grt deal,married,yes,2,relig,never,never,very,female,51,21,white
+1990,France,careful,6,5,married,yes,5,relig,8,never,very,female,51,14,not applicable
+1990,USA,trusted,satisf,8,single,yes,7,relig,3,never,very,male,18,18,white
+1990,Sweden,trusted,satisf,8,as marr,yes,3,relig,always,5,very,female,41,"dk, na",not applicable
+1990,USA,trusted,9,grt deal,divorced,yes,7,relig,3,never,very,male,56,21,white
+1990,Britain,trusted,satisf,5,married,yes,3,atheist,8,8,quite,male,36,"dk, na",not applicable
+1990,Sweden,trusted,7,6,single,yes,7,not rel,7,4,very,male,45,"dk, na",not applicable
+1990,Sweden,trusted,8,7,as marr,yes,8,not rel,always,7,quite,female,49,21,not applicable
+1990,Britain,trusted,9,grt deal,married,yes,9,relig,never,always,very,female,54,16,not applicable
+1990,Britain,careful,6,7,single,yes,4,relig,5,5,quite,female,18,18,not applicable
+1990,Britain,trusted,satisf,4,single,yes,8,not rel,7,never,not very,male,25,17,not applicable
+1990,Britain,careful,6,5,married,no,5,relig,9,never,not very,female,29,15,not applicable
+1990,Britain,careful,6,6,widow,yes,4,not rel,9,2,quite,male,68,15,not applicable
+1990,USA,trusted,dissatis,6,married,yes,7,relig,5,never,very,female,25,"dk, na",7
+1990,Britain,careful,7,8,married,no,5,relig,5,never,quite,female,29,16,not applicable
+1990,USA,trusted,satisf,8,as marr,yes,7,relig,4,never,very,male,34,18,black
+1990,France,careful,7,7,married,no,6,relig,5,5,very,female,50,14,not applicable
+1990,Britain,trusted,7,5,single,yes,5,not rel,5,4,very,male,21,16,not applicable
+1990,USA,careful,8,9,divorced,no,7,relig,always,never,quite,male,45,17,black
+1990,USA,trusted,5,grt deal,married,yes,5,relig,5,never,very,male,59,17,white
+1990,Sweden,careful,satisf,grt deal,married,yes,6,not rel,5,never,quite,female,34,21,not applicable
+1990,USA,trusted,satisf,grt deal,single,yes,5,relig,always,never,quite,male,67,19,white
+1990,USA,careful,9,9,married,yes,6,relig,7,never,notatall,male,48,20,white
+1990,Sweden,trusted,8,grt deal,divorced,yes,5,relig,7,never,very,male,54,"dk, na",not applicable
+1990,Sweden,careful,9,9,as marr,yes,7,not rel,5,8,quite,male,24,21,not applicable
+1990,Britain,careful,7,7,married,no,4,relig,7,5,quite,male,32,21,not applicable
+1990,USA,trusted,7,grt deal,widow,no,5,relig,7,never,very,female,67,19,white
+1990,France,careful,7,5,single,no,left,relig,7,5,quite,male,20,"dk, na",not applicable
+1990,USA,trusted,9,9,married,yes,7,relig,5,never,quite,male,47,21,white
+1990,USA,careful,satisf,9,married,yes,right,relig,5,never,very,female,39,17,white
+1990,Sweden,careful,7,8,as marr,yes,5,not rel,9,8,quite,male,33,21,not applicable
+1990,Sweden,trusted,9,9,as marr,yes,9,not rel,5,never,very,female,38,"dk, na",not applicable
+1990,France,careful,6,6,married,no,5,relig,6,5,quite,female,23,20,not applicable
+1990,USA,trusted,9,8,married,yes,6,relig,5,never,very,male,30,21,white
+1990,Sweden,trusted,8,9,married,yes,5,relig,8,never,very,male,38,"dk, na",not applicable
+1990,Sweden,careful,7,7,single,yes,right,not rel,5,4,very,male,24,19,not applicable
+1990,Britain,careful,6,8,married,no,5,relig,5,never,quite,male,77,16,not applicable
+1990,Britain,trusted,8,7,married,yes,8,not rel,always,6,quite,female,25,21,not applicable
+1990,USA,careful,2,4,married,no,5,relig,2,never,very,male,58,"dk, na",black
+1990,Britain,trusted,5,6,single,yes,5,relig,5,never,quite,female,26,16,not applicable
+1990,USA,trusted,8,9,married,yes,5,relig,5,never,very,male,38,21,white
+1990,France,careful,6,4,single,yes,4,relig,7,2,quite,male,18,18,not applicable
+1990,Sweden,trusted,6,8,married,yes,5,not rel,8,3,quite,male,42,21,not applicable
+1990,France,careful,6,7,married,no,2,relig,always,6,quite,female,27,17,not applicable
+1990,Britain,careful,3,3,married,no,6,relig,5,4,quite,female,39,16,not applicable
+1990,France,careful,5,3,married,yes,2,relig,4,2,quite,male,57,20,not applicable
+1990,USA,trusted,7,7,divorced,yes,7,relig,5,never,very,female,32,16,white
+1990,France,careful,2,6,married,yes,right,relig,5,5,not very,female,42,15,not applicable
+1990,USA,careful,satisf,grt deal,married,yes,6,relig,always,always,very,female,71,12,white
+1990,USA,careful,9,7,married,yes,5,not rel,2,2,very,female,22,20,white
+1990,Britain,trusted,2,3,married,yes,5,not rel,always,5,not very,female,57,15,not applicable
+1990,Sweden,trusted,8,6,single,yes,2,atheist,9,9,not very,male,31,21,not applicable
+1990,Britain,trusted,8,6,married,yes,3,not rel,6,7,very,male,29,18,not applicable
+1990,USA,careful,satisf,9,married,yes,5,relig,5,2,very,female,66,16,black
+1990,USA,trusted,6,grt deal,married,no,5,relig,never,never,notatall,female,36,20,white
+1990,France,careful,9,5,married,no,6,relig,3,3,quite,female,27,16,not applicable
+1990,Britain,careful,9,7,married,yes,7,atheist,5,never,very,male,36,16,not applicable
+1990,USA,careful,7,5,married,yes,6,relig,4,3,quite,male,38,15,7
+1990,Britain,careful,satisf,grt deal,married,no,right,not rel,always,always,very,male,87,14,not applicable
+1990,France,careful,7,8,married,no,6,relig,4,never,not very,female,45,17,not applicable
+1990,Sweden,trusted,satisf,grt deal,married,yes,9,not rel,always,4,very,female,43,21,not applicable
+1990,Britain,careful,4,7,married,yes,7,not rel,6,2,very,male,42,15,not applicable
+1990,France,careful,8,9,married,yes,9,not rel,5,5,quite,male,45,18,not applicable
+1990,Sweden,trusted,8,7,married,yes,8,atheist,8,8,very,male,39,"dk, na",not applicable
+1990,France,careful,5,grt deal,separat,yes,3,not rel,always,9,quite,female,66,20,not applicable
+1990,France,careful,9,9,married,no,3,relig,2,4,quite,male,66,14,not applicable
+1990,France,careful,8,8,married,no,3,relig,6,5,quite,female,29,18,not applicable
+1990,USA,trusted,5,8,married,no,4,relig,6,never,very,female,81,21,white
+1990,USA,careful,9,grt deal,married,yes,4,relig,4,never,very,male,38,21,white
+1990,Britain,careful,3,2,married,yes,4,not rel,4,never,very,male,69,14,not applicable
+1990,Britain,careful,8,8,married,yes,6,relig,6,7,very,female,37,15,not applicable
+1990,Britain,trusted,9,9,married,yes,right,relig,5,5,not very,female,43,17,not applicable
+1990,France,careful,6,4,married,yes,3,not rel,5,6,very,male,41,20,not applicable
+1990,Britain,careful,7,7,widow,no,7,relig,never,4,quite,female,84,21,not applicable
+1990,USA,trusted,8,7,married,yes,5,relig,never,never,very,female,64,17,white
+1990,USA,careful,8,8,married,yes,5,relig,6,never,quite,male,62,16,white
+1990,USA,trusted,7,7,married,yes,5,relig,5,never,very,female,50,21,white
+1990,Britain,trusted,9,grt deal,married,yes,5,relig,5,never,very,male,42,15,not applicable
+1990,USA,careful,satisf,grt deal,married,yes,right,relig,7,6,very,female,56,21,white
+1990,Britain,careful,satisf,7,married,yes,9,relig,5,never,very,male,52,18,not applicable
+1990,Britain,careful,5,6,widow,no,8,relig,never,never,very,male,61,14,not applicable
+1990,USA,trusted,7,5,married,yes,7,relig,5,5,very,female,38,"dk, na",other
+1990,France,careful,6,5,married,yes,9,relig,3,5,quite,male,59,14,not applicable
+1990,Britain,careful,5,5,single,yes,8,not rel,6,never,quite,male,44,15,not applicable
+1990,USA,careful,8,7,married,yes,5,not rel,5,5,quite,male,36,18,white
+1990,Britain,careful,5,6,single,yes,2,relig,6,never,very,female,33,16,not applicable
+1990,USA,trusted,8,grt deal,widow,yes,3,relig,5,3,very,male,69,21,white
+1990,France,trusted,7,7,as marr,no,4,not rel,5,2,quite,male,32,16,not applicable
+1990,France,trusted,9,9,widow,no,8,relig,5,never,very,female,66,16,not applicable
+1990,USA,careful,satisf,grt deal,single,no,9,relig,6,never,very,female,28,17,black
+1990,France,trusted,8,8,married,yes,5,relig,never,5,very,female,44,20,not applicable
+1990,USA,trusted,7,grt deal,as marr,yes,6,relig,4,never,very,female,29,18,white
+1990,France,careful,7,grt deal,widow,no,5,relig,never,never,quite,female,65,16,not applicable
+1990,Britain,trusted,satisf,grt deal,single,yes,6,relig,never,2,very,male,24,16,not applicable
+1990,France,careful,dissatis,8,married,no,5,relig,always,never,quite,male,40,15,not applicable
+1990,France,trusted,6,7,single,no,6,relig,8,6,quite,male,23,18,not applicable
+1990,Britain,trusted,7,7,married,yes,5,relig,5,never,very,male,49,17,not applicable
+1990,Britain,trusted,satisf,none,married,yes,5,not rel,5,3,quite,female,46,15,not applicable
+1990,Britain,careful,satisf,none,married,no,5,relig,never,never,very,male,78,14,not applicable
+1990,France,careful,9,9,married,yes,8,not rel,never,never,quite,female,40,21,not applicable
+1990,USA,careful,9,9,married,yes,5,relig,5,never,very,male,48,21,white
+1990,Britain,careful,8,8,married,yes,8,relig,3,4,quite,male,36,15,not applicable
+1990,Britain,trusted,8,4,as marr,no,5,not rel,5,7,quite,male,24,16,not applicable
+1990,Britain,careful,5,5,married,yes,5,relig,5,3,quite,female,42,16,not applicable
+1990,Britain,careful,satisf,8,married,no,6,not rel,8,8,very,female,41,16,not applicable
+1990,Britain,careful,satisf,8,married,yes,5,not rel,8,5,quite,male,39,15,not applicable
+1990,Britain,careful,7,9,as marr,no,5,not rel,6,6,very,female,28,15,not applicable
+1990,Sweden,trusted,satisf,grt deal,married,yes,5,relig,never,never,very,male,46,"dk, na",not applicable
+1990,Sweden,trusted,8,7,married,yes,7,not rel,always,always,quite,male,36,20,not applicable
+1990,USA,careful,8,6,married,yes,5,relig,4,5,quite,female,29,20,white
+1990,Sweden,trusted,6,3,married,yes,2,not rel,never,2,very,male,63,"dk, na",not applicable
+1990,Britain,careful,9,7,as marr,yes,6,not rel,4,5,very,female,21,16,not applicable
+1990,Britain,careful,satisf,8,married,yes,8,relig,5,never,very,male,46,15,not applicable
+1990,USA,trusted,7,7,married,yes,6,relig,never,3,quite,female,36,19,white
+1990,USA,trusted,8,8,single,no,5,relig,8,3,very,female,27,21,white
+1990,Britain,trusted,9,8,married,no,9,relig,8,never,quite,female,61,15,not applicable
+1990,USA,careful,5,5,single,no,5,relig,6,never,quite,female,18,"dk, na",e asian
+1990,Britain,trusted,8,5,married,yes,5,relig,6,5,quite,female,35,17,not applicable
+1990,France,trusted,7,5,married,yes,5,relig,7,4,quite,male,65,20,not applicable
+1990,USA,careful,6,8,divorced,yes,5,relig,never,never,quite,female,31,18,white
+1990,France,careful,8,7,single,yes,4,not rel,9,6,quite,female,18,"dk, na",not applicable
+1990,USA,trusted,8,9,married,yes,8,relig,8,5,very,male,30,20,white
+1990,Britain,careful,8,5,single,yes,2,not rel,2,never,quite,male,22,17,not applicable
+1990,Sweden,careful,8,grt deal,married,no,8,relig,never,never,quite,female,48,"dk, na",not applicable
+1990,Britain,careful,7,grt deal,widow,yes,5,relig,6,6,very,female,78,14,not applicable
+1990,France,careful,5,grt deal,divorced,yes,3,relig,7,always,quite,male,67,12,not applicable
+1990,USA,careful,9,7,single,no,8,relig,9,4,quite,female,18,"dk, na",black
+1990,USA,trusted,8,8,married,yes,8,relig,5,never,very,male,30,21,white
+1990,USA,careful,7,7,divorced,yes,6,relig,8,6,very,female,47,21,white
+1990,Sweden,careful,7,grt deal,single,yes,9,relig,4,5,quite,female,18,"dk, na",not applicable
+1990,Sweden,trusted,5,5,widow,yes,6,not rel,4,2,very,male,39,"dk, na",not applicable
+1990,USA,careful,5,8,married,no,6,not rel,8,2,quite,female,49,18,white
+1990,Sweden,trusted,7,7,married,yes,9,not rel,7,5,very,male,48,20,not applicable
+1990,USA,careful,7,7,married,yes,8,relig,6,never,very,male,64,15,white
+1990,USA,careful,8,8,widow,yes,6,relig,4,4,very,female,66,14,black
+1990,Britain,trusted,satisf,grt deal,married,yes,6,relig,3,8,very,female,59,14,not applicable
+1990,Britain,careful,8,5,married,no,6,not rel,5,7,very,male,39,"dk, na",not applicable
+1990,Britain,trusted,7,6,single,yes,5,relig,never,never,quite,male,45,16,not applicable
+1990,USA,trusted,8,7,married,yes,4,relig,9,4,very,female,34,18,white
+1990,Britain,trusted,9,8,married,yes,7,relig,8,never,quite,female,33,21,not applicable
+1990,Britain,trusted,8,7,married,yes,5,not rel,6,4,quite,female,27,16,not applicable
+1990,France,careful,6,7,single,yes,4,not rel,always,7,quite,male,22,21,not applicable
+1990,Britain,careful,8,8,single,yes,3,relig,3,never,very,male,20,16,not applicable
+1990,USA,trusted,7,7,married,yes,7,relig,6,2,quite,male,60,21,white
+1990,Sweden,careful,5,5,divorced,yes,5,not rel,never,never,quite,male,47,"dk, na",not applicable
+1990,France,careful,6,7,separat,yes,4,not rel,6,6,quite,female,26,18,not applicable
+1990,France,careful,6,4,single,no,3,atheist,9,5,quite,male,27,20,not applicable
+1990,USA,careful,9,9,widow,no,5,relig,3,never,very,female,66,17,white
+1990,USA,careful,7,7,as marr,yes,8,relig,5,never,very,male,75,"dk, na",white
+1990,USA,trusted,9,6,married,yes,right,relig,4,3,very,female,36,17,white
+1990,France,careful,8,6,single,no,4,not rel,always,never,quite,male,25,17,not applicable
+1990,Britain,careful,9,7,married,yes,5,relig,4,2,very,female,23,16,not applicable
+1990,USA,trusted,7,7,married,yes,5,relig,4,4,very,female,64,21,white
+1990,USA,careful,satisf,8,married,no,6,relig,3,3,very,female,65,18,white
+1990,USA,trusted,9,8,married,no,5,relig,5,4,very,female,76,21,white
+1990,USA,trusted,9,8,married,yes,7,relig,2,never,very,male,47,21,white
+1990,Britain,trusted,6,6,widow,no,5,relig,always,6,very,female,62,14,not applicable
+1990,USA,trusted,5,5,divorced,yes,right,relig,never,4,very,female,18,17,white
+1990,Sweden,careful,8,4,married,yes,3,not rel,6,8,very,male,58,"dk, na",not applicable
+1990,USA,trusted,7,6,married,yes,5,relig,9,never,quite,female,41,21,white
+1990,Sweden,trusted,satisf,8,as marr,yes,4,not rel,5,never,quite,male,26,21,not applicable
+1990,Britain,careful,satisf,7,married,yes,5,relig,7,7,very,female,51,18,not applicable
+1990,Sweden,careful,satisf,9,as marr,yes,8,relig,9,7,quite,female,24,18,not applicable
+1990,Sweden,trusted,9,grt deal,married,yes,7,not rel,8,never,quite,male,35,21,not applicable
+1990,Britain,trusted,satisf,3,married,yes,5,not rel,never,5,very,male,75,14,not applicable
+1990,USA,trusted,9,8,married,yes,6,relig,5,never,very,male,55,21,white
+1990,USA,careful,9,grt deal,married,yes,5,relig,7,never,very,male,38,21,white
+1990,USA,careful,satisf,6,married,yes,5,relig,5,never,very,male,35,19,white
+1990,USA,trusted,9,grt deal,single,yes,7,relig,2,never,very,male,32,17,white
+1990,France,trusted,8,8,married,yes,5,relig,3,3,very,male,44,18,not applicable
+1990,Britain,trusted,satisf,grt deal,married,yes,5,relig,5,5,very,female,36,15,not applicable
+1990,USA,careful,8,7,married,yes,6,relig,3,2,quite,male,43,21,white
+1990,USA,careful,7,7,married,yes,7,relig,never,never,very,male,24,18,white
+1990,USA,careful,7,4,married,no,6,relig,4,4,quite,male,54,21,black
+1990,Britain,careful,8,7,single,yes,4,not rel,7,never,quite,male,20,17,not applicable
+1990,USA,trusted,9,8,married,yes,7,relig,6,never,very,male,40,21,white
+1990,Britain,trusted,9,9,married,yes,8,relig,never,always,very,female,76,14,not applicable
+1990,USA,careful,9,8,married,yes,5,not rel,5,5,very,male,39,19,white
+1990,France,careful,6,6,single,yes,9,not rel,always,5,quite,female,18,"dk, na",not applicable
+1990,USA,trusted,8,9,divorced,yes,5,relig,5,never,very,female,45,17,white
+1990,Sweden,trusted,9,5,as marr,yes,5,atheist,3,never,quite,male,22,20,not applicable
+1990,Britain,trusted,5,5,married,yes,5,not rel,6,never,quite,male,44,15,not applicable
+1990,Britain,careful,8,8,married,yes,6,relig,5,5,not very,female,70,14,not applicable
+1990,USA,trusted,8,5,single,yes,6,relig,5,never,very,male,46,21,white
+1990,USA,trusted,8,8,divorced,yes,5,relig,9,never,very,female,48,14,white
+1990,USA,trusted,8,8,married,yes,5,relig,5,never,very,male,34,19,white
+1990,USA,careful,2,2,married,no,7,relig,5,never,not very,female,19,17,7
+1990,Britain,careful,satisf,7,married,yes,6,not rel,4,never,very,male,51,16,not applicable
+1990,Sweden,careful,7,7,single,yes,3,not rel,4,never,very,male,29,20,not applicable
+1990,Britain,trusted,9,8,married,yes,6,relig,4,never,very,male,55,21,not applicable
+1990,Sweden,trusted,7,8,single,yes,5,relig,3,never,very,female,27,21,not applicable
+1990,USA,careful,8,6,single,yes,8,relig,7,never,very,male,18,21,white
+1990,Britain,careful,satisf,6,widow,yes,4,relig,5,never,very,female,70,14,not applicable
+1990,Sweden,trusted,9,9,as marr,yes,6,not rel,5,2,very,male,26,21,not applicable
+1990,France,careful,5,none,as marr,yes,4,relig,9,9,quite,male,26,20,not applicable
+1990,Britain,careful,9,5,married,yes,7,relig,5,3,very,female,66,15,not applicable
+1990,USA,trusted,9,8,married,yes,5,relig,never,never,very,male,40,21,white
+1990,USA,careful,9,grt deal,married,no,7,not rel,9,5,quite,female,24,20,white
+1990,Britain,careful,2,2,married,no,3,not rel,7,never,very,male,76,14,not applicable
+1990,Britain,careful,7,4,married,yes,7,relig,never,never,very,male,78,14,not applicable
+1990,Britain,careful,3,5,as marr,yes,3,not rel,never,never,very,female,25,16,not applicable
+1990,USA,careful,6,8,married,yes,8,relig,7,6,very,female,40,21,e asian
+1990,USA,careful,6,grt deal,widow,yes,5,relig,never,never,very,male,62,"dk, na",black
+1990,USA,trusted,9,7,married,no,5,relig,2,2,very,female,37,21,white
+1990,USA,careful,5,7,widow,no,6,relig,8,2,quite,female,74,13,white
+1990,USA,trusted,9,8,married,yes,7,not rel,8,3,very,female,37,20,white
+1990,Sweden,careful,8,8,married,yes,3,not rel,3,never,quite,male,58,"dk, na",not applicable
+1990,Britain,trusted,satisf,5,married,yes,right,not rel,2,never,very,female,25,16,not applicable
+1990,Sweden,trusted,8,8,married,yes,3,not rel,8,2,quite,male,43,21,not applicable
+1990,France,careful,6,4,as marr,no,5,atheist,5,5,not very,male,27,21,not applicable
+1990,Britain,careful,9,8,widow,yes,5,relig,3,2,very,male,85,14,not applicable
+1990,France,trusted,6,6,married,no,7,relig,5,never,quite,female,70,17,not applicable
+1990,Sweden,trusted,satisf,7,married,yes,6,relig,5,always,quite,female,45,18,not applicable
+1990,France,careful,5,4,married,no,5,relig,2,2,quite,female,29,20,not applicable
+1990,USA,trusted,8,8,married,yes,8,relig,6,never,very,female,38,19,white
+1990,France,careful,6,5,married,yes,5,relig,always,6,very,male,51,16,not applicable
+1990,Britain,careful,7,6,married,yes,5,not rel,4,3,quite,female,27,16,not applicable
+1990,USA,trusted,8,9,separat,yes,8,relig,8,3,very,male,28,21,white
+1990,Britain,trusted,8,7,married,yes,6,relig,3,never,quite,female,28,21,not applicable
+1990,Sweden,trusted,8,7,widow,yes,7,relig,9,never,not very,female,66,18,not applicable
+1990,USA,careful,4,7,widow,yes,5,relig,7,8,very,female,50,21,white
+1990,USA,trusted,8,8,married,yes,6,relig,6,never,very,female,27,17,white
+1990,France,careful,5,5,married,yes,4,relig,7,never,very,male,39,18,not applicable
+1990,France,careful,satisf,9,separat,yes,4,relig,never,never,very,male,27,16,not applicable
+1990,USA,trusted,5,grt deal,divorced,yes,5,relig,5,never,very,female,43,21,white
+1990,USA,careful,9,9,divorced,yes,4,atheist,always,8,very,female,57,21,white
+1990,Britain,careful,7,7,single,no,5,not rel,9,2,quite,female,30,21,not applicable
+1990,USA,trusted,7,5,married,yes,5,relig,4,never,very,female,65,21,white
+1990,Sweden,trusted,satisf,grt deal,married,yes,9,relig,5,never,very,female,67,19,not applicable
+1990,Britain,trusted,satisf,8,married,yes,5,relig,never,never,very,female,45,15,not applicable
+1990,Britain,careful,9,8,single,no,3,relig,6,2,very,female,22,16,not applicable
+1990,Britain,trusted,6,4,single,yes,4,atheist,4,5,not very,male,21,16,not applicable
+1990,USA,trusted,8,7,divorced,yes,4,not rel,6,2,very,female,42,21,white
+1990,Sweden,trusted,9,8,married,yes,4,not rel,9,always,not very,female,51,21,not applicable
+1990,USA,careful,9,5,married,no,5,relig,never,5,very,male,62,18,not applicable
+1990,USA,careful,8,grt deal,married,yes,6,relig,never,never,very,male,48,20,white
+1990,France,careful,7,6,married,yes,3,not rel,5,5,quite,female,46,20,not applicable
+1990,France,trusted,7,5,widow,no,3,not rel,8,5,notatall,female,60,14,not applicable
+1990,USA,careful,6,grt deal,married,yes,8,relig,5,never,very,male,40,21,white
+1990,Sweden,trusted,6,5,single,yes,7,relig,5,2,very,female,21,21,not applicable
+1990,USA,careful,9,9,married,yes,7,relig,7,never,very,male,26,18,black
+1990,USA,trusted,7,8,married,yes,7,relig,2,never,very,male,50,17,white
+1990,France,careful,6,5,single,yes,5,relig,3,5,quite,male,20,20,not applicable
+1990,Sweden,trusted,8,6,married,yes,4,not rel,4,4,very,female,67,"dk, na",not applicable
+1990,USA,trusted,8,9,single,no,4,not rel,always,2,quite,male,33,21,white
+1990,USA,trusted,dissatis,grt deal,widow,yes,5,relig,4,5,very,female,75,21,white
+1990,USA,careful,9,9,married,no,5,relig,never,never,quite,male,52,13,7
+1990,USA,careful,9,8,married,yes,7,relig,6,never,very,male,63,16,white
+1990,Britain,careful,9,9,single,no,6,atheist,7,8,notatall,male,18,21,not applicable
+1990,Britain,trusted,6,7,separat,no,7,relig,6,never,quite,male,64,16,not applicable
+1990,Britain,careful,6,8,as marr,yes,7,not rel,3,never,very,male,39,15,not applicable
+1990,Sweden,trusted,satisf,grt deal,married,yes,5,not rel,5,never,quite,male,63,21,not applicable
+1990,USA,trusted,6,grt deal,single,yes,4,not rel,always,never,very,male,19,17,white
+1990,Britain,trusted,5,5,separat,no,5,not rel,3,never,quite,male,68,14,not applicable
+1990,USA,careful,9,7,married,no,5,relig,5,never,very,female,64,16,white
+1990,Sweden,careful,8,8,single,yes,6,not rel,5,never,not very,male,21,18,not applicable
+1990,USA,trusted,9,9,married,yes,7,relig,never,never,very,male,64,21,white
+1990,USA,trusted,7,8,single,no,2,not rel,5,6,not very,female,20,21,white
+1990,Britain,trusted,7,grt deal,widow,yes,7,relig,3,never,very,male,75,14,not applicable
+1990,France,careful,7,6,married,yes,8,relig,8,2,quite,female,66,12,not applicable
+1990,Britain,careful,6,7,single,yes,5,relig,5,5,quite,male,48,15,not applicable
+1990,France,careful,5,5,married,yes,5,atheist,5,never,quite,male,36,21,not applicable
+1990,Britain,trusted,7,6,married,yes,4,not rel,5,never,quite,female,43,15,not applicable
+1990,USA,careful,9,9,married,no,7,not rel,always,9,quite,male,63,21,white
+1990,Sweden,trusted,satisf,grt deal,divorced,yes,2,not rel,3,never,quite,male,53,"dk, na",not applicable
+1990,Britain,trusted,9,6,married,yes,8,relig,6,3,very,female,65,16,not applicable
+1990,Britain,careful,8,grt deal,divorced,yes,7,relig,5,never,very,male,45,15,not applicable
+1990,Sweden,careful,8,7,divorced,yes,5,not rel,8,5,very,female,55,18,not applicable
+1990,Britain,careful,8,7,single,yes,5,relig,5,5,quite,female,19,16,not applicable
+1990,France,careful,6,5,divorced,yes,4,not rel,5,6,quite,male,40,17,not applicable
+1990,USA,careful,4,3,separat,yes,4,relig,never,never,not very,female,45,21,white
+1990,Sweden,trusted,8,grt deal,married,yes,3,not rel,8,5,not very,male,51,21,not applicable
+1990,Britain,careful,8,8,married,yes,3,relig,5,never,very,male,70,14,not applicable
+1990,USA,trusted,8,7,married,yes,8,relig,never,never,very,male,39,18,black
+1990,Britain,careful,satisf,grt deal,widow,yes,5,relig,7,never,very,female,70,14,not applicable
+1990,Britain,trusted,8,7,widow,yes,5,relig,never,never,very,female,79,14,not applicable
+1990,Britain,careful,5,5,separat,yes,5,relig,never,7,very,female,51,15,not applicable
+1990,Britain,careful,7,grt deal,single,yes,6,not rel,3,never,quite,male,30,21,not applicable
+1990,Britain,careful,8,6,married,yes,4,not rel,7,6,not very,male,24,16,not applicable
+1990,France,careful,8,2,married,yes,6,not rel,7,7,quite,female,30,16,not applicable
+1990,USA,careful,satisf,none,as marr,yes,5,relig,never,never,very,male,30,15,white
+1990,USA,careful,satisf,8,married,yes,right,relig,8,never,very,male,55,21,white
+1990,USA,trusted,9,8,single,yes,9,relig,never,never,very,male,27,21,white
+1990,Britain,trusted,8,9,married,yes,9,relig,5,2,very,female,36,17,not applicable
+1990,USA,trusted,9,5,as marr,yes,3,relig,6,2,very,male,29,17,white
+1990,France,careful,6,6,married,no,5,relig,5,4,quite,female,45,21,not applicable
+1990,France,careful,satisf,2,married,yes,right,not rel,never,never,very,male,63,13,not applicable
+1990,Sweden,trusted,8,6,divorced,yes,4,not rel,always,always,quite,male,23,"dk, na",not applicable
+1990,France,careful,6,6,single,yes,6,not rel,5,5,quite,female,24,21,not applicable
+1990,USA,trusted,8,6,married,yes,5,relig,never,never,very,female,39,21,white
+1990,Britain,trusted,9,9,married,yes,5,not rel,5,4,very,male,37,16,not applicable
+1990,USA,trusted,satisf,grt deal,single,yes,6,relig,3,3,very,female,68,21,white
+1990,Sweden,trusted,8,8,married,yes,5,atheist,always,never,not very,male,31,21,not applicable
+1990,Britain,careful,8,8,divorced,yes,6,relig,6,never,very,female,39,17,not applicable
+1990,Sweden,careful,4,7,single,yes,9,atheist,7,5,not very,male,19,19,not applicable
+1990,Sweden,careful,7,7,married,yes,3,not rel,5,never,quite,male,65,"dk, na",not applicable
+1990,Britain,trusted,7,6,married,yes,4,relig,4,5,very,female,56,15,not applicable
+1990,USA,trusted,9,8,married,yes,5,relig,5,never,quite,female,62,17,white
+1990,USA,careful,2,7,divorced,yes,5,relig,5,never,quite,female,51,16,black
+1990,Britain,trusted,7,7,single,yes,5,relig,5,5,quite,male,58,14,not applicable
+1990,Britain,trusted,7,8,married,yes,5,not rel,5,5,quite,male,29,17,not applicable
+1990,USA,careful,8,8,married,yes,6,relig,9,6,very,female,35,21,white
+1990,USA,careful,satisf,grt deal,widow,yes,7,relig,never,never,very,female,65,18,white
+1990,France,careful,6,2,married,yes,7,not rel,5,3,quite,female,22,18,not applicable
+1990,Britain,careful,8,3,married,no,left,relig,5,never,very,female,39,21,not applicable
+1990,France,careful,8,7,separat,yes,6,relig,5,never,quite,female,35,21,not applicable
+1990,Sweden,careful,9,grt deal,single,yes,4,not rel,5,never,very,female,30,21,not applicable
+1990,France,trusted,8,7,married,yes,5,not rel,always,always,quite,female,41,21,not applicable
+1990,Britain,careful,6,5,divorced,yes,5,relig,5,5,quite,female,51,16,not applicable
+1990,USA,trusted,9,9,married,yes,8,relig,4,never,quite,male,33,21,white
+1990,Sweden,careful,satisf,8,married,yes,5,atheist,6,never,very,female,38,21,not applicable
+1990,Britain,trusted,satisf,grt deal,single,yes,5,not rel,5,never,very,female,18,16,not applicable
+1990,Sweden,trusted,9,5,married,yes,6,not rel,always,8,very,male,31,21,not applicable
+1990,Sweden,trusted,7,8,married,yes,3,not rel,6,never,very,male,39,"dk, na",not applicable
+1990,France,careful,5,5,married,yes,5,relig,8,4,quite,female,50,20,not applicable
+1990,USA,trusted,8,7,married,no,3,not rel,7,3,not very,male,39,21,white
+1990,France,careful,7,7,single,yes,8,relig,5,8,not very,female,20,"dk, na",not applicable
+1990,France,careful,9,8,widow,yes,4,not rel,2,5,very,female,38,14,not applicable
+1990,USA,trusted,6,8,divorced,no,5,not rel,7,3,quite,female,57,18,black
+1990,USA,trusted,9,8,married,yes,8,relig,6,4,very,male,37,21,white
+1990,France,careful,8,5,married,yes,8,relig,5,never,quite,male,34,18,not applicable
+1990,Sweden,careful,8,3,as marr,yes,5,not rel,5,never,quite,male,47,20,not applicable
+1990,Britain,careful,satisf,7,married,yes,7,relig,5,never,very,female,39,16,not applicable
+1990,USA,trusted,7,8,married,yes,4,relig,5,never,very,male,37,"dk, na",white
+1990,France,careful,6,6,married,yes,4,relig,6,5,quite,male,48,18,not applicable
+1990,USA,trusted,9,8,married,yes,5,relig,3,2,very,female,52,14,white
+1990,Sweden,trusted,3,7,single,no,5,not rel,5,2,not very,male,19,17,not applicable
+1990,Sweden,trusted,7,7,married,yes,4,not rel,8,5,quite,male,55,20,not applicable
+1990,Britain,trusted,satisf,grt deal,married,yes,5,atheist,always,5,very,male,60,14,not applicable
+1990,Britain,trusted,6,grt deal,married,yes,9,relig,6,6,very,male,62,14,not applicable
+1990,Britain,careful,7,8,married,yes,5,relig,4,2,very,female,30,16,not applicable
+1990,Britain,trusted,9,8,married,yes,5,relig,6,never,very,male,67,14,not applicable
+1990,Sweden,careful,satisf,grt deal,married,yes,5,not rel,never,never,very,male,49,"dk, na",not applicable
+1990,Sweden,careful,8,8,widow,yes,7,relig,3,6,very,male,66,21,not applicable
+1990,USA,careful,7,8,married,no,5,relig,2,never,quite,male,72,12,white
+1990,France,careful,satisf,5,married,yes,6,atheist,3,7,quite,male,69,16,not applicable
+1990,USA,careful,5,7,widow,yes,3,relig,always,3,very,male,80,16,white
+1990,Sweden,trusted,8,8,single,yes,9,not rel,5,5,quite,male,29,21,not applicable
+1990,Britain,careful,7,6,married,yes,5,relig,5,5,quite,female,37,16,not applicable
+1990,France,careful,7,7,married,yes,5,relig,8,5,quite,male,49,18,not applicable
+1990,Sweden,trusted,9,8,married,yes,8,not rel,always,2,not very,male,48,21,not applicable
+1990,Sweden,careful,6,8,married,yes,6,relig,5,3,quite,female,69,"dk, na",not applicable
+1990,USA,trusted,6,7,widow,no,7,relig,5,never,very,female,64,"dk, na",white
+1990,Britain,trusted,9,7,married,yes,5,relig,5,2,very,female,57,14,not applicable
+1990,France,trusted,6,7,married,yes,3,relig,5,4,quite,male,43,21,not applicable
+1990,Sweden,trusted,8,7,divorced,yes,2,not rel,5,never,very,male,26,"dk, na",not applicable
+1990,Sweden,trusted,8,8,married,no,5,not rel,5,3,not very,male,48,21,not applicable
+1990,USA,trusted,9,9,married,yes,8,relig,5,never,very,female,78,19,white
+1990,Sweden,trusted,9,8,single,yes,8,relig,3,never,very,male,21,20,not applicable
+1990,France,careful,9,9,married,no,2,atheist,9,5,quite,female,24,16,not applicable
+1990,Britain,trusted,5,8,single,yes,5,relig,never,never,very,female,85,14,not applicable
+1990,Britain,careful,9,5,married,no,5,relig,5,always,not very,female,53,15,not applicable
+1990,Sweden,careful,6,8,married,yes,5,not rel,6,4,very,male,39,21,not applicable
+1990,Britain,careful,satisf,5,married,yes,5,relig,4,4,very,female,35,17,not applicable
+1990,USA,trusted,7,6,married,yes,6,not rel,7,2,quite,male,36,21,white
+1990,Britain,trusted,9,9,married,yes,6,relig,6,never,very,male,54,15,not applicable
+1990,Britain,trusted,7,9,widow,no,5,not rel,never,never,quite,female,81,13,not applicable
+1990,Britain,trusted,8,8,married,yes,8,relig,never,2,very,male,34,15,not applicable
+1990,Britain,trusted,6,6,married,no,4,relig,5,never,quite,female,44,15,not applicable
+1990,Britain,careful,8,8,married,no,4,not rel,7,7,quite,male,40,15,not applicable
+1990,Britain,trusted,satisf,9,as marr,yes,3,relig,9,7,very,female,27,17,not applicable
+1990,Britain,careful,8,5,married,yes,7,relig,5,never,very,male,69,16,not applicable
+1990,Sweden,careful,8,7,divorced,yes,right,not rel,always,7,not very,male,33,"dk, na",not applicable
+1990,France,trusted,dk,7,married,yes,8,relig,never,never,very,male,65,21,not applicable
+1990,Britain,careful,satisf,8,widow,yes,right,not rel,5,never,very,male,77,14,not applicable
+1990,USA,careful,5,grt deal,divorced,no,5,relig,2,5,very,male,38,18,white
+1990,USA,careful,9,9,single,yes,8,relig,5,3,very,male,38,21,black
+1990,France,careful,7,5,married,no,5,not rel,5,8,not very,male,41,21,not applicable
+1990,USA,careful,5,8,single,yes,5,relig,5,never,very,female,20,16,white
+1990,Sweden,careful,9,6,married,yes,7,not rel,6,never,very,female,63,"dk, na",not applicable
+1990,USA,careful,9,8,married,no,9,relig,4,never,very,male,67,21,white
+1990,USA,careful,5,4,single,yes,6,not rel,7,3,quite,male,42,21,white
+1990,France,careful,satisf,grt deal,as marr,no,4,not rel,5,5,quite,female,35,21,not applicable
+1990,Britain,careful,8,5,as marr,no,6,not rel,8,never,very,female,25,16,not applicable
+1990,Britain,trusted,satisf,9,married,yes,5,relig,4,6,not very,male,77,18,not applicable
+1990,USA,careful,8,8,single,no,5,relig,5,never,quite,female,45,"dk, na",7
+1990,Britain,trusted,6,5,married,yes,5,relig,7,5,very,male,52,16,not applicable
+1990,USA,careful,7,9,single,yes,5,relig,4,never,very,female,20,"dk, na",white
+1990,Sweden,trusted,satisf,grt deal,as marr,yes,6,not rel,5,2,very,male,36,18,not applicable
+1990,Britain,trusted,9,8,married,no,5,relig,6,never,quite,female,37,15,not applicable
+1990,Britain,careful,satisf,8,married,yes,right,relig,never,never,very,female,62,14,not applicable
+1990,Sweden,careful,satisf,8,married,yes,9,not rel,6,never,very,female,51,21,not applicable
+1990,Britain,careful,3,2,married,yes,6,relig,3,6,quite,male,47,12,not applicable
+1990,France,careful,5,5,as marr,no,3,not rel,5,5,quite,male,23,17,not applicable
+1990,USA,trusted,9,7,married,no,4,relig,9,never,quite,female,43,21,other
+1990,France,trusted,satisf,grt deal,single,no,left,atheist,always,always,quite,female,46,21,not applicable
+1990,Sweden,trusted,5,6,married,yes,5,atheist,always,never,quite,male,27,18,not applicable
+1990,France,trusted,7,8,single,no,4,not rel,always,5,not very,male,24,20,not applicable
+1990,USA,careful,8,6,married,yes,7,not rel,never,3,very,male,29,21,white
+1990,France,careful,6,6,as marr,no,3,not rel,7,5,quite,female,23,18,not applicable
+1990,Britain,trusted,8,8,married,yes,8,relig,5,never,very,male,47,"dk, na",not applicable
+1990,USA,trusted,9,9,married,yes,5,relig,always,9,very,female,47,21,white
+1990,USA,careful,7,9,divorced,yes,8,relig,6,never,very,female,44,18,white
+1990,Britain,careful,4,8,married,yes,7,relig,5,5,quite,female,51,17,not applicable
+1990,Britain,trusted,satisf,grt deal,widow,no,5,relig,never,never,quite,female,80,14,not applicable
+1990,USA,careful,9,8,married,yes,5,relig,4,3,very,female,34,17,white
+1990,France,trusted,7,6,married,yes,5,relig,3,never,very,female,50,18,not applicable
+1990,Britain,careful,8,5,married,yes,right,relig,always,5,very,male,84,14,not applicable
+1990,USA,careful,7,7,single,no,6,relig,8,8,quite,male,35,20,white
+1990,USA,trusted,8,7,divorced,yes,5,relig,6,never,very,female,54,"dk, na",white
+1990,Britain,careful,satisf,8,married,yes,7,relig,5,never,quite,male,32,17,not applicable
+1990,USA,trusted,8,5,divorced,no,left,not rel,5,never,very,male,43,18,white
+1990,Britain,careful,7,7,married,yes,5,relig,8,never,very,female,34,16,not applicable
+1990,France,careful,8,8,married,yes,8,relig,5,3,very,female,30,21,not applicable
+1990,USA,trusted,7,7,married,yes,4,not rel,6,3,very,male,36,21,white
+1990,USA,trusted,7,grt deal,married,yes,5,relig,6,never,very,female,35,17,white
+1990,USA,trusted,8,7,single,yes,4,relig,4,never,very,female,42,21,white
+1990,Britain,careful,7,6,widow,no,6,relig,4,3,quite,female,78,14,not applicable
+1990,USA,trusted,7,7,married,yes,8,relig,7,never,very,female,51,21,white
+1990,Britain,careful,8,6,married,no,4,relig,5,never,very,female,54,15,not applicable
+1990,Sweden,careful,8,7,married,yes,8,not rel,5,4,very,male,52,"dk, na",not applicable
+1990,Sweden,trusted,7,grt deal,as marr,no,right,not rel,always,never,quite,male,20,18,not applicable
+1990,Britain,careful,7,5,married,yes,7,relig,4,never,very,female,71,16,not applicable
+1990,Britain,trusted,2,5,married,yes,right,relig,7,never,very,female,79,17,not applicable
+1990,France,careful,8,grt deal,single,no,3,not rel,8,8,notatall,female,21,"dk, na",not applicable
+1990,USA,trusted,9,8,married,yes,4,relig,8,3,quite,female,41,21,white
+1990,France,careful,5,5,married,yes,3,relig,5,never,very,female,42,18,not applicable
+1990,USA,trusted,8,8,married,yes,5,not rel,6,never,very,female,49,"dk, na",white
+1990,Sweden,trusted,satisf,grt deal,married,yes,5,not rel,5,4,very,male,44,"dk, na",not applicable
+1990,USA,trusted,9,8,single,yes,5,relig,4,never,very,female,40,18,white
+1990,Britain,trusted,7,7,married,yes,5,relig,5,6,quite,female,36,15,not applicable
+1990,USA,careful,7,grt deal,single,yes,3,relig,5,never,very,male,19,21,white
+1990,Sweden,trusted,9,8,single,yes,6,relig,4,never,very,female,21,20,not applicable
+1990,Britain,trusted,8,5,married,yes,5,not rel,7,never,very,male,43,16,not applicable
+1990,Britain,careful,8,7,married,no,2,relig,5,never,quite,female,66,13,not applicable
+1990,Britain,trusted,8,6,married,yes,5,not rel,5,never,very,female,26,21,not applicable
+1990,France,careful,6,9,single,no,4,atheist,6,never,notatall,female,20,"dk, na",not applicable
+1990,France,careful,8,8,married,no,2,not rel,8,always,not very,female,32,18,not applicable
+1990,France,careful,5,5,divorced,yes,5,not rel,8,2,very,male,43,21,not applicable
+1990,USA,trusted,8,grt deal,married,yes,5,relig,5,never,very,female,61,18,white
+1990,Sweden,careful,satisf,grt deal,married,yes,2,relig,8,never,very,female,64,"dk, na",not applicable
+1990,USA,careful,satisf,8,married,yes,5,relig,never,never,very,female,65,14,white
+1990,Sweden,trusted,9,grt deal,as marr,yes,7,not rel,always,5,quite,male,27,21,not applicable
+1990,France,careful,8,7,married,no,7,relig,7,always,quite,female,38,18,not applicable
+1990,Sweden,careful,8,9,widow,yes,7,relig,5,5,very,female,51,21,not applicable
+1990,USA,careful,8,3,married,yes,5,relig,5,never,very,male,37,21,white
+1990,USA,careful,satisf,7,married,yes,6,relig,5,never,very,male,64,17,white
+1990,France,careful,6,4,married,yes,8,relig,5,never,quite,female,35,18,not applicable
+1990,Sweden,careful,9,9,married,yes,5,not rel,7,never,very,male,64,13,not applicable
+1990,USA,careful,satisf,grt deal,widow,yes,5,relig,5,never,very,female,64,21,white
+1990,Britain,careful,3,7,married,yes,6,relig,2,2,very,male,59,16,not applicable
+1990,Britain,trusted,8,8,married,yes,right,not rel,5,never,notatall,male,69,17,not applicable
+1990,USA,trusted,8,7,single,yes,5,relig,7,4,quite,male,20,19,white
+1990,Britain,trusted,satisf,9,single,no,5,relig,5,3,very,male,61,14,not applicable
+1990,France,careful,9,9,married,no,4,relig,5,8,very,female,28,16,not applicable
+1990,Britain,careful,8,9,married,no,7,relig,4,never,very,male,60,14,not applicable
+1990,France,careful,7,7,married,yes,8,not rel,8,3,very,male,33,16,not applicable
+1990,USA,trusted,9,grt deal,married,yes,7,relig,5,never,very,male,60,21,white
+1990,USA,careful,7,7,divorced,yes,5,relig,6,2,very,female,47,"dk, na",black
+1990,Britain,careful,8,8,married,yes,5,relig,8,never,very,male,42,16,not applicable
+1990,France,careful,5,6,married,no,7,relig,8,6,very,female,64,14,not applicable
+1990,Sweden,trusted,9,8,as marr,yes,4,atheist,always,3,not very,male,54,21,not applicable
+1990,Britain,careful,9,6,married,no,5,not rel,6,6,very,female,28,17,not applicable
+1990,USA,careful,8,5,widow,yes,5,relig,3,never,very,female,71,21,white
+1990,France,careful,5,4,single,yes,right,relig,5,7,very,male,24,21,not applicable
+1990,France,careful,7,7,single,no,8,atheist,always,5,not very,male,27,17,not applicable
+1990,USA,trusted,9,8,divorced,yes,4,atheist,3,3,very,female,60,14,white
+1990,Britain,trusted,8,8,married,yes,4,relig,4,2,very,male,44,21,not applicable
+1990,Sweden,careful,satisf,grt deal,married,yes,7,not rel,5,never,very,female,51,"dk, na",not applicable
+1990,USA,trusted,8,9,married,yes,8,relig,5,2,very,male,60,21,white
+1990,France,careful,7,grt deal,divorced,yes,3,not rel,5,2,very,male,64,13,not applicable
+1990,France,careful,9,8,married,no,3,not rel,9,never,notatall,female,62,12,not applicable
+1990,France,careful,7,7,as marr,yes,8,not rel,5,5,very,male,70,16,not applicable
+1990,USA,careful,6,8,divorced,yes,6,not rel,always,6,very,male,70,16,white
+1990,Britain,trusted,9,8,married,yes,left,not rel,5,5,very,male,74,14,not applicable
+1990,Britain,trusted,9,7,married,yes,8,relig,never,never,very,female,54,20,not applicable
+1990,Britain,careful,satisf,8,married,no,left,relig,4,3,very,female,29,17,not applicable
+1990,USA,careful,satisf,grt deal,divorced,yes,right,relig,always,never,very,female,55,16,white
+1990,Britain,trusted,9,9,widow,yes,6,relig,5,2,very,male,66,14,not applicable
+1990,Britain,careful,satisf,7,married,no,4,relig,4,never,very,male,73,14,not applicable
+1990,Britain,careful,9,8,married,yes,5,relig,never,never,quite,male,28,16,not applicable
+1990,France,careful,8,7,as marr,yes,5,not rel,8,never,quite,female,34,20,not applicable
+1990,Britain,careful,7,8,married,yes,5,atheist,always,never,very,male,41,21,not applicable
+1990,Britain,careful,satisf,grt deal,widow,yes,7,relig,never,never,very,female,70,14,not applicable
+1990,USA,trusted,8,grt deal,married,yes,3,relig,always,4,very,female,41,21,white
+1990,Britain,careful,satisf,2,widow,no,3,relig,5,4,very,female,81,20,not applicable
+1990,USA,trusted,7,8,married,yes,5,relig,5,never,quite,male,44,21,white
+1990,Sweden,trusted,satisf,grt deal,married,yes,7,not rel,8,never,very,male,36,21,not applicable
+1990,USA,careful,satisf,grt deal,married,yes,7,relig,never,5,quite,male,42,21,white
+1990,Britain,careful,7,9,married,yes,8,not rel,7,2,very,male,44,16,not applicable
+1990,Britain,trusted,8,8,married,yes,8,not rel,4,8,very,female,57,18,not applicable
+1990,Britain,careful,8,5,married,no,5,relig,7,never,quite,female,53,21,not applicable
+1990,France,careful,5,4,widow,yes,7,relig,2,never,quite,male,81,21,not applicable
+1990,France,careful,satisf,grt deal,married,yes,7,relig,4,never,very,female,37,17,not applicable
+1990,Britain,careful,7,8,widow,yes,3,relig,5,3,very,female,77,14,not applicable
+1990,France,careful,6,6,widow,yes,6,relig,4,4,very,female,54,14,not applicable
+1990,Sweden,trusted,4,7,divorced,yes,2,relig,9,5,quite,female,47,21,not applicable
+1990,Britain,trusted,4,7,single,yes,3,relig,8,3,not very,male,41,21,not applicable
+1990,Britain,careful,9,8,married,yes,6,not rel,5,6,quite,male,38,21,not applicable
+1990,France,careful,7,6,married,no,4,not rel,6,5,quite,female,65,21,not applicable
+1990,USA,careful,4,5,married,yes,5,relig,5,3,not very,male,41,19,white
+1990,France,careful,satisf,grt deal,married,yes,5,relig,never,never,very,male,76,12,not applicable
+1990,USA,careful,8,9,single,yes,7,not rel,7,3,quite,female,38,18,white
+1990,Britain,careful,9,grt deal,married,yes,4,not rel,9,2,very,male,43,21,not applicable
+1990,Britain,careful,satisf,grt deal,married,yes,6,relig,4,5,very,female,43,15,not applicable
+1990,USA,trusted,8,7,single,yes,5,relig,9,6,quite,female,40,21,white
+1990,USA,careful,6,6,married,no,5,relig,5,3,very,female,36,18,s asian
+1990,USA,careful,7,6,married,yes,8,relig,3,never,quite,female,36,20,white
+1990,USA,trusted,8,7,married,yes,5,relig,3,2,very,female,45,18,white
+1990,USA,careful,8,8,single,yes,5,relig,never,never,very,female,30,18,white
+1990,Sweden,trusted,8,7,as marr,yes,4,relig,9,always,quite,female,32,21,not applicable
+1990,USA,trusted,7,2,as marr,yes,5,not rel,never,never,quite,male,29,15,white
+1990,Britain,trusted,satisf,grt deal,married,yes,right,relig,5,8,very,male,56,18,not applicable
+1990,Britain,trusted,satisf,9,married,yes,5,not rel,5,never,very,male,66,14,not applicable
+1990,USA,careful,5,7,divorced,no,5,not rel,always,always,quite,male,40,21,white
+1990,Sweden,trusted,8,8,as marr,yes,6,not rel,always,always,very,male,47,20,not applicable
+1990,France,trusted,satisf,4,divorced,no,2,atheist,5,never,very,male,40,14,not applicable
+1990,Sweden,trusted,satisf,grt deal,married,yes,8,not rel,5,never,quite,male,58,21,not applicable
+1990,France,careful,7,7,married,yes,4,relig,5,always,notatall,female,26,21,not applicable
+1990,USA,careful,9,9,married,yes,right,relig,5,5,very,male,77,15,black
+1990,USA,careful,8,7,married,yes,5,relig,6,3,quite,female,28,18,white
+1990,USA,trusted,satisf,grt deal,divorced,no,5,relig,9,5,very,female,69,21,white
+1990,USA,trusted,7,7,married,yes,7,relig,5,2,very,male,62,21,white
+1990,Britain,trusted,7,7,married,yes,4,not rel,5,5,quite,male,33,15,not applicable
+1990,Britain,trusted,9,8,married,yes,4,relig,4,5,very,female,43,15,not applicable
+1990,Britain,careful,9,grt deal,widow,yes,3,relig,6,4,very,female,63,14,not applicable
+1990,USA,trusted,8,9,married,yes,8,relig,4,never,very,male,48,21,white
+1990,Britain,careful,8,5,married,no,8,not rel,5,never,quite,male,36,16,not applicable
+1990,Britain,trusted,7,7,widow,yes,7,relig,3,3,quite,female,56,16,not applicable
+1990,USA,trusted,satisf,grt deal,married,yes,5,relig,never,3,very,female,62,16,white
+1990,USA,trusted,7,8,married,yes,8,relig,5,5,very,male,69,21,white
+1990,USA,trusted,8,6,married,yes,8,relig,3,never,very,male,50,18,white
+1990,Britain,careful,5,none,married,no,left,relig,7,5,quite,male,65,17,not applicable
+1990,France,careful,7,grt deal,married,no,3,not rel,always,always,quite,male,34,18,not applicable
+1990,USA,trusted,6,6,married,yes,5,relig,5,never,very,male,50,21,white
+1990,Britain,trusted,8,8,single,no,9,relig,8,5,very,female,59,21,not applicable
+1990,Britain,careful,6,5,married,yes,8,not rel,5,2,quite,male,70,15,not applicable
+1990,Britain,trusted,5,none,married,no,7,relig,7,4,quite,female,78,21,not applicable
+1990,USA,trusted,9,9,divorced,yes,4,relig,3,never,very,female,68,17,white
+1990,Sweden,careful,5,7,single,yes,4,not rel,always,8,quite,female,27,20,not applicable
+1990,Britain,trusted,satisf,grt deal,widow,yes,6,relig,5,never,quite,female,73,17,not applicable
+1990,USA,careful,8,7,married,no,5,relig,3,never,very,female,41,20,black
+1990,USA,trusted,4,7,married,yes,6,relig,5,never,very,male,56,20,white
+1990,Britain,careful,8,6,married,yes,5,not rel,5,never,quite,male,37,15,not applicable
+1990,USA,trusted,6,6,married,yes,5,not rel,7,5,very,male,28,21,white
+1990,Sweden,trusted,8,8,married,yes,4,relig,never,never,very,male,42,21,not applicable
+1990,Britain,careful,8,7,married,no,5,relig,never,never,not very,male,53,15,not applicable
+1990,France,careful,7,5,divorced,yes,8,relig,4,3,quite,female,51,17,not applicable
+1990,Britain,trusted,7,7,married,no,6,not rel,6,never,quite,female,25,16,not applicable
+1990,France,trusted,9,7,married,yes,8,relig,5,never,very,female,86,12,not applicable
+1990,France,careful,8,8,married,yes,3,not rel,5,never,very,male,58,14,not applicable
+1990,Britain,trusted,satisf,grt deal,single,yes,left,not rel,6,never,very,female,37,16,not applicable
+1990,USA,careful,8,8,married,no,right,relig,7,never,very,female,66,21,white
+1990,Britain,careful,8,7,divorced,no,4,atheist,always,always,not very,female,39,16,not applicable
+1990,Britain,careful,8,7,married,yes,7,relig,4,2,quite,female,52,17,not applicable
+1990,USA,careful,9,9,married,yes,5,relig,2,never,quite,male,41,21,black
+1990,France,careful,4,4,as marr,yes,5,relig,3,never,quite,female,49,16,not applicable
+1990,Sweden,trusted,satisf,grt deal,single,yes,7,atheist,always,always,very,female,20,19,not applicable
+1990,USA,careful,5,6,married,yes,5,relig,5,never,very,female,61,14,black
+1990,Britain,trusted,7,8,separat,no,5,atheist,9,4,notatall,female,36,21,not applicable
+1990,Britain,trusted,satisf,9,married,yes,4,relig,2,never,very,male,45,15,not applicable
+1990,USA,trusted,satisf,grt deal,separat,yes,5,relig,never,never,very,male,87,14,white
+1990,Sweden,careful,9,9,single,yes,5,relig,never,never,quite,male,23,"dk, na",not applicable
+1990,Sweden,trusted,6,8,single,yes,4,not rel,7,5,quite,male,44,21,not applicable
+1990,Britain,careful,8,8,married,yes,5,relig,8,never,very,male,27,16,not applicable
+1990,Sweden,careful,4,5,divorced,yes,4,relig,3,never,very,female,46,21,not applicable
+1990,Britain,careful,satisf,grt deal,single,yes,5,relig,5,2,very,male,19,16,not applicable
+1990,USA,trusted,9,8,married,yes,7,relig,3,never,very,male,57,21,white
+1990,USA,trusted,8,8,married,yes,6,relig,5,4,very,female,23,18,white
+1990,USA,trusted,9,9,married,no,6,relig,6,never,very,female,33,20,white
+1990,USA,trusted,7,6,as marr,yes,4,not rel,8,3,quite,female,28,17,white
+1990,USA,careful,7,7,married,yes,6,not rel,4,6,very,male,33,20,white
+1990,USA,careful,8,grt deal,married,yes,3,relig,6,never,very,female,46,16,black
+1990,Sweden,trusted,3,5,single,yes,3,relig,5,never,very,male,37,"dk, na",not applicable
+1990,Britain,trusted,8,5,single,yes,5,not rel,5,4,very,female,29,16,not applicable
+1990,USA,trusted,8,9,widow,yes,5,relig,5,never,very,female,75,21,white
+1990,France,careful,7,7,married,yes,5,relig,5,never,quite,female,39,14,not applicable
+1990,USA,careful,8,8,married,yes,8,relig,5,5,very,female,37,20,white
+1990,France,careful,6,5,married,yes,5,relig,2,2,quite,female,55,21,not applicable
+1990,USA,careful,8,8,married,yes,6,relig,never,6,very,male,48,"dk, na",e asian
+1990,France,careful,7,8,married,yes,5,not rel,5,5,very,female,56,14,not applicable
+1990,Sweden,trusted,8,8,married,yes,4,not rel,always,never,quite,male,30,18,not applicable
+1990,Sweden,careful,satisf,5,as marr,no,left,not rel,5,never,quite,female,21,20,not applicable
+1990,Britain,careful,satisf,none,married,yes,4,not rel,3,3,very,male,69,14,not applicable
+1990,France,trusted,6,6,separat,yes,2,atheist,always,never,quite,male,48,20,not applicable
+1990,Sweden,trusted,8,grt deal,single,yes,8,not rel,always,7,quite,male,20,21,not applicable
+1990,Sweden,trusted,8,5,married,yes,8,not rel,4,2,quite,male,44,21,not applicable
+1990,Sweden,trusted,7,8,married,no,5,not rel,5,never,quite,female,21,17,not applicable
+1990,USA,careful,7,8,married,yes,5,relig,never,never,very,male,28,"dk, na",white
+1990,Britain,careful,8,8,single,no,7,relig,never,never,quite,female,19,16,not applicable
+1990,USA,careful,satisf,9,married,no,5,relig,5,never,very,female,18,17,white
+1990,USA,careful,8,2,married,yes,5,relig,never,never,very,female,67,13,black
+1990,USA,careful,8,grt deal,married,yes,8,relig,never,never,very,male,36,"dk, na",other
+1990,Britain,careful,8,9,married,no,5,relig,8,8,quite,female,53,15,not applicable
+1990,USA,careful,3,9,single,yes,5,relig,4,never,quite,male,31,17,white
+1990,Sweden,trusted,satisf,7,married,yes,2,not rel,never,never,quite,female,44,21,not applicable
+1990,Britain,trusted,8,8,single,yes,7,relig,2,2,very,female,65,15,not applicable
+1990,Britain,careful,9,grt deal,married,no,5,not rel,5,2,quite,male,37,15,not applicable
+1990,Britain,trusted,9,8,married,yes,8,relig,2,never,very,male,67,14,not applicable
+1990,France,careful,7,5,single,no,3,atheist,always,8,not very,female,18,"dk, na",not applicable
+1990,Britain,careful,8,7,married,yes,6,relig,6,6,very,female,42,16,not applicable
+1990,USA,careful,8,9,married,yes,5,relig,5,5,very,female,27,19,white
+1990,France,careful,7,6,married,yes,8,relig,8,never,very,male,48,16,not applicable
+1990,USA,trusted,6,5,divorced,yes,5,relig,9,never,very,female,49,"dk, na",black
+1990,Britain,careful,7,6,married,yes,6,relig,3,never,very,male,44,15,not applicable
+1990,USA,trusted,9,9,married,yes,7,relig,7,5,very,male,36,20,white
+1990,USA,careful,5,5,married,no,5,relig,5,never,very,female,44,19,white
+1990,USA,trusted,satisf,5,married,no,5,relig,3,never,very,male,84,"dk, na",white
+1990,Britain,careful,5,8,married,yes,6,relig,never,5,quite,female,32,15,not applicable
+1990,Sweden,trusted,9,7,married,yes,4,not rel,5,never,very,male,57,21,not applicable
+1990,France,careful,8,5,married,yes,4,relig,7,8,quite,female,33,17,not applicable
+1990,USA,careful,8,8,married,yes,5,relig,4,never,very,female,62,18,white
+1990,USA,careful,9,grt deal,as marr,yes,2,not rel,5,5,very,male,38,18,white
+1990,France,careful,3,grt deal,single,yes,8,relig,never,never,quite,female,24,18,not applicable
+1990,Sweden,trusted,8,6,married,yes,6,not rel,4,2,quite,female,61,"dk, na",not applicable
+1990,USA,careful,3,7,as marr,yes,8,relig,6,6,very,male,21,17,black
+1990,USA,careful,satisf,8,single,yes,4,not rel,5,never,very,female,20,21,black
+1990,France,careful,5,7,married,yes,5,atheist,7,never,quite,male,43,16,not applicable
+1990,USA,careful,satisf,grt deal,single,yes,8,relig,4,2,quite,male,18,20,black
+1990,USA,trusted,5,8,married,yes,5,relig,5,never,very,female,72,17,white
+1990,USA,trusted,satisf,grt deal,married,yes,3,relig,2,never,very,male,27,18,black
+1990,France,careful,5,5,single,no,5,relig,2,never,not very,male,25,18,not applicable
+1990,France,careful,7,7,married,yes,7,relig,always,never,quite,male,41,17,not applicable
+1990,Sweden,trusted,6,5,married,yes,5,not rel,5,2,quite,female,59,21,not applicable
+1990,Britain,careful,8,8,single,yes,4,relig,7,never,not very,male,24,16,not applicable
+1990,France,careful,satisf,8,married,yes,7,relig,9,5,very,male,82,12,not applicable
+1990,USA,careful,7,9,married,no,5,relig,2,never,very,male,48,20,black
+1990,Britain,trusted,satisf,grt deal,married,no,5,relig,never,5,quite,male,77,14,not applicable
+1990,USA,careful,3,9,married,yes,6,relig,4,4,very,female,26,20,white
+1990,Britain,trusted,6,7,married,no,3,not rel,4,never,quite,female,49,15,not applicable
+1990,Britain,careful,9,7,as marr,yes,5,not rel,9,never,very,female,31,17,not applicable
+1990,USA,trusted,6,8,single,yes,5,relig,2,never,very,female,61,18,white
+1990,France,careful,9,5,widow,yes,8,not rel,3,never,very,male,64,16,not applicable
+1990,USA,careful,8,8,married,no,8,relig,never,never,very,female,69,"dk, na",white
+1990,Britain,careful,6,8,widow,yes,6,relig,3,2,quite,female,71,14,not applicable
+1990,France,trusted,9,7,single,yes,4,relig,5,6,very,male,19,"dk, na",not applicable
+1990,Sweden,trusted,9,grt deal,married,no,5,relig,5,never,notatall,female,55,"dk, na",not applicable
+1990,Britain,trusted,satisf,8,widow,yes,6,relig,5,4,very,male,83,14,not applicable
+1990,Sweden,careful,satisf,9,as marr,yes,2,not rel,never,never,quite,male,25,17,not applicable
+1990,Britain,trusted,satisf,grt deal,married,yes,7,relig,never,never,very,female,45,16,not applicable
+1990,Britain,trusted,5,5,married,yes,5,not rel,7,8,not very,male,60,21,not applicable
+1990,Britain,trusted,9,5,single,no,8,not rel,4,never,very,female,73,14,not applicable
+1990,USA,careful,satisf,8,married,yes,6,relig,5,never,very,female,33,"dk, na",white
+1990,Britain,careful,5,5,single,yes,5,relig,8,4,very,female,89,18,not applicable
+1990,Britain,trusted,5,7,married,yes,3,not rel,6,6,quite,female,41,14,not applicable
+1990,Sweden,trusted,7,5,married,yes,5,relig,9,9,quite,female,35,21,not applicable
+1990,USA,careful,9,9,married,yes,8,relig,never,never,very,male,64,18,white
+1990,Sweden,trusted,9,7,single,yes,8,not rel,3,never,quite,male,20,18,not applicable
+1990,USA,trusted,8,8,married,yes,5,relig,5,never,very,male,66,21,white
+1990,USA,careful,8,9,single,yes,7,not rel,never,4,very,female,23,"dk, na",white
+1990,France,careful,9,8,widow,yes,5,relig,never,never,quite,female,69,20,not applicable
+1990,Britain,careful,satisf,grt deal,divorced,no,right,relig,always,never,very,female,62,14,not applicable
+1990,France,careful,8,8,single,no,5,relig,7,never,very,male,66,18,not applicable
+1990,Sweden,careful,8,8,married,yes,9,relig,6,6,not very,female,59,17,not applicable
+1990,USA,careful,7,grt deal,married,yes,6,relig,7,never,very,male,52,18,white
+1990,USA,trusted,satisf,grt deal,married,yes,5,relig,always,never,very,male,28,20,white
+1990,Britain,trusted,9,6,married,yes,5,relig,7,2,very,male,60,16,not applicable
+1990,USA,trusted,8,8,married,yes,8,relig,4,never,very,male,32,21,white
+1990,Britain,careful,7,grt deal,married,no,5,relig,5,5,quite,male,65,15,not applicable
+1990,Britain,careful,7,7,as marr,no,6,not rel,7,5,very,female,33,20,not applicable
+1990,USA,trusted,9,9,married,no,right,relig,6,never,quite,female,45,18,white
+1990,Britain,careful,7,4,married,no,3,atheist,always,6,notatall,female,27,21,not applicable
+1990,USA,careful,7,grt deal,single,no,5,not rel,5,never,very,male,28,17,black
+1990,France,careful,satisf,8,widow,no,5,not rel,5,5,quite,male,78,13,not applicable
+1990,France,careful,2,5,single,no,5,relig,5,4,quite,female,50,21,not applicable
+1990,France,careful,8,5,married,no,4,not rel,5,5,quite,female,33,18,not applicable
+1990,USA,trusted,satisf,7,divorced,yes,right,relig,2,never,very,female,80,20,white
+1990,USA,careful,8,5,divorced,yes,7,relig,6,never,very,female,64,16,black
+1990,France,careful,7,7,married,no,3,relig,8,2,quite,male,29,21,not applicable
+1990,USA,trusted,9,9,married,yes,5,relig,always,3,very,male,37,14,not applicable
+1990,Britain,trusted,7,8,widow,yes,9,relig,5,5,quite,female,78,14,not applicable
+1990,Sweden,trusted,8,8,married,yes,8,not rel,8,8,not very,male,51,21,not applicable
+1990,Sweden,careful,9,5,married,yes,6,not rel,8,never,very,male,54,20,not applicable
+1990,Britain,careful,7,6,married,yes,5,not rel,7,6,very,female,44,15,not applicable
+1990,France,careful,8,6,married,yes,left,not rel,never,never,quite,male,64,14,not applicable
+1990,Britain,careful,satisf,grt deal,divorced,yes,5,relig,4,never,very,female,61,16,not applicable
+1990,USA,careful,9,8,married,yes,5,relig,6,never,very,male,39,21,white
+1990,Sweden,trusted,7,6,as marr,yes,4,atheist,8,5,quite,male,49,"dk, na",not applicable
+1990,Sweden,trusted,6,4,married,yes,5,relig,3,2,quite,male,41,"dk, na",not applicable
+1990,USA,careful,satisf,grt deal,married,yes,6,relig,5,never,very,male,71,20,white
+1990,USA,careful,9,8,married,yes,7,relig,never,never,very,male,83,18,white
+1990,USA,trusted,8,9,divorced,no,5,relig,6,never,very,female,54,19,white
+1990,USA,trusted,9,8,married,yes,8,relig,8,5,very,male,62,21,white
+1990,Britain,careful,4,9,single,no,3,not rel,always,5,quite,male,29,21,not applicable
+1990,Sweden,trusted,9,9,married,yes,5,relig,5,5,quite,male,29,21,not applicable
+1990,Britain,careful,7,4,single,yes,6,relig,4,7,quite,male,23,16,not applicable
+1990,USA,trusted,7,7,married,yes,4,not rel,never,2,very,male,70,"dk, na",white
+1990,Sweden,trusted,satisf,grt deal,married,yes,7,not rel,always,8,very,female,32,21,not applicable
+1990,Sweden,trusted,satisf,grt deal,widow,yes,5,not rel,5,never,quite,female,65,"dk, na",not applicable
+1990,Sweden,careful,satisf,grt deal,divorced,yes,8,not rel,always,never,not very,male,58,21,not applicable
+1990,France,trusted,6,7,married,yes,5,not rel,7,3,quite,female,33,21,not applicable
+1990,USA,careful,6,9,married,yes,5,relig,never,never,very,male,36,17,s asian
+1990,Sweden,careful,8,8,married,yes,9,relig,8,5,quite,female,56,20,not applicable
+1990,Britain,trusted,8,7,married,yes,5,not rel,7,5,quite,male,29,16,not applicable
+1990,USA,careful,2,grt deal,married,yes,5,relig,never,never,very,male,24,18,white
+1990,USA,careful,6,5,married,yes,5,relig,6,never,very,male,50,18,white
+1990,USA,trusted,8,7,married,yes,6,relig,4,6,quite,female,30,16,e asian
+1990,USA,careful,satisf,grt deal,married,yes,5,relig,5,never,very,male,35,18,black
+1990,Sweden,trusted,satisf,7,married,yes,7,relig,4,never,very,female,29,21,not applicable
+1990,USA,careful,satisf,grt deal,married,yes,7,not rel,3,9,very,female,74,17,white
+1990,Britain,trusted,4,4,married,yes,4,relig,7,6,notatall,female,43,16,not applicable
+1990,Britain,trusted,8,7,married,yes,7,relig,7,3,very,male,44,16,not applicable
+1990,Britain,careful,7,5,married,yes,8,relig,5,2,very,female,52,16,not applicable
+1990,Britain,careful,satisf,grt deal,married,yes,6,not rel,6,5,very,male,55,15,not applicable
+1990,Britain,trusted,6,6,married,no,right,relig,5,5,very,female,61,15,not applicable
+1990,USA,trusted,satisf,5,married,yes,5,relig,8,always,quite,female,60,21,white
+1990,Sweden,trusted,9,grt deal,single,yes,6,not rel,9,always,quite,male,18,"dk, na",not applicable
+1990,France,trusted,8,9,married,no,3,not rel,9,3,not very,female,59,17,not applicable
+1990,Sweden,careful,5,grt deal,married,yes,right,not rel,6,always,quite,female,55,20,not applicable
+1990,Sweden,careful,dissatis,5,widow,yes,3,not rel,6,5,quite,male,70,"dk, na",not applicable
+1990,USA,careful,satisf,grt deal,married,yes,6,not rel,always,never,very,female,30,17,white
+1990,Britain,trusted,8,8,married,no,5,relig,5,2,quite,female,26,16,not applicable
+1990,Sweden,trusted,9,8,single,yes,9,not rel,3,2,very,male,19,21,not applicable
+1990,Britain,trusted,8,5,married,yes,5,not rel,5,3,very,male,57,14,not applicable
+1990,USA,careful,9,8,married,yes,4,relig,8,2,very,male,52,18,black
+1990,Britain,careful,6,6,single,yes,5,relig,5,never,very,female,22,20,not applicable
+1990,USA,careful,6,6,married,no,5,relig,never,never,not very,female,54,16,white
+1990,USA,trusted,8,6,married,yes,8,relig,3,never,quite,male,62,21,white
+1990,Britain,careful,dissatis,none,separat,yes,right,relig,never,7,very,male,45,15,not applicable
+1990,USA,careful,7,8,single,yes,3,atheist,always,always,quite,male,34,16,white
+1990,Britain,careful,satisf,8,married,yes,5,not rel,9,3,very,male,41,16,not applicable
+1990,USA,careful,5,5,as marr,yes,5,not rel,5,never,very,female,25,17,white
+1990,USA,careful,9,9,married,yes,7,relig,8,5,very,male,63,20,white
+1990,Britain,trusted,5,3,married,yes,7,relig,4,4,very,female,45,15,not applicable
+1990,Sweden,trusted,8,8,married,yes,3,not rel,8,4,very,male,35,21,not applicable
+1990,Britain,trusted,8,8,widow,yes,4,relig,5,5,quite,male,70,17,not applicable
+1990,France,careful,8,5,married,yes,8,relig,never,never,quite,male,37,17,not applicable
+1990,USA,careful,7,9,married,yes,4,relig,5,never,quite,male,37,18,white
+1990,USA,trusted,9,7,married,yes,5,relig,5,never,very,female,39,21,white
+1990,France,careful,satisf,grt deal,married,yes,7,not rel,always,never,quite,female,63,17,not applicable
+1990,France,careful,5,5,married,no,5,not rel,5,5,very,male,23,16,not applicable
+1990,USA,careful,9,3,separat,yes,6,relig,4,never,very,male,38,"dk, na",white
+1990,USA,trusted,satisf,grt deal,separat,yes,6,relig,6,9,very,male,48,18,white
+1990,Sweden,trusted,8,8,married,no,7,relig,4,never,quite,male,30,20,not applicable
+1990,Britain,careful,5,5,married,no,3,relig,7,7,very,female,54,15,not applicable
+1990,USA,careful,9,4,married,yes,8,relig,2,2,very,male,65,18,white
+1990,Sweden,careful,5,4,single,yes,8,relig,never,never,quite,male,40,21,not applicable
+1990,Sweden,trusted,7,5,married,yes,5,not rel,always,always,quite,female,40,"dk, na",not applicable
+1990,Sweden,careful,8,6,married,yes,3,relig,3,never,quite,female,64,"dk, na",not applicable

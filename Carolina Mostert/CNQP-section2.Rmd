@@ -1,0 +1,121 @@
+---
+title: "CNQP3"
+output: pdf_document
+date: "2023-01-03"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, comment = "")
+```
+
+
+
+
+
+# Read Dataset
+
+```{r}
+trading <- read.csv("trading.csv")
+```
+
+
+# Question 1
+
+## 1a.
+
+```{r}
+sum(trading$isrstock == 1)
+```
+* **414** individuals received Isreali stocks.
+
+```{r}
+sum(trading$palstock == 1)
+```
+* **416** individuals received Palestinian stocks.
+
+```{r}
+
+nrow(subset(trading, assettreat == 1 & isrstock == 0 & palstock == 0))
+
+```
+* **206** individuals were assigned to the treatment group, but did not receive Isreali or Palestinian stocks.
+
+
+## 1b.
+
+```{r}
+
+trading_subset <- subset(trading, !(assettreat == 1 & 
+                                      isrstock == 0 & 
+                                      palstock == 0))
+```
+
+
+## 1c.
+
+
+## 1d.
+
+```{r}
+boxplot(trading_subset$p_index_2013, main = "Boxplot of peace index in 2013")
+```
+
+```{r}
+boxplot(trading_subset$p_index_2015, main = "Boxplot of peace index in 2015")
+```
+
+
+# Question 3
+
+## 3a.
+
+* Randomization as a method of experimental control helps to prevent the selection bias and insures against the accidental bias. 
+
+* It helps to produce the comparable groups and eliminates the source of bias in treatment assignments.
+
+## 3b.
+
+* The age distribution of the individuals in the experimental group is a potential cofounding variable; such that if the randomization did not work properly could bias the estimate of the effect of trading.
+
+
+# Question 4
+
+## 4a.
+
+* If the authors' hypothesis about the effect of being exposed to financial markets is true, then it's expected that the treatment effect is similar for both respondents' assigned to receive either the Isreali stocks and those assigned to receive Palestinian stocks.
+
+
+## 4b.
+
+**Null Hypothesis**
+
+$H_0$: Being exposed to assets of the opposing group in conflict have no particularly effects on attitudes towards peace.
+
+**Alternative Hypothesis**
+
+$H_1$: Being exposed to assets of the opposing group in conflict have particularly strong effects on attitudes towards peace.
+
+
+## 4c.
+
+```{r}
+t.test(p_index_2015 ~ palstock, data = trading_subset)
+```
+
+## 4d.
+
+* Statistical significance helps quantify whether a result is likely due to chance or to some factor of interest.
+
+* Going by the analysis in 4d above, the p-value which is the lowest probability at which the null hypothesis would be rejected is the statistic that influences whether the statistical significance is high or low.
+
+## 4e.
+
+* In general statistical methods, the object of concern between the two types of errors is the **Type I** error. This is the reason why the alpha (i.e. $\alpha$) is often assumed to be 5%. This is the maximum probability of committing a type 1 error.
+
+
+# Question 5
+
+## 5a.
+
+* The validity of the difference-in-differences approach relies on the equal trends assumption, or rather the assumption that no time-varying differences exist between the treatment and control groups.
+

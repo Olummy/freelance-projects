@@ -1,0 +1,106 @@
+---
+title: "Transmuted New Weibull-Pareto Distribution"
+subtitle: "Mathematical Statistics"
+author: "Ayodele Ayodeji Theophilus"
+date: "2/16/2022"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    code_folding: "hide"
+    theme: darkly
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+# EDA{.tabset}
+
+## Summary
+
+
+```{r cars, comment=""}
+summary(cars)
+```
+
+## Visualizations
+
+> Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE, dpi=95}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+```{r}
+library(reticulate)
+```
+
+
+```{python}
+x = 42*2
+```
+
+
+```{r}
+#retrieve the value from python object
+py$x/2
+```
+
+```{r}
+# assign a value to python object
+py$y <- seq(1,50, by = 0.01)
+```
+
+
+```{python}
+print(y[1:10]);
+```
+
+## Python plot
+
+```{python}
+import matplotlib.pyplot as plt
+
+plt.plot([0,2,1,4])
+plt.show()
+```
+
+```{r}
+library(JuliaCall)
+```
+
+
+> Some Julia Codes
+
+```{julia}
+a = sqrt(49)
+
+typeof(a)
+```
+
+
+## Map
+
+```{r}
+library(leaflet)
+
+leaflet() %>% addTiles() %>% 
+  setView(-93.65, 42.0285, zoom = 17) %>% 
+  addPopups(
+    -93.65, 42.0285,
+    'Here is the <b>Department of Statistics</b>, ISU'
+  )
+```
+

@@ -1,0 +1,576 @@
+---
+title: "Transmuted New Weibull-Pareto Distribution"
+author: "Ayodeji Ayodele Theophilus"
+date: "4/16/2022"
+output: 
+  word_document:
+    toc: yes
+    fig_width: 9
+    fig_height: 4.5
+  pdf_document:
+    toc: yes
+  html_document: 
+    toc: yes
+    toc_float: yes
+    anchor_sections: yes
+    code_folding: show
+    code_download: yes
+    highlight: kate
+    theme: readable
+    number_sections: yes
+    fig_width: 9
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+# Libraries
+
+```{r}
+library(maxLik) 
+library(rnoaa)
+library(dplyr)
+library(ggplot2)
+library(lubridate)
+options(scipen = 999, digits = 3)
+```
+
+
+
+# Density Plot
+
+```{r fig.cap="TNWP density plot using different values of the paramters"}
+
+## PDF #=============================================
+
+x <- seq(0, 3, by = 0.0001)
+beta <- 1.5
+delta <- 0.5
+theta <- 0.5
+lambda <- 0.0
+
+tnwp.pdf <- function(x, beta=1.5, delta=0.5, 
+                     theta=0.5, lambda=0.0){
+  (beta*delta/theta) * ((x/theta)^(beta-1))*
+    exp(-(delta*(x/theta)^beta)) *(1-lambda + 2*lambda*exp(-(delta*(x/theta)^ beta)))
+}
+
+
+ # par(mfrow = c(2,2), cex.axis = 0.5, cex.lab = 0.5,
+ #     mar = c(3.5, 3.5, 3.5, 3.5) - 2.5)
+
+plot(x, tnwp.pdf(x,1.5,0.5,0.5,0.0), type = "l", xlab = "x", 
+     ylab = "density", ylim = c(0, 1.7), 
+     main = "TNWP density plot using different values of the paramters",
+     cex.axis = 0.7, 
+     cex.lab = 0.7,
+     cex.main = 0.8,
+     ann = TRUE)
+
+lines(x, tnwp.pdf(x,1.5,0.5,0.5,0.2), col = 2)
+lines(x, tnwp.pdf(x,1.5,0.5,0.5,0.4), col = 3)
+lines(x, tnwp.pdf(x,1.5,0.5,0.5,0.6), col = 4)
+lines(x, tnwp.pdf(x,1.5,0.5,0.5,0.8), col = 5)
+lines(x, tnwp.pdf(x,1.5,0.5,0.5,1.0), col = 6)
+legend("topright", cex=0.7, 
+       c(expression(paste(beta, "=1.5, ",
+                          delta, "=0.5, ",
+                          theta, "=0.5, ",
+                          lambda, "=0.0"),
+                    paste(beta, "=1.5, ",
+                          delta, "=0.5, ",
+                          theta, "=0.5, ",
+                          lambda, "=0.2"),
+                    paste(beta, "=1.5, ",
+                          delta, "=0.5, ",
+                          theta, "=0.5, ",
+                          lambda, "=0.4"),
+                    paste(beta, "=1.5, ",
+                          delta, "=0.5, ",
+                          theta, "=0.5, ",
+                          lambda, "=0.6"),
+                    paste(beta, "=1.5, ",
+                          delta, "=0.5, ",
+                          theta, "=0.5, ",
+                          lambda, "=0.8"),
+                    paste(beta, "=1.5, ",
+                          delta, "=0.5, ",
+                          theta, "=0.5, ",
+                          lambda, "=1.0"))),
+       col = c(1,2,3,4,5,6),
+       lty = c(1,1,1,1,1,1), 
+       lwd = c(2,2,2,2,2,2), 
+       horiz = FALSE,
+       bg = "grey96")
+
+
+####========== 2nd plot
+
+
+plot(x, tnwp.pdf(x,1.5,0.5,0.5,0.0), type = "l", xlab = "x", 
+     ylab = "density", ylim = c(0, 1.5),
+     main = "TNWP density plot using different values of the paramters",
+     cex.axis = 0.7, 
+     cex.lab = 0.7,
+     cex.main = 0.8,
+     ann = TRUE)
+
+lines(x, tnwp.pdf(x,1.5,0.5,0.5,-0.2), col = 2)
+lines(x, tnwp.pdf(x,1.5,0.5,0.5,-0.4), col = 3)
+lines(x, tnwp.pdf(x,1.5,0.5,0.5,-0.6), col = 4)
+lines(x, tnwp.pdf(x,1.5,0.5,0.5,-0.8), col = 5)
+lines(x, tnwp.pdf(x,1.5,0.5,0.5,-1.0), col = 6)
+legend("topright", cex=0.7,
+       c(expression(paste(beta, "=1.5, ",
+                          delta, "=0.5, ",
+                          theta, "=0.5, ",
+                          lambda, "=0.0"),
+                    paste(beta, "=1.5, ",
+                          delta, "=0.5, ",
+                          theta, "=0.5, ",
+                          lambda, "=-0.2"),
+                    paste(beta, "=1.5, ",
+                          delta, "=0.5, ",
+                          theta, "=0.5, ",
+                          lambda, "=-0.4"),
+                    paste(beta, "=1.5, ",
+                          delta, "=0.5, ",
+                          theta, "=0.5, ",
+                          lambda, "=-0.6"),
+                    paste(beta, "=1.5, ",
+                          delta, "=0.5, ",
+                          theta, "=0.5, ",
+                          lambda, "=-0.8"),
+                    paste(beta, "=1.5, ",
+                          delta, "=0.5, ",
+                          theta, "=0.5, ",
+                          lambda, "=-1.0"))),
+       col = c(1,2,3,4,5,6),
+       lty = c(1,1,1,1,1,1), 
+       lwd = c(2,2,2,2,2,2), 
+       horiz = F,
+       bg = "grey96")
+
+
+####========== 3rd plot
+
+
+plot(x, tnwp.pdf(x,3.0,5.0,2.0,0.0), type = "l", xlab = "x", 
+     ylab = "density", 
+     ylim = c(0, 1.4),
+     main = "TNWP density plot using different values of the paramters",
+     cex.axis = 0.7, 
+     cex.lab = 0.7,
+     cex.main = 0.8,
+     ann = TRUE)
+
+lines(x, tnwp.pdf(x,3.0,5.0,2.0,0.2), col = 2)
+lines(x, tnwp.pdf(x,3.0,5.0,2.0,0.4), col = 3)
+lines(x, tnwp.pdf(x,3.0,5.0,2.0,0.6), col = 4)
+lines(x, tnwp.pdf(x,3.0,5.0,2.0,0.8), col = 5)
+lines(x, tnwp.pdf(x,3.0,5.0,2.0,1.0), col = 6)
+legend("topright",cex=0.7, 
+       c(expression(paste(beta, "=3.0, ",
+                          delta, "=5.0, ",
+                          theta, "=2.0, ",
+                          lambda, "=0.0"),
+                    paste(beta, "=3.0, ",
+                          delta, "=5.0, ",
+                          theta, "=2.0, ",
+                          lambda, "=0.2"),
+                    paste(beta, "=3.0, ",
+                          delta, "=5.0, ",
+                          theta, "=2.0, ",
+                          lambda, "=0.4"),
+                    paste(beta, "=3.0, ",
+                          delta, "=5.0, ",
+                          theta, "=2.0, ",
+                          lambda, "=0.6"),
+                    paste(beta, "=3.0, ",
+                          delta, "=5.0, ",
+                          theta, "=2.0, ",
+                          lambda, "=0.8"),
+                    paste(beta, "=3.0, ",
+                          delta, "=5.0, ",
+                          theta, "=2.0, ",
+                          lambda, "=1.0"))),
+       col = c(1,2,3,4,5,6),
+       lty = c(1,1,1,1,1,1), 
+       lwd = c(2,2,2,2,2,2), 
+       horiz = F,
+       bg = "grey96")
+
+####========== 4th plot
+
+
+plot(x, tnwp.pdf(x,0.4,0.5,0.0,-1.0), type = "l", 
+     xlab = "x", 
+     ylab = "density", 
+     ylim = c(0, 1.8),
+     main = "TNWP density plot using different values of the paramters",
+     cex.axis = 0.7, 
+     cex.lab = 0.7,
+     cex.main = 0.8,
+     ann = TRUE)
+
+lines(x, tnwp.pdf(x,0.9,1.2,1.1,0.6), col = 2)
+lines(x, tnwp.pdf(x,4.6,2.9,2.8,-0.5), col = 3)
+lines(x, tnwp.pdf(x,4.0,1.9,1.5,0.2), col = 4)
+lines(x, tnwp.pdf(x,5.5,5.0,6.2,1.0), col = 5)
+lines(x, tnwp.pdf(x,5.9,6.2,7.5,1.0), col = 6)
+legend("topright",cex=0.7, 
+       c(expression(paste(beta, "=0.4, ",
+                          delta, "=0.5, ",
+                          theta, "=0.0, ",
+                          lambda, "=-1.0"),
+                    paste(beta, "=0.9, ",
+                          delta, "=1.2, ",
+                          theta, "=1.1, ",
+                          lambda, "=0.6"),
+                    paste(beta, "=4.6, ",
+                          delta, "=2.9, ",
+                          theta, "=2.8, ",
+                          lambda, "=-0.5"),
+                    paste(beta, "=4.0, ",
+                          delta, "=1.9, ",
+                          theta, "=1.5, ",
+                          lambda, "=0.2"),
+                    paste(beta, "=5.5, ",
+                          delta, "=5.0, ",
+                          theta, "=6.2, ",
+                          lambda, "=1.0"),
+                    paste(beta, "=5.9, ",
+                          delta, "=6.2, ",
+                          theta, "=7.5, ",
+                          lambda, "=1.0"))),
+       col = c(1,2,3,4,5,6),
+       lty = c(1,1,1,1,1,1), 
+       lwd = c(2,2,2,2,2,2), 
+       horiz = F,
+       bg = "grey96")
+                                                
+```
+
+
+# CDF Plot
+
+
+```{r fig.cap="CDF of Transmuted Weibull Pareto Distribution"}
+## ==== R-code for the CDF plot =========================
+
+x <- seq(0,10,0.025)
+
+cd <- function(x,beta,delta,theta,lambda){
+  
+  (1-exp(-(delta*(x/theta)^beta)))*
+    (1+lambda*(exp(-(delta*(x/theta)^beta))))
+  
+  }
+
+
+c1 <- cd(x,beta=1,delta=2,theta=1,lambda=1) 
+
+plot(x,c1, main="CDF of Transmuted Weibull Pareto Distribution",
+     type="n", xlab = "x",ylab = "F(x)", 
+     cex.main = 0.8, 
+     cex.lab = 0.7,
+     cex.axis = 0.7) 
+
+lines(x, cd(x,beta=1,delta=2,theta=1,lambda=1), 
+      col="red",lwd=2,lty=1) 
+
+lines(x, cd(x,beta=2,delta=2,theta=1,lambda=0),
+      col="blue",lwd=2,lty=1) 
+
+lines(x, cd(x,beta=3,delta=2,theta=1.5,lambda=0.5),
+      col="green",lwd=2,lty=1) 
+
+lines(x, cd(x,beta=4,delta=2,theta=1.5,lambda=1),
+      col="black",lwd=2,lty=1) 
+
+
+legend("bottomright",cex=0.7, 
+       c(expression(paste(beta, "=1, ",
+                          delta, "=2, ",
+                          theta, "=1, ",
+                          lambda, "=1"),
+                    paste(beta, "=2, ",
+                          delta, "=2, ",
+                          theta, "=1, ",
+                          lambda, "=0"),
+                    paste(beta, "=3, ",
+                          delta, "=2, ",
+                          theta, "=1.5, ",
+                          lambda, "=0.5"),
+                    paste(beta, "=4, ",
+                          delta, "=2, ",
+                          theta, "=1.5, ",
+                          lambda, "=1"))),
+       horiz=F, 
+       lty=c(1,1,1,1),
+       lwd=c(2,2,2,2), 
+       col=c("red","blue","green","black"), 
+       bg="grey96")
+                                                  
+```
+
+# Survival Plot
+
+
+```{r fig.cap="Survival Plot of Transmuted Weibull Pareto Distribution"}
+## ====R-code for the Survival Plot ======
+
+x <- seq(0,10,0.025) 
+
+h <- function(x, beta, delta, theta, lambda){
+  
+  (1-((1-exp(-(delta*(x/theta)^beta)))*
+        (1+(lambda*(exp(-(delta*(x/theta)^beta)))))))
+  
+} 
+
+x1 <- h(x,beta=1,delta=2,theta=1,lambda=1) 
+
+x2 <- h(x,beta=2,delta=2,theta=1,lambda=0) 
+
+x3 <- h(x,beta=3,delta=2,theta=1.5,lambda=0.5) 
+
+x4 <- h(x,beta=4,delta=2,theta=1.5,lambda=1)
+
+plot(x, x1, 
+     main = "Survival Plot of Transmuted Weibull Pareto Dist.",
+     ylim = c(0,1),type = "n", xlab = "x",ylab = "S(x)",
+     cex.main = 0.8, cex.lab = 0.7,
+    cex.axis = 0.7)
+
+lines(x,x1,col="red",lwd=2,lty=1) 
+
+lines(x,x2,col="blue",lwd=2,lty=1) 
+
+lines(x,x3,col="black",lwd=2,lty=1) 
+
+lines(x,x4,col="green",lwd=2,lty=1) 
+
+
+legend("topright",cex=0.7, 
+       c(expression(paste(beta, "=1, ",
+                          delta, "=2, ",
+                          theta, "=1, ",
+                          lambda, "=1"),
+                    paste(beta, "=2, ",
+                          delta, "=2, ",
+                          theta, "=1, ",
+                          lambda, "=0"),
+                    paste(beta, "=3, ",
+                          delta, "=2, ",
+                          theta, "=1.5, ",
+                          lambda, "=0.5"),
+                    paste(beta, "=4, ",
+                          delta, "=2, ",
+                          theta, "=1.5, ",
+                          lambda, "=1"))),
+       horiz=F, 
+       lty=c(1,1,1,1),
+       lwd=c(2,2,2,2), 
+       col=c("red","blue","black","green"), 
+       bg="grey96")
+
+```
+
+
+# Hazard Plot
+
+```{r}
+## ==== R-code for the Hazard Plot 
+
+x <- seq(0,10,0.025) 
+
+ha <- function(x,beta,delta,theta,lambda){
+  
+  ((beta*delta/theta)*((x/theta)^(beta-1))*
+     (1-lambda+2*lambda*exp(-(delta*(x/theta)^beta))))/
+    (lambda*exp(-(delta*(x/theta)^beta))+1-lambda)
+  
+  } 
+
+x1 <- ha(x,beta=0.5,delta=3,theta=2,lambda=-1) 
+
+x2 <- ha(x,beta=1,delta=3,theta=2,lambda=0) 
+
+x3 <- ha(x,beta=1.5,delta=3,theta=2,lambda=0.5) 
+
+x4 <- ha(x,beta=2,delta=3,theta=2,lambda=1) 
+
+plot(x,x1, main="Hazard Plot of Transmuted Weibull Pareto Dist.",type="n",xlab = "x",ylab = "H(x)",cex.main = 0.8, 
+     cex.lab = 0.7,
+     cex.axis = 0.7) 
+
+lines(x,x1,col="red",lwd=2,lty=1)
+
+lines(x,x2,col="blue",lwd=2,lty=1)
+
+lines(x,x3,col="green",lwd=2,lty=1) 
+
+lines(x,x4,col="black",lwd=2,lty=1) 
+
+legend("topright",cex=0.7, 
+       c(expression(paste(beta, "=0.5, ",
+                          delta, "=3, ",
+                          theta, "=2, ",
+                          lambda, "=-1"),
+                    paste(beta, "=1, ",
+                          delta, "=3, ",
+                          theta, "=2, ",
+                          lambda, "=0"),
+                    paste(beta, "=1.5, ",
+                          delta, "=3, ",
+                          theta, "=2, ",
+                          lambda, "=0.5"),
+                    paste(beta, "=2, ",
+                          delta, "=3, ",
+                          theta, "=2, ",
+                          lambda, "=1"))),
+       horiz=F, 
+       lty=c(1,1,1,1),
+       lwd=c(2,2,2,2), 
+       col=c("red","blue","green","black"), 
+       bg="grey96")
+```
+
+
+# Maximum Likelihood Estimation
+
+<!-- ## Public data via `rnoaa` R package -->
+
+<!-- ### Precipitation Data -->
+
+<!-- * The precipitation data is taken from the State of **Florida** station in the United States of America via the `rnoaa` R package. -->
+
+<!-- ```{r comment=""} -->
+
+<!-- # Precipitation -->
+
+<!-- prcp <- ncdc(datasetid='GHCND', stationid='GHCND:USW00014895', datatypeid='PRCP', startdate = '2021-01-01', enddate = '2021-12-31', limit=500, add_units = TRUE, token = Sys.getenv("rnoaa_key")) -->
+
+
+<!-- prcp_df <- prcp$data -->
+<!-- ``` -->
+
+
+<!-- ```{r fig.width=9} -->
+<!-- prcp_df %>%  -->
+<!--   mutate(date = ymd_hms(date)) %>%  -->
+<!--   ggplot(aes(x = date, y = value)) + -->
+<!--   geom_line() + -->
+<!--   geom_smooth() + -->
+<!--   labs(y = "Precipitation (mm)", -->
+<!--        title = "2021 Precipitation (mm) from Florida Station, USA", -->
+<!--        x = "") + -->
+<!--   scale_x_datetime(date_breaks = "1 month",  -->
+<!--                date_labels = "%b-%y") + -->
+<!--   theme(axis.text.x = element_text(angle = 45, vjust = 0.9, hjust = 0.9)) -->
+<!-- ``` -->
+
+
+## Transmuted New Weibull-Pareto
+
+The transmuted new weibull-pareto density function is given below as:
+
+$$f(x) = \frac{\beta~\delta}{\theta}~(\frac{x}{\theta})^{\beta -1}~e^{-\delta}(\frac{x}{\theta})^\beta~(1-\lambda + 2\lambda~e^{-\delta}(\frac{x}{\theta})^\beta)$$
+
+The log likelihood is given below as:
+
+$$loglik = nlog(\beta) + nlog(\delta) -nlog(\theta)-\delta~\sum_{i=1}^n~ (\frac{x_i}{\theta})^\theta + (\beta-1)\sum_{i=1}^n~log(\frac{x}{\theta}) + \sum_{i=1}^n(log(1-\lambda + 2\lambda~e^{-\delta}(\frac{x_i}{\theta})^\beta)$$
+
+***
+
+#### Data
+
+* The dataset used for the analysis was randomly selected from the weibull distribution using the `rweibull` function in R. 
+
+```{r comment=""}
+## ===R-code for the Maximum likelihood estimation =====
+
+#x <- prcp_df$value
+set.seed(123)
+x <- rweibull(120, 2)
+
+loglik <- function(a) {
+  
+  beta <- a[1]
+  delta <- a[2]
+  theta <- a[3]
+  lambda <- a[4]
+  
+log_lik <-   n*log(a[1])+n*log(a[2])-n*log(a[3])-(a[2])*
+  sum(x/a[3])^a[1]+(a[1]-1)*sum(log(x/a[3]))+
+  sum(log(1 - a[4] + 2 * a[4]*exp(-(a[2]*(x/a[3])^a[1]))))
+  
+  } 
+
+n <- length(x) 
+
+mle_estimate <- maxLik(loglik, 
+                       start = c(beta = 3.421, 
+                                delta = 8.6231,
+                                theta = 2.25,
+                                lambda = -0.4608),
+                       control=list(printLevel=2)) 
+
+summary(mle_estimate)
+AIC(mle_estimate)
+```
+
+
+## Weibull 2-parameter distribution
+
+Let $$f_{\lambda},_{\beta}(x) = \frac{\beta}{\lambda}(\frac{x}{\lambda})^{\beta -1}e^{-(\frac{x}{\beta})^\beta} , ~ x \ge 0$$
+
+The loglikelihood function becomes:
+
+$$loglik = nlog\beta - n\beta~log\lambda - \sum_{i=1}^n~(\frac{x_i}{\lambda})^\beta + (\beta -1)\sum_{i = 1}^n log~x_i$$
+
+
+```{r comment=""}
+weibull_loglik <- function(a) {
+  
+  beta <- a[1]
+  lambda <- a[2]
+  
+log_lik <-  n*log(a[1]) - n*a[1]*log(a[2]) - (sum(x/a[2])^a[1]) + (a[1] - 1)* sum(log(x)) 
+  
+  } 
+
+n <- length(x) 
+
+mle_weibull <- maxLik(weibull_loglik, 
+                       start = c(beta = 3.421, 
+                                lambda = 0.5),
+                       control=list(printLevel=2)) 
+
+summary(mle_weibull)
+
+AIC(mle_weibull)
+```
+
+
+
+# Citation
+
+- R Core Team (2021). R: A language and environment for
+  statistical computing. R Foundation for Statistical
+  Computing, Vienna, Austria.
+  https://www.R-project.org/.
+  
+
+- Arne Henningsen and Ott Toomet (2011). maxLik: A package
+  for maximum likelihood estimation in R. Computational
+  Statistics 26(3), 443-458. DOI
+  10.1007/s00180-010-0217-1.
+  
+- Scott Chamberlain (2021). rnoaa: 'NOAA' Weather Data
+  from R. R package version 1.3.8.
+  https://CRAN.R-project.org/package=rnoaa
+  
+

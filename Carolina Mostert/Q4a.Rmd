@@ -1,0 +1,40 @@
+---
+title: "Analysis"
+author: "Halimah"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+
+# Libraries
+
+```{r}
+library(tidyverse)
+```
+
+
+```{r}
+df <- read_rds("PD_dat.RData")
+```
+
+# Q4a
+
+```{r}
+ggplot(data = df, aes(x = seq(1:5000))) +
+  geom_line(aes(y = UPDRS, color = "UPDRS"), show.legend = TRUE) +
+  geom_line(aes(y = Apathy_Baseline, color = "Apathy_Baseline"), show.legend = TRUE) +
+  scale_color_manual(values = c("UPDRS" = "grey30","Apathy_Baseline"= "red")) +
+  
+  labs(color = "",
+       x = "") +
+  theme_minimal() +
+  theme(legend.position = "top") +
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank())
+  
+```
+

@@ -1,0 +1,468 @@
+---
+title: "Survey Data Analysis"
+author: "Ireoluwa Ige"
+format: 
+  docx:
+    toc: true
+    toc-depth: 2
+    toc-title: "Content"
+editor: visual
+---
+
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+if(!require(pacman))install.packages("pacman")
+
+pacman::p_load(
+  tidyverse,
+  readxl,
+  factoextra,
+  FactoMineR,
+  DescTools,
+  psych
+)
+
+```
+
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+
+# read data
+
+survey_tbl <- read_excel("DATA.xlsx", sheet = "Survey Data")
+
+```
+
+
+
+## Gender Distribution
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| comment: ""
+#| fig-width: 9
+#| fig-height: 4
+
+survey_tbl %>% 
+  mutate(GENDER = case_when(GENDER == 1 ~ "Male",
+                            TRUE ~ "Female")) %>% 
+  group_by(GENDER) %>%
+  summarise(Freq = n()) %>% 
+  mutate(prop = Freq/sum(Freq)) %>% 
+  filter(Freq != 0) %>% 
+  
+  ggplot(mapping = aes(x = 2, y = prop, fill = GENDER))+
+  geom_bar(width = 1, color = "white", stat = "identity") +
+  xlim(0.5, 2.5) +
+  coord_polar(theta = "y", start = 0) +
+  theme_void() +
+  scale_y_continuous(labels = scales::percent) +
+  geom_text(aes(label = paste0(round(prop*100, 1), "%")), size = 4, position = position_stack(vjust = 0.5)) +
+  scale_fill_manual(values = c("#fc0394","#03adfc")) +
+  #theme(axis.text.x = element_text(angle = 90), legend.position = "top")+
+  labs(title = "",
+       x = "",
+       y = "",
+       fill = "") +
+  theme(legend.position = "top") 
+```
+
+
+* About 31% of the participants' were female and 69% male.
+
+
+## Descriptive Statistical Analysis
+
+### Life Expectancy
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| comment: ""
+#| fig-height: 4
+#| fig-width: 9
+
+lf <- survey_tbl %>% 
+  select(starts_with("LFE")) %>% 
+  rowMeans(.) %>% 
+  as_tibble()
+
+
+Desc(lf, plotit = FALSE)
+
+ggplot(lf, aes(value)) +
+  geom_density(fill = "steelblue", color = "white") +
+  theme_minimal() +
+  labs(x = "Life Expectancy",
+       y = "Density",
+       title = "Life expectancy density plot")
+```
+
+
+* The skewness and kurtosis statistics for `life expectancy` is 0.15 and -1.85. By implication, the value of the skewness implies that the `life expectancy` is right or positively skewed such that the distribution is longer on the right side of its peak than on its left. The measure of the kurtosis (i.e. -1.85) implies that the distribution is **Platykurtic** or **negative kurtosis** as the kurtosis is less than 3. Platykurtic distributions have a low frequency of `outliers`.  
+
+
+**Normality Test**
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| comment: ""
+
+
+lf %>% 
+  pull(value) %>% 
+  shapiro.test()
+```
+
+* The `shapiro test` statistic above shows that the `life expectancy` variable is significantly different from a normal distribution as the p-value is lower than 0.05.
+
+***
+
+
+### Agricultural Output Quality
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| comment: ""
+#| fig-width: 9
+#| fig-height: 4
+
+aq <- survey_tbl %>% 
+  select(starts_with("AQ")) %>% 
+  rowMeans(.) %>% 
+  as_tibble()
+
+
+Desc(aq, plotit = FALSE)
+
+ggplot(aq, aes(value)) +
+  geom_density(fill = "steelblue", color = "white") +
+  theme_minimal() +
+  labs(x = "Agricultural Output Quality",
+       y = "Density",
+       title = "Agricultural output quality density plot")
+```
+
+
+* The skewness and kurtosis statistics for `agricultural output quality` is 0.61 and -0.61. By implication, the value of the skewness implies that the `agricultural output quality` is right or positively skewed such that the distribution is longer on the right side of its peak than on its left. The measure of the kurtosis (i.e. -0.61) implies that the distribution is **Platykurtic** or **negative kurtosis** as the kurtosis is less than 3. Platykurtic distributions have a low frequency of `outliers`.  
+
+
+**Normality Test**
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| comment: ""
+
+
+aq %>% 
+  pull(value) %>% 
+  shapiro.test()
+```
+
+
+* The `shapiro test` statistic above shows that the `Agricultural output quality` variable is significantly different from a normal distribution as the p-value is lower than 0.05.
+
+
+***
+
+
+### Carbon Emission
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| comment: ""
+#| fig-width: 9
+#| fig-height: 4
+
+ce <- survey_tbl %>% 
+  select(starts_with("CE")) %>% 
+  rowMeans(.) %>% 
+  as_tibble()
+
+
+Desc(ce, plotit = FALSE)
+
+ggplot(ce, aes(value)) +
+  geom_density(fill = "steelblue", color = "white") +
+  theme_minimal() +
+  labs(x = "Carbon Emission",
+       y = "Density",
+       title = "Carbon emission density plot")
+```
+
+* The skewness and kurtosis statistics for `carbon emission` is -4.01 and 21.99. By implication, the value of the skewness implies that the `carbon emission` is left or negatively skewed such that the distribution is longer on the left side of its peak than on its right. The measure of the kurtosis (i.e. 21.99) implies that the distribution is **Leptokurtic** or **positive kurtosis** as the kurtosis is greater than 3. Leptokurtic distribution is fat-tailed, meaning that there are a lot of `outliers`.  
+
+
+
+**Normality Test**
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| fig-width: 9
+#| fig-height: 4
+#| comment: ""
+
+
+ce %>% 
+  pull(value) %>% 
+  shapiro.test()
+```
+
+
+* The `shapiro test` statistic above shows that the `Carbon emission` variable is significantly different from a normal distribution as the p-value is lower than 0.05.
+
+***
+
+
+### Foreign Direct Investment
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| comment: ""
+#| fig-width: 9
+#| fig-height: 4
+
+fd <- survey_tbl %>% 
+  select(starts_with("FD")) %>% 
+  rowMeans(.) %>% 
+  as_tibble()
+
+
+Desc(fd, plotit = FALSE)
+
+ggplot(fd, aes(value)) +
+  geom_density(fill = "steelblue", color = "white") +
+  theme_minimal() +
+  labs(x = "Foreign Direct Investment",
+       y = "Density",
+       title = "Foreign direct investment density plot")
+```
+
+
+* The skewness and kurtosis statistics for `foreign direct investment` is -0.418 and -0.895 By implication, the value of the skewness implies that the `foreign direct investment` is right or positively skewed such that the distribution is longer on the right side of its peak than on its left. The measure of the kurtosis (i.e. -0.895) implies that the distribution is **Platykurtic** or **negative kurtosis** as the kurtosis is less than 3. Platykurtic distributions have a low frequency of `outliers`.  
+
+
+**Normality Test**
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| comment: ""
+
+
+fd %>% 
+  pull(value) %>% 
+  shapiro.test()
+```
+
+
+* The `shapiro test` statistic above shows that the `Foreign direct investment` variable is significantly different from a normal distribution as the p-value is lower than 0.05.
+
+***
+
+
+## Reliability of the scale
+
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| comment: ""
+#| fig-width: 8
+#| fig-height: 4
+
+
+questions <- survey_tbl %>% 
+  select(-GENDER)
+
+cron_estimate <- psych::alpha(questions)
+
+cron_estimate
+```
+
+
+### How to interpret ‘Reliability if an item is dropped’?
+
+* The overall $\alpha$ (raw_alpha) is 0.8132048. Each row refers to each item and has a raw alpha associated—this refers to the overall $\alpha$ when that particular item has been dropped/deleted. For example, the first row refers to `LFE1`, and if it is dropped, the overall $\alpha$ becomes 0.7962759, which reflects lower reliability, so we want to keep `LFE1`
+
+* We are checking whether any of these raw alpha values are greater than the overall $\alpha$ of 0.8132048; if yes, this means that dropping that particular item will increase the overall $\alpha$ of the scale.
+
+* If item `CE4` is dropped, the $\alpha$ becomes 0.8184122 which is the highest value that the $\alpha$ could assume. Thus, we can drop the item and recalaculate the `cronbach-alpha`.
+
+* The other columns of this table refer to how the other statistics will change if that particular item has been dropped/deleted.
+
+
+### How to interpret the final frequency table?
+
+This table tells us what percentage of people gave each response to each of the items (i.e., since if you have a 5-point scale, then it tells you how many percent of responses were 1, 2, 3, 4, or 5).
+This helps you check the distribution of responses and whether everyone is giving the same responses (which will lead to low reliability).
+
+### Items to be dropped
+
+* Item to be dropped is `CE4`
+
+### Redo Reliability
+
+Below we redo the reliability analysis by removing the item above
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| comment: ""
+#| fig-width: 8
+#| fig-height: 4
+
+
+cron_estimate_2 <- psych::alpha(questions %>% select(-CE4))
+
+
+
+```
+
+
+* The raw alpha is now 0.8184122.
+
+***
+
+
+## Factor Analysis
+
+
+### Parallel Analysis
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| comment: ""
+#| fig-width: 9
+#| fig-height: 4
+
+## run the parallel analysis
+
+parallel <- fa.parallel(questions, fm = 'minres', fa = 'fa')
+```
+
+
+The blue line shows eigenvalues of actual data and the red lines (placed on top of each other) show simulated and resampled data. Here we look at the large drops in the actual data and spot the point where it levels off to the right. Also we locate the point of inflection – the point where the gap between simulated data and actual data tends to be minimum.
+
+Looking at this plot and parallel analysis, anywhere between 3 to 5 factors would be good choice.
+
+### Correlation
+
+```{r fig.width=9, fig.height=5}
+#| echo: false
+#| warning: false
+#| message: false
+#| comment: ""
+#| fig-width: 10
+#| fig-height: 6
+
+
+opinion_cor <- cor(questions, use = "pairwise.complete.obs", method = "kendall")
+
+ggcorrplot::ggcorrplot(opinion_cor, type = "lower", show.legend = TRUE, show.diag = FALSE, lab = TRUE)
+```
+
+
+### Analysis
+
+
+Now that we’ve arrived at probable number number of factors, let’s start off with 4 (as the number of factors) as suggested by the scree plot above. In order to perform factor analysis, we’ll use `psych` package’s `fa()` function. Given below are the arguments we’ll supply:
+
+* r - Raw data or correlation or covariance matrix
+
+* nfactors – Number of factors to extract
+
+* rotate – Although there are various types rotations, `Varimax` and `Oblimin` are most popular
+
+* fm – One of the factor extraction techniques like `Minimum Residual (OLS)`, `Maximum Liklihood`, `Principal Axis` etc.
+
+In this case, we will select oblique rotation (rotate = “oblimin”) as we believe that there is correlation in the factors. Note that Varimax rotation is used under the assumption that the factors are completely uncorrelated. We will use `Ordinary Least Squared/Minres` factoring (fm = “minres”), as it is known to provide results similar to `Maximum Likelihood` without assuming multivariate normal distribution and derives solutions through iterative eigendecomposition like principal axis.
+
+<!-- Run the following to start the analysis: -->
+
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| comment: ""
+#| fig-width: 8
+#| fig-height: 4
+
+
+fivefactor <- fa(questions, nfactors = 4, 
+                rotate = "oblimin",fm="minres")
+print(fivefactor)
+```
+
+
+Now we need to consider the loadings more than 0.5 and not loading on more than one factor. Note that negative values are acceptable here. So let’s first establish the cut off to improve visibility:
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| comment: ""
+#| fig-width: 8
+#| fig-height: 4
+
+
+print(fivefactor$loadings,cutoff = 0.5)
+```
+
+As you can see few variables have become insignificant and none of the variables have multiple-loadings. This is called simple structure
+
+```{r fig.width=9, fig.height=6}
+#| echo: false
+#| warning: false
+#| message: false
+#| comment: ""
+#| fig-width: 9
+#| fig-height: 6
+
+
+fa.diagram(fivefactor)
+```
+
+### Adequacy Test
+
+Now that we’ve achieved a structure it’s time for us to validate our model. Let’s look at the factor analysis output to proceed:
+
+
+The root mean square of residuals (RMSR) is 0.02. This is acceptable as this value should be closer to 0. Finally, the `Tucker-Lewis Index` (TLI) is 0.755 – an acceptable value considering it’s over 0.5.
+
+
+***
+
+
+
+
+
+

@@ -1,0 +1,1314 @@
+---
+title: "Citi Bike Analytics"
+subtitle: "Implementation"
+author: "Bukola Aborode"
+date: "October 19, 2018"
+output: 
+  html_document: 
+    fig_caption: yes
+    toc: yes
+    number_sections: false
+    toc_depth: 4
+    fig.retina: 4
+    fig.caption: true
+    fig.width: 12
+    fig.height: 7
+    code_folding: show
+    df_print: paged
+    toc_float: 
+      collapsed:  false
+      smooth_scroll: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+# Preambles
+
+## Libraries
+
+* The code chunk below include all the libraries used for the implementation. If any of the libraries is not available on your machine, you will need to install it using _install.packages("packageName")_. For instance, to install **tidyverse** run _install.packages("tidyverse")_ on the console.
+
+```{r libaries}
+library(tidyverse)
+library(caret)
+library(rnn)
+library(xgboost)
+library(highcharter)
+library(corrplot)
+library(kknn)
+library(caTools)
+library(randomForest)
+library(e1071)
+library(ipred)
+library(xgboost)
+library(leaflet)
+library(ROCR)
+library(readxl)
+library(factoextra)
+library(lubridate)
+library(ggthemes)
+library(nnet)
+library(tmap)
+library(mice)
+options(scipen = 999)
+memory.limit(size = 8000)
+options(java.parameters = "-Xmx8g")
+```
+
+# Exploratory Data Analysis
+
+* All the datasets intended to use for this study are described fully using different descriptive statistical measures which include visualizations
+
+## Yellow Taxi Dataset Analysis
+
+
+### Load Yellow Taxi Dataset
+
+* The code chunk below is majorly used to load/read all the yellow taxi dataset.
+
+```{r readdata_yellowTaxi}
+
+yellow_taxi_files <- list.files(path = "Yellow Taxi Trip/",pattern = "*.xlsx", 
+                                full.names = TRUE, include.dirs = TRUE, recursive = TRUE) %>% 
+   map_df(read_excel)
+
+
+
+## drop the empty rows
+
+yellow_taxi_files <- yellow_taxi_files[complete.cases(yellow_taxi_files), ]
+
+glimpse(yellow_taxi_files)
+
+```
+
+* Modify the _tpep_pickup_datetime_ field to generate
+  * pickup_date
+  * pickup_day (day of the week)
+  * pickup_month (month of the year)
+  * pickup_year (pickup year)
+
+```{r modifytheDatefields}
+
+## extract features from the pickup_datetime field and limit the dataset to 2017. 
+
+yellow_taxi_files <- yellow_taxi_files %>% 
+  mutate(tpep_pickup_date = ymd(as.Date(tpep_pickup_datetime)), # extract the date from the datetime field
+         tpep_pickup_hour = hour(tpep_pickup_datetime), # extract the hour from the datetime field
+         tpep_pickup_day = wday(as.Date(tpep_pickup_date), label= TRUE, abbr = TRUE), # extract day from the datetime fiels
+         tpep_pickup_year = year(as.Date(tpep_pickup_date)), # extract year from the datetime field
+         tpep_pickup_month = month(as.Date(tpep_pickup_date), label = TRUE, abbr = TRUE), # extract month from the datetime field
+         tpep_pickup_mon_yr = paste(tpep_pickup_month, tpep_pickup_year, sep = "-")) %>% # concatenate the mon-year
+  filter(!tpep_pickup_date %in% as.Date(c("2029-05-05","2053-03-21"))) %>%
+  filter(tpep_pickup_year == "2017") # include only 2017 data
+
+```
+
+
+### Yellow taxi summary based on usage
+
+```{r}
+
+yellow_taxi_summary <- yellow_taxi_files %>% group_by(tpep_pickup_date) %>%
+  summarise(Day = min(tpep_pickup_day),
+            Month = min(tpep_pickup_month),
+            Year = min(tpep_pickup_year),
+            `Mon-Year` = min(tpep_pickup_mon_yr),
+            Passengers = sum(passenger_count))
+
+```
+
+### Use of yellow taxi by passengers with respect to the hour of the day
+
+```{r fig.width=12, fig.height=7}
+
+yellow_taxi_files %>% group_by(tpep_pickup_hour) %>%
+  summarise(passengers = sum(passenger_count, na.rm = TRUE)) %>%
+  arrange(tpep_pickup_hour, passengers) %>%
+  ggplot(mapping = aes(x = reorder(tpep_pickup_hour, passengers), y = passengers, label =
+    format(passengers, big.mark = ",", decimal.mark = "."))) +
+  geom_col(show.legend = FALSE) +
+  coord_flip() +
+  theme_economist() +
+  geom_text() +
+  labs(x = "Hour of the day",
+       y = "# of passengers",
+       title = "# of passengers using the yellow taxi by hour of the day") +
+  scale_y_continuous(labels = scales::comma)
+    
+
+```
+
+
+
+### Use of yellow taxi by passengers with respect to the pick-up date
+
+```{r fig.width=15}
+yellow_taxi_summary %>% group_by(tpep_pickup_date) %>%
+  summarise(passengers = sum(Passengers, na.rm = TRUE)) %>%
+  ggplot(mapping = aes(x = tpep_pickup_date, y = passengers)) +
+  geom_line() +
+  scale_x_date(date_labels = "%b %d %y", date_breaks = "1 month", date_minor_breaks = "1 day",
+               limits = as.Date(c("2017-01-01", "2017-12-31"))) +
+  scale_y_continuous(labels = scales::comma) +
+  labs(x = "Pick-up Date",
+       y = "# of passengers",
+       title = "# of passengers by pick-up date") +
+  theme_economist_white()
+
+```
+
+
+
+### Use of yellow taxi on different days of the week
+
+```{r yelllowTaxiUsagebyDay, fig.width=10, fig.height=5}
+yellow_taxi_summary %>% group_by(Day) %>%
+  summarise(`Total-Passengers` = sum(Passengers, na.rm = TRUE)) %>%
+  arrange(Day, `Total-Passengers`) %>%
+  ggplot(mapping = aes(x = reorder(Day, `Total-Passengers`), y = `Total-Passengers`, label = format(`Total-Passengers`, big.mark = ",", decimal.mark = "."))) +
+  geom_col(show.legend = FALSE, fill = "blue") +
+  coord_flip() +
+  theme_economist() +
+  geom_text() +
+  labs(x = "Days of the week",
+       y = "# of passengers",
+       title = "# of passengers using the yellow taxi by days of the week") +
+  scale_y_continuous(labels = scales::comma)
+  
+
+```
+
+
+* It would  be observed from the Figure above that more passengers use the yellow taxi on Fridays than any other day of the week with least number of passengers using the yellow taxi on Thursday.
+
+
+### Use of yellow taxi by month of the year
+
+```{r yelllowTaxiUsagebymth, fig.width=10, fig.height=5}
+
+yellow_taxi_summary %>% group_by(Month) %>%
+  summarise(`Total-Passengers` = sum(Passengers, na.rm = TRUE)) %>%
+  arrange(Month, `Total-Passengers`) %>%
+  ggplot(mapping = aes(x = reorder(Month, `Total-Passengers`), y = `Total-Passengers`, label = format(`Total-Passengers`, big.mark = ",", decimal.mark = "."))) +
+  geom_col(show.legend = FALSE, fill = "blue") +
+  coord_flip() +
+  theme_economist() +
+  geom_text() +
+  labs(x = "Months of the year",
+       y = "# of passengers",
+       title = "# of passengers using the yellow taxi by months of the year") +
+  scale_y_continuous(labels = scales::comma)
+  
+
+```
+
+
+## Citi Bike Dataset Analysis
+
+
+### Load Citi Bike Dataset
+
+#### Clean the citi bike dataset
+
+* The code chunk below is used to clean the citi bike dataset. It main function is to ensure that all datatype are accurately parsed/guessed by the **read_excel** function. The steps taken are described below
+
+1. Read all the citi-bike dataset i.e. all the 2017 datasets to be used for the analysis
+1. While reading the files, set the **na** argument of the **read_excel** function to **na = c("", "NULL")**. This will help the function to accurately guess the NA entries in the dataset
+1. bind all the dataframes into al single dataframe using **bind_rows()** function of the dplyr package.
+
+
+
+```{r cleanCiti_bike}
+
+## reading the excel files
+
+ citibike_201701 <- read_excel("CitiBike_2017/201701-citibike-tripdata.xlsx", na = c("", "NULL"), col_names = TRUE)
+
+ names(citibike_201701) <- c("Trip Duration", "Start Time", "Stop Time", "Start Station ID", "Start Station Name", "Start Station Latitude", "Start Station Longitude", "End Station ID", "End Station Name", "End Station Latitude", "End Station Longitude", "Bike ID", "User Type", "Birth Year", "Gender")
+
+citibike_201702 <- read_excel("CitiBike_2017/201702-citibike-tripdata.xlsx", na = c("", "NULL"),
+                              col_names = TRUE)
+
+names(citibike_201702) <- c("Trip Duration", "Start Time", "Stop Time", "Start Station ID", "Start Station Name", "Start Station Latitude", "Start Station Longitude", "End Station ID", "End Station Name", "End Station Latitude", "End Station Longitude", "Bike ID", "User Type", "Birth Year", "Gender")
+
+citibike_201703 <- read_excel("CitiBike_2017/201703-citibike-tripdata.xlsx", na = c("", "NULL"),
+                              col_names = TRUE)
+
+names(citibike_201703) <- c("Trip Duration", "Start Time", "Stop Time", "Start Station ID", "Start Station Name", "Start Station Latitude", "Start Station Longitude", "End Station ID", "End Station Name", "End Station Latitude", "End Station Longitude", "Bike ID", "User Type", "Birth Year", "Gender")
+
+citibike_201704 <- read_excel("CitiBike_2017/201704-citibike-tripdata.xlsx", na = c("", "NULL"),
+                              col_names = TRUE)
+
+names(citibike_201704) <- c("Trip Duration", "Start Time", "Stop Time", "Start Station ID", "Start Station Name", "Start Station Latitude", "Start Station Longitude", "End Station ID", "End Station Name", "End Station Latitude", "End Station Longitude", "Bike ID", "User Type", "Birth Year", "Gender")
+
+citibike_201705 <- read_excel("CitiBike_2017/201705-citibike-tripdata.xlsx", na = c("", "NULL"),
+                              col_names = TRUE)
+
+names(citibike_201705) <- c("Trip Duration", "Start Time", "Stop Time", "Start Station ID", "Start Station Name", "Start Station Latitude", "Start Station Longitude", "End Station ID", "End Station Name", "End Station Latitude", "End Station Longitude", "Bike ID", "User Type", "Birth Year", "Gender")
+
+citibike_201706 <- read_excel("CitiBike_2017/201706-citibike-tripdata.xlsx", na = c("", "NULL"),
+                              col_names = TRUE)
+
+names(citibike_201706) <- c("Trip Duration", "Start Time", "Stop Time", "Start Station ID", "Start Station Name", "Start Station Latitude", "Start Station Longitude", "End Station ID", "End Station Name", "End Station Latitude", "End Station Longitude", "Bike ID", "User Type", "Birth Year", "Gender")
+
+ citibike_201707 <- read_excel("CitiBike_2017/201707-citibike-tripdata.xlsx", na = c("", "NULL"),
+                               col_names = TRUE)
+ 
+ names(citibike_201707) <- c("Trip Duration", "Start Time", "Stop Time", "Start Station ID", "Start Station Name", "Start Station Latitude", "Start Station Longitude", "End Station ID", "End Station Name", "End Station Latitude", "End Station Longitude", "Bike ID", "User Type", "Birth Year", "Gender")
+ 
+ citibike_201708 <- read_excel("CitiBike_2017/201708-citibike-tripdata.xlsx", na = c("", "NULL"),
+                               col_names = TRUE)
+ 
+ names(citibike_201708) <- c("Trip Duration", "Start Time", "Stop Time", "Start Station ID", "Start Station Name", "Start Station Latitude", "Start Station Longitude", "End Station ID", "End Station Name", "End Station Latitude", "End Station Longitude", "Bike ID", "User Type", "Birth Year", "Gender")
+ 
+ citibike_201709 <- read_excel("CitiBike_2017/201709-citibike-tripdata.xlsx", na = c("", "NULL"),
+                               col_names = TRUE)
+ 
+ names(citibike_201709) <- c("Trip Duration", "Start Time", "Stop Time", "Start Station ID", "Start Station Name", "Start Station Latitude", "Start Station Longitude", "End Station ID", "End Station Name", "End Station Latitude", "End Station Longitude", "Bike ID", "User Type", "Birth Year", "Gender")
+
+citibike_201710 <- read_excel("CitiBike_2017/201710-citibike-tripdata.xlsx", na = c("", "NULL"),
+                              col_names = TRUE)
+
+names(citibike_201710) <- c("Trip Duration", "Start Time", "Stop Time", "Start Station ID", "Start Station Name", "Start Station Latitude", "Start Station Longitude", "End Station ID", "End Station Name", "End Station Latitude", "End Station Longitude", "Bike ID", "User Type", "Birth Year", "Gender")
+
+citibike_201711 <- read_excel("CitiBike_2017/201711-citibike-tripdata.xlsx", na = c("", "NULL"),
+                              col_names = TRUE)
+
+names(citibike_201711) <- c("Trip Duration", "Start Time", "Stop Time", "Start Station ID", "Start Station Name", "Start Station Latitude", "Start Station Longitude", "End Station ID", "End Station Name", "End Station Latitude", "End Station Longitude", "Bike ID", "User Type", "Birth Year", "Gender")
+
+citibike_201712 <- read_excel("CitiBike_2017/201712-citibike-tripdata.xlsx", na = c("", "NULL"),
+                              col_names = TRUE)
+
+names(citibike_201712) <- c("Trip Duration", "Start Time", "Stop Time", "Start Station ID", "Start Station Name", "Start Station Latitude", "Start Station Longitude", "End Station ID", "End Station Name", "End Station Latitude", "End Station Longitude", "Bike ID", "User Type", "Birth Year", "Gender")
+
+
+```
+
+
+* The code chunk below is majorly used to bind all the citi bike dataset.
+
+```{r readdata2}
+
+citi_bike_files <- bind_rows(citibike_201701, citibike_201702, citibike_201703, citibike_201704, citibike_201705,
+                             citibike_201706, citibike_201707, citibike_201708, citibike_201709, citibike_201710, citibike_201711, citibike_201712)
+
+glimpse(citi_bike_files)
+
+## remove the individual citibike dataframes to free up the system memory
+
+rm(citibike_201701, citibike_201702, citibike_201703, citibike_201704, 
+            citibike_201705, citibike_201706, citibike_201707, citibike_201708, 
+            citibike_201709, citibike_201710, citibike_201711, citibike_201712)
+
+```
+ 
+
+* Modify the _starttime_ field to generate
+  1. hour
+  1. date
+  1. start day (day of the week)
+  1. start month (month of the year)
+  1. start year (pickup year)
+
+```{r Bikedataset_modifytheDatefields}
+
+## extract features from the pickup_datetime field and limit the dataset to 2017. 
+
+citi_bike_files <- citi_bike_files %>% 
+  mutate(startdate = ymd(as.Date(`Start Time`)), # extract the date from the datetime field
+         starthour = hour(`Start Time`), # extract the hour from the datetime field
+         startday = wday(as.Date(`Start Time`), label= TRUE, abbr = TRUE), # extract day from the datetime fiels
+         startyear = year(as.Date(`Start Time`)), # extract year from the datetime field
+         startmonth = month(as.Date(`Start Time`), label = TRUE, abbr = TRUE), # extract month from the datetime field
+         start_mon_yr = paste(startmonth, startyear, sep = "-")) %>% # concatenate the mon-year
+  filter(startyear == "2017") # include only 2017 data
+
+```
+
+## Daily use of bike
+
+```{r tripduration, fig.width=15, fig.height=6}
+
+citi_bike_files %>% group_by(startdate) %>%
+  summarise(average_tripduration = mean(`Trip Duration`, na.rm = TRUE)) %>%
+  ggplot(mapping = aes(x = startdate, y = average_tripduration)) +
+  geom_line() +
+  scale_x_date(date_labels = "%b %d %y", date_breaks = "1 month", date_minor_breaks = "1 day",
+               limits = as.Date(c("2017-01-01", "2017-12-31"))) +
+  scale_y_continuous(labels = scales::comma) +
+  labs(x = "Start Date",
+       y = "Average trip duration",
+       title = "Average trip duration by date") +
+  theme_economist_white()
+
+```
+
+### Bike average trip duration by hour of the day
+
+```{r hour_tripduration, fig.width=12, fig.height=8}
+
+citi_bike_files %>% group_by(starthour) %>%
+  summarise(average_tripduration = mean(`Trip Duration`, na.rm = TRUE),
+            sd_error = sd(`Trip Duration`, na.rm = TRUE)/sqrt(n())) %>%
+  arrange(starthour, average_tripduration, sd_error) %>%
+  ggplot(mapping = aes(x = reorder(starthour, average_tripduration), y = average_tripduration)) +
+  geom_bar(show.legend = FALSE, stat = "identity") +
+  geom_errorbar(aes(ymin = average_tripduration - sd_error, ymax = average_tripduration + sd_error), position = "dodge", width = 0.25) +
+  coord_flip() +
+  theme_economist() +
+  labs(x = "Hour of the day",
+       y = "Average trip duration",
+       title = "Average trip duration of citi bike by hour of the day with error bar") +
+  scale_y_continuous(labels = scales::comma)
+
+
+
+
+citi_bike_files %>% group_by(starthour) %>%
+  summarise(average_tripduration = mean(`Trip Duration`, na.rm = TRUE),
+            sd_error = sd(`Trip Duration`, na.rm = TRUE)/sqrt(n())) %>%
+  arrange(starthour, average_tripduration, sd_error) %>%
+  ggplot(mapping = aes(x = reorder(starthour, average_tripduration), y = average_tripduration, label =
+    format(average_tripduration, big.mark = ",", decimal.mark = ".", digits = 5))) +
+  geom_bar(show.legend = FALSE, stat = "identity") +
+  coord_flip() +
+  theme_economist() +
+  geom_text() +
+  labs(x = "Hour of the day",
+       y = "Average trip duration",
+       title = "Average trip duration of citi bike by hour of the day") +
+  scale_y_continuous(labels = scales::comma)
+
+
+
+```
+
+
+### Bike demand by hour of the day
+
+```{r hour_demand, fig.width=12, fig.height=8}
+
+citi_bike_files %>% group_by(starthour) %>%
+  summarise(demand = n()) %>% 
+  arrange(starthour, demand) %>%
+  ggplot(mapping = aes(x = reorder(starthour, demand), y = demand)) +
+  geom_bar(show.legend = FALSE, stat = "identity") +
+  coord_flip() +
+  theme_economist() +
+  labs(x = "Hour of the day",
+       y = "Bike Usage",
+       title = "Bike usage by hour of the day") +
+  scale_y_continuous(labels = scales::comma)
+```
+
+
+
+
+
+
+## Weather Dataset Analysis
+
+### Load weather dataset
+
+```{r}
+
+weather_data <- read_csv("Weather Dataset/weather_dataset.csv") %>%
+  mutate(Date = parse_date(Date, format = "%d-%b-%y" ),
+         Time = parse_time(Time),
+         Temperature = as.numeric(gsub(pattern = "[[:alpha:]]", replacement = "",x = iconv(Temperature, to = "ASCII//TRANSLIT"))),
+         `Dew Point` = as.numeric(gsub(pattern = "[[:alpha:]]", replacement = "",x = iconv(`Dew Point`, to = "ASCII//TRANSLIT"))),
+         Humidity = as.numeric(gsub(pattern = "[[:punct:]]", replacement = "",x = iconv(Humidity, to = "ASCII//TRANSLIT"))),
+         Wind = factor(Wind),
+         `Wind Speed` = as.numeric(gsub(pattern = "[[:alpha:]]", replacement = "",x = iconv(`Wind Speed`, to = "ASCII//TRANSLIT"))),
+         `Wind Gust` = as.numeric(gsub(pattern = "[[:alpha:]]", replacement = "",x = iconv(`Wind Gust`, to = "ASCII//TRANSLIT"))),
+         Pressure = as.numeric(gsub(pattern = "[[:alpha:]]", replacement = "",x = iconv(Pressure, to = "ASCII//TRANSLIT"))),
+         `Precip.` = as.numeric(gsub(pattern = "[[:alpha:]]", replacement = "",x = iconv(`Precip.`, to = "ASCII//TRANSLIT"))),
+         `Precip Accum` = as.numeric(gsub(pattern = "[[:alpha:]]", replacement = "",x = iconv(`Precip Accum`, to = "ASCII//TRANSLIT"))),
+         Condition = factor(Condition))
+
+```
+
+#### summarize the weather into different hours for each day
+
+```{r}
+
+weather_data_hour <- weather_data %>% 
+  mutate(Hour = hour(Time)) %>%
+  group_by(Date, Hour) %>%
+  summarise(Temperature = mean(Temperature, na.rm = TRUE),
+            `Dew Point` = mean(`Dew Point`, na.rm = TRUE),
+            Humidity = mean(Humidity, na.rm = TRUE),
+            `Wind Speed` = mean(`Wind Speed`, na.rm = TRUE),
+            `Wind Gust` = mean(`Wind Gust`, na.rm = TRUE),
+            Pressure = mean(Pressure, na.rm = TRUE),
+            `Precip.` = mean(`Precip.`, na.rm = TRUE),
+            `Precip Accum` = mean(`Precip Accum`, na.rm = TRUE))
+
+```
+
+
+## Daily weather parameters visualization
+
+```{r weather, fig.width=15, fig.height=6}
+
+weather_data_hour %>% group_by(Date) %>%
+  summarise(average_temp = mean(Temperature, na.rm = TRUE)) %>%
+  ggplot(mapping = aes(x = Date, y = average_temp)) +
+  geom_line(col = "blue") +
+  scale_x_date(date_labels = "%b %d %y", date_breaks = "1 month", date_minor_breaks = "1 day",
+               limits = as.Date(c("2017-01-01", "2017-12-31"))) +
+  scale_y_continuous(labels = scales::comma) +
+  labs(x = "Date",
+       y = "Average Temperature (F)",
+       title = "Average temperature by date") +
+  theme_economist_white()
+
+
+weather_data_hour %>% group_by(Date) %>%
+  summarise(average_dew_point = mean(`Dew Point`, na.rm = TRUE)) %>%
+  ggplot(mapping = aes(x = Date, y = average_dew_point)) +
+  geom_line(col = "green") +
+  scale_x_date(date_labels = "%b %d %y", date_breaks = "1 month", date_minor_breaks = "1 day",
+               limits = as.Date(c("2017-01-01", "2017-12-31"))) +
+  scale_y_continuous(labels = scales::comma) +
+  labs(x = "Date",
+       y = "Dew Point (F)",
+       title = "Average dew point by date") +
+  theme_economist_white()
+
+weather_data_hour %>% group_by(Date) %>%
+  summarise(average_humidity = mean(Humidity, na.rm = TRUE)) %>%
+  ggplot(mapping = aes(x = Date, y = average_humidity)) +
+  geom_line(col = "yellow") +
+  scale_x_date(date_labels = "%b %d %y", date_breaks = "1 month", date_minor_breaks = "1 day",
+               limits = as.Date(c("2017-01-01", "2017-12-31"))) +
+  scale_y_continuous(labels = scales::comma) +
+  labs(x = "Date",
+       y = "Humidity (%)",
+       title = "Average Humidity by date") +
+  theme_economist_white()
+
+
+weather_data_hour %>% group_by(Date) %>%
+  summarise(average_wind_speed = mean(`Wind Speed`, na.rm = TRUE)) %>%
+  ggplot(mapping = aes(x = Date, y = average_wind_speed)) +
+  geom_line(col = "orange") +
+  scale_x_date(date_labels = "%b %d %y", date_breaks = "1 month", date_minor_breaks = "1 day",
+               limits = as.Date(c("2017-01-01", "2017-12-31"))) +
+  scale_y_continuous(labels = scales::comma) +
+  labs(x = "Date",
+       y = "Wind Speed",
+       title = "Average wind speed by date") +
+  theme_economist_white()
+
+
+
+
+weather_data_hour %>% group_by(Date) %>%
+  summarise(average_wind_gust = mean(`Wind Gust`, na.rm = TRUE)) %>%
+  ggplot(mapping = aes(x = Date, y = average_wind_gust)) +
+  geom_line(col = "grey") +
+  scale_x_date(date_labels = "%b %d %y", date_breaks = "1 month", date_minor_breaks = "1 day",
+               limits = as.Date(c("2017-01-01", "2017-12-31"))) +
+  scale_y_continuous(labels = scales::comma) +
+  labs(x = "Date",
+       y = "Wind Gust (mph)",
+       title = "Average wind gust by date") +
+  theme_economist_white()
+
+
+weather_data_hour %>% group_by(Date) %>%
+  summarise(average_pressure = mean(Pressure, na.rm = TRUE)) %>%
+  ggplot(mapping = aes(x = Date, y = average_pressure)) +
+  geom_line(col = "pink") +
+  scale_x_date(date_labels = "%b %d %y", date_breaks = "1 month", date_minor_breaks = "1 day",
+               limits = as.Date(c("2017-01-01", "2017-12-31"))) +
+  scale_y_continuous(labels = scales::comma) +
+  labs(x = "Date",
+       y = "Pressure (in)",
+       title = "Average pressure by date") +
+  theme_economist_white()
+
+weather_data_hour %>% group_by(Date) %>%
+  summarise(average_precip = mean(`Precip.`, na.rm = TRUE)) %>%
+  ggplot(mapping = aes(x = Date, y = average_precip)) +
+  geom_line(col = "red") +
+  scale_x_date(date_labels = "%b %d %y", date_breaks = "1 month", date_minor_breaks = "1 day",
+               limits = as.Date(c("2017-01-01", "2017-12-31"))) +
+  scale_y_continuous(labels = scales::comma) +
+  labs(x = "Date",
+       y = "Precipitation (in)",
+       title = "Average precipitation by date") +
+  theme_economist_white()
+
+```
+
+
+## Green Taxi Dataset Analysis
+
+
+### Load Green Taxi Dataset
+
+* The code chunk below is majorly used to load/read all the green taxi dataset.
+
+```{r readdata_greenTaxi}
+
+green_taxi_files <- list.files(path = "Green Taxi Dataset/",pattern = "*.xlsx", 
+                                full.names = TRUE, include.dirs = TRUE, recursive = TRUE) %>% 
+   map_df(read_excel)
+
+
+
+## drop the empty rows
+
+green_taxi_files <- green_taxi_files[-1, ]
+
+glimpse(green_taxi_files)
+
+```
+
+* Modify the _lpep_pickup_datetime_ field to generate
+  * pickup_date
+  * pickup_day (day of the week)
+  * pickup_month (month of the year)
+  * pickup_year (pickup year)
+
+```{r green_taxi_modifytheDatefields}
+
+## extract features from the pickup_datetime field and limit the dataset to 2017. 
+
+green_taxi_files <- green_taxi_files %>% 
+  mutate(lpep_pickup_date = ymd(as.Date(lpep_pickup_datetime)), # extract the date from the datetime field
+         lpep_pickup_hour = hour(lpep_pickup_datetime), # extract the hour from the datetime field
+         lpep_pickup_day = wday(as.Date(lpep_pickup_datetime), label= TRUE, abbr = TRUE), # extract day from the datetime fiels
+         lpep_pickup_year = year(as.Date(lpep_pickup_date)), # extract year from the datetime field
+         lpep_pickup_month = month(as.Date(lpep_pickup_date), label = TRUE, abbr = TRUE), # extract month from the datetime field
+         lpep_pickup_mon_year = paste(lpep_pickup_month, lpep_pickup_year, sep = "-")) %>% # concatenate the mon-year
+  filter(lpep_pickup_year == "2017") # include only 2017 data
+
+```
+
+
+### Green taxi summary based on usage
+
+```{r}
+
+green_taxi_summary <- green_taxi_files %>% group_by(lpep_pickup_date) %>%
+  summarise(Day = min(lpep_pickup_day),
+            Month = min(lpep_pickup_month),
+            Year = min(lpep_pickup_year),
+            `Mon-Year` = min(lpep_pickup_mon_year),
+            Passengers = sum(passenger_count, na.rm = TRUE),
+            total_distance = sum(trip_distance, na.rm = TRUE))
+
+```
+
+
+
+### Use of green taxi by passengers with respect to the hour of the day
+
+```{r fig.width=12, fig.height=7}
+
+green_taxi_files %>% group_by(lpep_pickup_hour) %>%
+  summarise(passengers = sum(passenger_count, na.rm = TRUE)) %>%
+  arrange(lpep_pickup_hour, passengers) %>%
+  ggplot(mapping = aes(x = reorder(lpep_pickup_hour, passengers), y = passengers, label =
+    format(passengers, big.mark = ",", decimal.mark = "."))) +
+  geom_col(show.legend = FALSE) +
+  coord_flip() +
+  theme_economist() +
+  geom_text() +
+  labs(x = "Hour of the day",
+       y = "# of passengers",
+       title = "# of passengers using the green taxi by hour of the day") +
+  scale_y_continuous(labels = scales::comma)
+    
+
+```
+
+
+
+### Use of green taxi by passengers with respect to the pick-up date
+
+```{r fig.width=15}
+green_taxi_summary %>% group_by(lpep_pickup_date) %>%
+  summarise(passengers = sum(Passengers, na.rm = TRUE)) %>%
+  ggplot(mapping = aes(x = lpep_pickup_date, y = passengers)) +
+  geom_line() +
+  scale_x_date(date_labels = "%b %d %y", date_breaks = "1 month", date_minor_breaks = "1 day",
+               limits = as.Date(c("2017-01-01", "2017-12-31"))) +
+  scale_y_continuous(labels = scales::comma) +
+  labs(x = "Pick-up Date",
+       y = "# of passengers",
+       title = "# of passengers by pick-up date | Green Taxi") +
+  theme_economist_white()
+
+```
+
+
+
+### Use of green taxi on different days of the week
+
+```{r greenTaxiUsagebyDay, fig.width=10, fig.height=5}
+green_taxi_summary %>% group_by(Day) %>%
+  summarise(`Total-Passengers` = sum(Passengers, na.rm = TRUE)) %>%
+  arrange(Day, `Total-Passengers`) %>%
+  ggplot(mapping = aes(x = reorder(Day, `Total-Passengers`), y = `Total-Passengers`, label = format(`Total-Passengers`, big.mark = ",", decimal.mark = "."))) +
+  geom_col(show.legend = FALSE, fill = "blue") +
+  coord_flip() +
+  theme_economist() +
+  geom_text() +
+  labs(x = "Days of the week",
+       y = "# of passengers",
+       title = "# of passengers using the green taxi by days of the week") +
+  scale_y_continuous(labels = scales::comma)
+  
+
+```
+
+
+
+### Use of green taxi by month of the year
+
+```{r greenTaxiUsagebymth, fig.width=10, fig.height=5}
+
+green_taxi_summary %>% group_by(Month) %>%
+  summarise(`Total-Passengers` = sum(Passengers, na.rm = TRUE)) %>%
+  arrange(Month, `Total-Passengers`) %>%
+  ggplot(mapping = aes(x = reorder(Month, `Total-Passengers`), y = `Total-Passengers`, label = format(`Total-Passengers`, big.mark = ",", decimal.mark = "."))) +
+  geom_col(show.legend = FALSE, fill = "blue") +
+  coord_flip() +
+  theme_economist() +
+  geom_text() +
+  labs(x = "Months of the year",
+       y = "# of passengers",
+       title = "# of passengers using the green taxi by months of the year") +
+  scale_y_continuous(labels = scales::comma)
+  
+
+```
+
+
+
+### Average distance covered by green taxi by day of the week
+
+```{r averagedistanceGreenTaxi, fig.width=10, fig.height=5}
+
+green_taxi_files %>% group_by(lpep_pickup_day) %>%
+  summarise(Average_distance = mean(trip_distance, na.rm = TRUE)) %>%
+  arrange(lpep_pickup_day, Average_distance) %>%
+  ggplot(mapping = aes(x = reorder(lpep_pickup_day, Average_distance), y = Average_distance, label = format(Average_distance, big.mark = ",", decimal.mark = "."))) +
+  geom_col(show.legend = FALSE, fill = "blue") +
+  coord_flip() +
+  theme_economist() +
+  geom_text() +
+  labs(x = "Days of the week",
+       y = "Average trip distance",
+       title = "Average trip distance of green taxi by months of the year") +
+  scale_y_continuous(labels = scales::comma)
+  
+
+```
+
+
+## Gasoline Dataset
+
+### Load the gasoline dataset
+
+* The code chunk below is used to load the historical gasoline dataset.
+
+```{r}
+gasoline_df <- read_excel("Gasoline/Gasoline_Retail_Prices_Weekly_Average_by_Region__Beginning_2007.xlsx") %>%
+  mutate(Date = mdy(Date))
+
+glimpse(gasoline_df)
+
+gasoline_df_tidied <- gasoline_df %>% 
+  gather(-Date, key = "City", value = "Gasoline_Average_Price")
+
+```
+
+
+### Visualize the historical pattern of average gasoline price in different city
+
+```{r fig.width=15, fig.height=8}
+
+gasoline_df_tidied %>% 
+  mutate(Year = year(Date)) %>% 
+  filter(Year == 2017) %>% 
+ggplot(mapping = aes(x = Date, y = Gasoline_Average_Price, color = City)) +
+  geom_smooth(se = FALSE) +
+  scale_x_date(date_labels = "%b %d %y", date_breaks = "1 month", date_minor_breaks = "1 day",
+               limits = as.Date(c("2017-01-01", "2017-12-31"))) +
+  scale_y_continuous(labels = scales::dollar) +
+  labs(x = "Date",
+       y = "Average gasoline price ($/gal)",
+       title = "2017 historical pattern of average gasoline price across different cities ") +
+  theme_economist_white()
+
+```
+
+
+
+### Visualize the historical pattern of average gasoline price in New York City
+
+```{r fig.width=15, fig.height=8}
+
+gasoline_df_tidied %>% 
+  mutate(Year = year(Date)) %>% 
+  filter(Year == 2017) %>%
+  filter(City == "New York City Average ($/gal)") %>% 
+ggplot(mapping = aes(x = Date, y = Gasoline_Average_Price)) +
+  geom_smooth() +
+  scale_x_date(date_labels = "%b %d %y", date_breaks = "1 month", date_minor_breaks = "1 day",
+               limits = as.Date(c("2017-01-01", "2017-12-31"))) +
+  scale_y_continuous(labels = scales::dollar) +
+  labs(x = "Date",
+       y = "Average gasoline price ($/gal)",
+       title = "2017 historical pattern of average gasoline price in New York City") +
+  theme_economist_white()
+
+```
+
+
+## Population Dataset
+
+### Load the population by age dataset
+
+* The code chunk below is used to load the 2017 population by age dataset for NYC.
+
+```{r}
+
+population_NYC_df <- read_excel("Population Data/population 2017_by age-NYC.xlsx")
+
+glimpse(population_NYC_df)
+
+
+```
+
+### Visualize the population age group dataset for NYC
+
+```{r fig.width = 12, fig.height = 8}
+
+population_NYC_df %>% 
+  ggplot(mapping = aes(x = reorder(`Age Group`, `Actual Population`), y = `Actual Population`, fill = `Age Group`, label = format(`Actual Population`, big.mark = ",", decimal.mark = "."))) +
+  geom_bar(show.legend = FALSE, stat = "identity", width = 0.8) +
+  labs(x = "Age Group",
+       y = "Population",
+       title = "NYC population by age group") +
+  scale_y_continuous(labels = scales::comma) +
+  theme_economist() +
+  coord_flip() +
+  geom_text()
+
+```
+
+
+# Clustering
+
+* Clustering the citi-bike dataset based on the start location lon-lat
+
+**Write up**
+
+## Clustering
+
+Clustering is an unsupervised learning technique. It is the task of grouping together a set of objects in a way that objects in the same cluster are more similar to each other than to objects in other clusters. Similarity is an amount that reflects the strength of relationship between two data objects. Clustering is mainly used for exploratory data mining. It is used in many fields such as machine learning, pattern recognition, image analysis, information retrieval, bio-informatics, data compression, and computer graphics.
+
+
+### K-means Clustering
+
+K-means clustering is a Centroid-based clustering. In this type of clustering, clusters are represented by a central vector or a centroid. This centroid might not necessarily be a member of the dataset. This is an iterative clustering algorithms in which the notion of similarity is derived by how close a data point is to the centroid of the cluster. 
+
+```{r}
+set.seed(120)
+km_model1 <- kmeans(citi_bike_files[, c(6:7)], 5, nstart = 100)
+
+## print the result
+
+print(km_model1)
+
+```
+
+**Adding the clusters from the kmeans algorithm to the citi bike dataset**
+
+* I named the clusters **Borough** in the _citi_bike_files_ dataset.
+
+```{r}
+
+citi_bike_files <- citi_bike_files %>% 
+  mutate(Borough  = as.factor(km_model1$cluster))
+
+## Google API key is required to access googlemap API
+
+#  library(ggmap)
+# 
+#  NYCMap <- get_map("New York", zoom = 10)
+#  ggmap(NYCMap) + geom_point(aes(x = Lon[], y = Lat[], colour = Borough),data = citi_bike_files) +
+#    ggtitle("NYC Boroughs using KMean")
+
+
+```
+
+
+
+## joining the population and citi bike datasets
+
+* Here, I will start joining the datasets. First starting with the population and citibike datasets.
+
+```{r}
+citi_bike_files <- citi_bike_files %>% 
+  mutate(Age = 2017 - `Birth Year`,
+         `Age Group` = if_else(Age < 5, "Under 5 years",
+                               if_else(Age >= 5 & Age <= 9, "5 to 9 years",
+                                       if_else(Age >= 10 & Age <= 14, "10 to 14 years",
+                                               if_else(Age >= 15 & Age <= 19, "15 to 19 years",
+                                                       if_else(Age >= 20 & Age  <= 24, "20 to 24 years",
+                                                               if_else(Age >= 25 & Age <= 29, "25 to 29 years",
+                                                                       if_else(Age >= 30 & Age <= 34, "30 to 34 years",
+                                                                               if_else(Age >= 35 & Age <= 39, "35 to 39 years",
+                                                                                       if_else(Age >= 40 & Age <= 44, "40 to 44 years",
+                                                                                               if_else(Age >= 45 & Age <= 49, "45 to 49 years",
+                                                                                                       if_else(Age >= 50 & Age <= 54, "50 to 54 years",
+                                                                                                               if_else(Age >= 55 & Age <= 59, "55 to 59 years",
+                                                                                                                       if_else(Age >= 60 & Age <= 64, "60 to 64 years",
+                                                                                                                               if_else(Age >= 65 & Age <= 69, "65 to 69 years",
+                                                                                                                                       if_else(Age >= 70 & Age <= 74, "70 to 74 years",
+                                                                                                                                               if_else(Age >= 75 & Age <= 79, "75 to 79 years",
+                                                                                                                                                       if_else(Age >= 80 & Age <= 84, "80 to 84 years",
+                                                                                                                                                               if_else(Age >= 85, "85 years and over", "NA"))))))))))))))))))) %>% 
+  inner_join(population_NYC_df)
+
+
+```
+
+
+
+## Bike usage per hour of the day for each day
+
+* Here, we will compute the daily hourly bike demand. The variable generated from here will be used as the target variable for the model. 
+
+* The target variable is the variable dubbed **demand** from the code chunk below.
+
+```{r}
+
+
+
+citi_bike_files_demand <- citi_bike_files %>% group_by(startdate, starthour, Borough) %>% 
+  summarise(demand = n(),
+            Duration = mean(`Trip Duration`, na.rm = TRUE),
+            `Birth Year` = max(`Birth Year`, na.rm = TRUE),
+            Population = round(mean(`Actual Population`, na.rm = TRUE),0)) 
+
+
+## compute the month for the startdate variable
+
+citi_bike_files_demand <- citi_bike_files_demand %>% mutate(week = lubridate::week(startdate))
+
+```
+
+
+## Join the gasoline dataset to the citi bike dataset
+
+```{r}
+gasoline_price <- gasoline_df %>% mutate(year = lubridate::year(Date),
+                                                 week = lubridate::week(Date)) %>% filter(year == 2017) %>%
+  dplyr::select(week, `New York City Average ($/gal)`) %>% 
+  rename(gasoline_price = `New York City Average ($/gal)`) 
+
+citi_bike_files_demand <- citi_bike_files_demand %>% 
+  left_join(gasoline_price)
+  
+```
+
+
+## Joining the weather dataset to the citi bike dataset
+
+* Here I will create a pseudo key for each dataset by concatenating the date and the hour of the day.
+
+```{r}
+
+citi_bike_files_demand <- citi_bike_files_demand %>% 
+  mutate(key = paste0(startdate, starthour))
+
+weather_data_hour <- weather_data_hour %>% 
+  mutate(key = paste0(Date, Hour))
+
+citi_bike_files_demand <- citi_bike_files_demand %>% 
+  left_join(weather_data_hour, by = "key")
+
+```
+
+
+## Joining the green dataset to the citi bike dataset
+
+* Here, I will prep the green taxi dataset by grouping by date and hour of the day and aggregating the trip duration, total amount and total passenger.
+
+```{r}
+
+green_taxi_prep <- green_taxi_files %>% 
+  group_by(lpep_pickup_date, lpep_pickup_hour) %>% 
+  summarise(green_taxi_total_trip_distance = sum(trip_distance, na.rm = TRUE),
+            green_taxi_total_amount = sum(total_amount, na.rm = TRUE),
+            green_taxi_total_passenger = sum(passenger_count, na.rm = TRUE)) %>% 
+  mutate(key = paste0(lpep_pickup_date, lpep_pickup_hour))
+
+citi_bike_files_demand <- citi_bike_files_demand %>% 
+  left_join(green_taxi_prep, by = "key") %>% 
+  dplyr::select(-lpep_pickup_date, -lpep_pickup_hour)
+
+
+```
+
+
+
+## Joining the yellow dataset to the citi bike dataset
+
+* Here, I will prep the yellow taxi dataset by grouping by date and hour of the day and aggregating the trip duration, total amount and total passenger.
+
+```{r}
+
+yellow_taxi_prep <- yellow_taxi_files %>% 
+  group_by(tpep_pickup_date, tpep_pickup_hour) %>% 
+  summarise(yellow_taxi_total_trip_distance = sum(trip_distance, na.rm = TRUE),
+            yellow_taxi_total_amount = sum(total_amount, na.rm = TRUE),
+            yellow_taxi_total_passenger = sum(passenger_count, na.rm = TRUE)) %>% 
+  mutate(key = paste0(tpep_pickup_date, tpep_pickup_hour))
+
+citi_bike_files_demand <- citi_bike_files_demand %>% 
+  left_join(yellow_taxi_prep, by = "key") %>% 
+  dplyr::select(-tpep_pickup_date, -tpep_pickup_hour, -Date, -Hour, -`Birth Year`, -week)
+
+
+```
+
+## Generate the final dataset
+
+```{r}
+final_citi_bike_data <- citi_bike_files_demand %>% 
+  select(-key) %>% 
+  mutate(Day = wday(startdate),
+         Month = month(startdate),
+         Week_Num = week(startdate)) %>% 
+  rename(Dew_Point = `Dew Point`, Wind_Speed = `Wind Speed`, Wind_Gust = `Wind Gust`, Precip = `Precip.`, Precip_Accum = `Precip Accum`)
+```
+
+
+## Correlation Analysis
+
+* In the code chunk below, I will implement a bivariate correlation among the covariates in the dataframe.
+* This will include only the numerical fields. Also, the pearson product moment correlation will be implemented
+
+```{r, fig.width=15, fig.height=7}
+correlate <- cor(final_citi_bike_data[, -c(1,3)], use = "pairwise.complete.obs")
+
+## Non-interactive correlation visualization
+corrplot(correlate)
+
+
+## interactive correlation visualization
+hchart(correlate)
+
+```
+
+From the visualization above, it will be observed that few of the variables correlate strongly.
+
+* The code chunk below will list the variables that correlate strongly based on a chosen threshold.
+
+
+```{r}
+findCorrelation(correlate, cutoff = 0.8, exact = TRUE, names = TRUE, verbose = TRUE)
+
+```
+
+
+# Model Implementation
+
+**Preprocessing**
+
+There are few NA's in the dataset to be used for the modelling. Missing value imputation method will be used to correct for missing values in the dataset.
+
+* Moreover, the training set will be preprocessed using **scale**, **center** and **pca** methods in the algorithms to be used for each of the models implementation.
+
+```{r warning=FALSE, message=FALSE}
+
+
+miceMod <- mice(final_citi_bike_data[, !names(final_citi_bike_data) %in% c("startdate", "Borough")], method="rf", m = 2)  # perform mice imputation, based on random forests.
+miceOutput <- complete(miceMod)  # generate the completed data.
+anyNA(miceOutput)
+
+
+final_citi_bike_dataset <- bind_cols(startdate = final_citi_bike_data$startdate,
+                                     Borough = final_citi_bike_data$Borough,
+                                     miceOutput) 
+
+
+```
+
+
+
+**Splitting the dataset into training and testing set**
+
+* 70% of the dataset is used for model training while 30% for testing
+
+```{r}
+
+spl <-  sample.split(final_citi_bike_dataset$Borough, SplitRatio = 0.7)
+
+training_set <-  subset(final_citi_bike_dataset, spl == TRUE)
+testing_set <-  subset(final_citi_bike_dataset, spl == FALSE)
+```
+
+## Algorithm: Artificial Neural Network (ANN)
+
+### Using only the citi-bike variates
+
+```{r}
+
+ANNFit_1 <- pcaNNet(demand ~ Borough + Duration + Day + Month + Week_Num, data = training_set, na.action = na.pass, size = 2)
+
+ANNFit_1
+
+pdata_ANN_1 <- predict(ANNFit_1, newdata = testing_set, na.action = na.pass)
+
+ANN1_RMSE <- DescTools::RMSE(pdata_ANN_1, testing_set$demand)
+#ANN1_MAPE <- DescTools::MAPE(pdata_ANN_1, testing_set$demand)
+ANN1_MAE <- DescTools::MAE(pdata_ANN_1, testing_set$demand)
+
+ANN1 <- data.frame(RMSE = ANN1_RMSE, MAE = ANN1_MAE)
+
+```
+
+
+### Bike data and weather data
+
+```{r}
+
+ANNFit_2 <- pcaNNet(demand ~ Borough + Duration + Day + Month + Week_Num + Temperature + `Dew_Point` + Humidity + `Wind_Speed` + `Wind_Gust` + Pressure + `Precip` + `Precip_Accum`, data = training_set, na.action = "na.omit", size = 2)
+
+ANNFit_2
+
+
+
+pdata_ANN_2 <- predict(ANNFit_2, newdata = testing_set, na.action = "na.omit")
+
+ANN2_RMSE <- DescTools::RMSE(pdata_ANN_2, testing_set$demand)
+#ANN2_MAPE <- DescTools::MAPE(pdata_ANN_2, testing_set$demand)
+ANN2_MAE <- DescTools::MAE(pdata_ANN_2, testing_set$demand)
+
+ANN2 <- data.frame(RMSE = ANN2_RMSE, MAE = ANN2_MAE)
+```
+
+
+### Bike data and yellow taxi data
+
+```{r}
+
+ANNFit_3 <- pcaNNet(demand ~ Borough + Duration + Day + Month + Week_Num + 
+                      yellow_taxi_total_trip_distance +
+                      yellow_taxi_total_amount +
+                      yellow_taxi_total_passenger,
+                    data = training_set, na.action = "na.omit", size = 2)
+
+ANNFit_3
+
+
+
+pdata_ANN_3 <- predict(ANNFit_3, newdata = testing_set, na.action = "na.omit")
+
+ANN3_RMSE <- DescTools::RMSE(pdata_ANN_3, testing_set$demand)
+#ANN3_MAPE <- DescTools::MAPE(pdata_ANN_3, testing_set$demand)
+ANN3_MAE <- DescTools::MAE(pdata_ANN_3, testing_set$demand)
+
+ANN3 <- data.frame(RMSE = ANN3_RMSE, MAE = ANN3_MAE)
+```
+
+
+### Bike data, weather data and yellow taxi data
+
+```{r}
+
+ANNFit_4 <- pcaNNet(demand ~ Borough + Duration + Day + Month + Week_Num + 
+                      yellow_taxi_total_trip_distance +
+                      yellow_taxi_total_amount +
+                      yellow_taxi_total_passenger +
+                      Temperature + `Dew_Point` + Humidity + `Wind_Speed` + `Wind_Gust` + Pressure + `Precip` + `Precip_Accum`,
+                    data = training_set, na.action = "na.omit", size = 2)
+
+ANNFit_4
+
+
+
+pdata_ANN_4 <- predict(ANNFit_4, newdata = testing_set, na.action = "na.omit")
+
+ANN4_RMSE <- DescTools::RMSE(pdata_ANN_4, testing_set$demand)
+#ANN4_MAPE <- DescTools::MAPE(pdata_ANN_4, testing_set$demand)
+ANN4_MAE <- DescTools::MAE(pdata_ANN_4, testing_set$demand)
+
+ANN4<- data.frame(RMSE = ANN4_RMSE, MAE = ANN4_MAE)
+```
+
+### Bike data, weather data,  yellow taxi data and green data
+
+
+```{r}
+
+ANNFit_5 <- pcaNNet(demand ~ Borough + Duration + Day + Month + Week_Num + 
+                      yellow_taxi_total_trip_distance +
+                      yellow_taxi_total_amount +
+                      yellow_taxi_total_passenger +
+                      Temperature + `Dew_Point` + Humidity + `Wind_Speed` + `Wind_Gust` + Pressure + `Precip` + `Precip_Accum` + green_taxi_total_trip_distance +
+                      green_taxi_total_amount + green_taxi_total_passenger,
+                    data = training_set, na.action = "na.omit", size = 2)
+
+ANNFit_5
+
+
+
+pdata_ANN_5 <- predict(ANNFit_5, newdata = testing_set, na.action = "na.omit")
+
+ANN5_RMSE <- DescTools::RMSE(pdata_ANN_5, testing_set$demand)
+#ANN5_MAPE <- DescTools::MAPE(pdata_ANN_5, testing_set$demand)
+ANN5_MAE <- DescTools::MAE(pdata_ANN_5, testing_set$demand)
+
+ANN5<- data.frame(RMSE = ANN5_RMSE, MAE = ANN5_MAE)
+```
+
+
+### Bike data, weather data, yellow taxi data, green taxi data, population data
+
+
+
+```{r}
+
+ANNFit_6 <- pcaNNet(demand ~ Borough + Duration + Day + Month + Week_Num + 
+                      yellow_taxi_total_trip_distance +
+                      yellow_taxi_total_amount +
+                      yellow_taxi_total_passenger +
+                      Temperature + `Dew_Point` + Humidity + `Wind_Speed` + `Wind_Gust` + Pressure + `Precip` + `Precip_Accum` + green_taxi_total_trip_distance +
+                      green_taxi_total_amount + green_taxi_total_passenger +
+                      Population,
+                    data = training_set, na.action = "na.omit", size = 2)
+
+ANNFit_6
+
+
+
+pdata_ANN_6 <- predict(ANNFit_6, newdata = testing_set, na.action = "na.omit")
+
+ANN6_RMSE <- DescTools::RMSE(pdata_ANN_6, testing_set$demand)
+#ANN6_MAPE <- DescTools::MAPE(pdata_ANN_6, testing_set$demand)
+ANN6_MAE <- DescTools::MAE(pdata_ANN_6, testing_set$demand)
+
+ANN6<- data.frame(RMSE = ANN6_RMSE, MAE = ANN6_MAE)
+```
+
+### Bike data, weather data, yellow taxi data, green taxi data, population data and gasoline price data
+
+
+
+```{r}
+
+ANNFit_7 <- nnet(demand ~ Borough + Duration + Day + Month + Week_Num + 
+                      yellow_taxi_total_trip_distance +
+                      yellow_taxi_total_amount +
+                      yellow_taxi_total_passenger +
+                      Temperature + `Dew_Point` + Humidity + `Wind_Speed` + `Wind_Gust` + Pressure + `Precip` + `Precip_Accum` + green_taxi_total_trip_distance +
+                      green_taxi_total_amount + green_taxi_total_passenger +
+                      Population + gasoline_price,
+                    data = training_set, na.action = "na.omit", size = 1)
+
+ANNFit_7
+
+
+
+pdata_ANN_7 <- predict(ANNFit_7, newdata = testing_set, na.action = "na.omit")
+
+ANN7_RMSE <- DescTools::RMSE(pdata_ANN_7, testing_set$demand)
+#ANN7_MAPE <- DescTools::MAPE(pdata_ANN_7, testing_set$demand)
+ANN7_MAE <- DescTools::MAE(pdata_ANN_7, testing_set$demand)
+
+ANN7<- data.frame(RMSE = ANN7_RMSE, MAE = ANN7_MAE)
+```
+
+## ANN Model metrics
+
+The table from the code chunk below shows the statistic (RMSE, MAE) from each of the ANN models.
+
+```{r}
+ANN_stat <- bind_rows(ANN1, ANN2, ANN3, ANN4, ANN5, ANN6, ANN7)
+
+knitr::kable(ANN_stat, caption = "ANN model metrics (RMSE, MAPE, MAE)")
+
+```
+
+## Support Vector Machine
+
+```{r}
+
+svm_model <- svm(demand ~ Borough + Duration + Day + Month + Week_Num + 
+                      yellow_taxi_total_trip_distance + yellow_taxi_total_amount +
+                      yellow_taxi_total_passenger + Temperature + `Dew_Point` +
+                      Humidity + `Wind_Speed` +
+                      Wind_Gust + Pressure + `Precip` + `Precip_Accum` +
+                      green_taxi_total_trip_distance + green_taxi_total_amount +
+                      green_taxi_total_passenger + Population + gasoline_price, 
+                      data = training_set, kernel = "radial")
+
+pdata_svm <- predict(svm_model, testing_set)
+
+svm_RMSE <- DescTools::RMSE(pdata_svm, testing_set$demand)
+svm_MAE <- DescTools::MAE(pdata_svm, testing_set$demand)
+
+svm_evaluation <- data.frame(RMSE = svm_RMSE, MAE = svm_MAE)
+
+## svm model evaluation
+
+knitr::kable(svm_evaluation, caption = "SVM model evaluation metrics (RMSE, MAE)")
+
+```
+
+
+## Random Forest
+
+```{r}
+
+rf_model <- randomForest(demand ~ Borough + Duration + Day + Month + Week_Num + 
+                      yellow_taxi_total_trip_distance + yellow_taxi_total_amount +
+                      yellow_taxi_total_passenger + Temperature + `Dew_Point` +
+                      Humidity + `Wind_Speed` +
+                      Wind_Gust + Pressure + `Precip` + `Precip_Accum` +
+                      green_taxi_total_trip_distance + green_taxi_total_amount +
+                      green_taxi_total_passenger + Population + gasoline_price, 
+                      data = training_set)
+
+pdata_rf <- predict(rf_model, testing_set)
+
+rf_RMSE <- DescTools::RMSE(pdata_rf, testing_set$demand)
+rf_MAE <- DescTools::MAE(pdata_rf, testing_set$demand)
+
+rf_evaluation <- data.frame(RMSE = rf_RMSE, MAE = rf_MAE)
+
+## svm model evaluation
+
+knitr::kable(rf_evaluation, caption = "Random Forest model evaluation metrics (RMSE, MAE)")
+
+```
+
+
+## Recurrent Neural Network (RNN)
+
+```{r}
+
+```
+
+
+## eXtreme Gradient Boosting (xgboost)
+
+
+```{r}
+
+```
+

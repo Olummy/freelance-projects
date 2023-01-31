@@ -1,0 +1,687 @@
+---
+title: "Autism Spectrum Disorder Detector"
+format: 
+  html:
+    toc: true
+    toc-depth: 3
+    toc-title: "Contents"
+    code-fold: show
+    theme: journal
+    code-overflow: wrap
+    code-copy: true
+    toc-float: true
+    anchor-sections: true
+    highlight-style: kate
+    fig-width: 12
+    fig-height: 9
+editor: visual
+---
+
+<!-- # AUTISM SPECTRUM DISORDER DETECTOR -->
+
+## Load Libraries and Datasets
+
+```{r}
+#| warning: false
+#| message: false
+
+library(tidyverse)
+library(magrittr)
+library(reactable)
+library(naniar)
+library(ggthemes)
+library(ggcorrplot)
+library(DescTools)
+library(tidymodels)
+library(zoo)
+
+# #import libraries
+# import matplotlib.pyplot as plt
+# import pandas as pd
+# import seaborn as sns
+# import warnings
+# from sklearn.metrics import plot_confusion_matrix
+# warnings.filterwarnings("ignore")
+```
+
+```{r}
+#| warning: false
+#| message: false
+
+
+# Load datasets
+
+df1 <- read_csv('csv_result-Autism-Adolescent-Data.csv')
+df2 <- read_csv('csv_result-Autism-Adult-Data.csv')
+df3 <- read_csv('csv_result-Autism-Child-Data.csv')
+```
+
+```{r}
+#| warning: false
+#| message: false
+
+
+dim(df1)
+dim(df2)
+dim(df3)
+```
+
+```{r}
+#| warning: false
+#| message: false
+
+
+#Merge datasets
+
+df2 %<>% mutate(age = as.numeric(age))
+
+df3 %<>% mutate(age = as.numeric(age))
+
+df <- df1 %>% 
+  bind_rows(df2, df3)
+
+```
+
+```{r}
+#| warning: false
+#| message: false
+#| comment: ""
+
+
+# Dataset shape, structure and variable data types
+
+glimpse(df)
+```
+
+## Exploratory Data Analysis of the Dataset
+
+```{r}
+#| warning: false
+#| message: false
+#| comment: ""
+
+
+reactable(df, searchable = TRUE, filterable = TRUE, sortable = TRUE, pagination = TRUE)
+
+```
+
+```{r}
+#| warning: false
+#| message: false
+#| comment: ""
+
+
+#Dataset Summary
+
+summary(df)
+```
+
+```{r}
+#| warning: false
+#| message: false
+#| comment: ""
+
+
+#Statistical Summary
+
+Desc(df)
+```
+
+```{r}
+#| warning: false
+#| message: false
+#| comment: ""
+
+
+# Autism Disorder Distribution in the Data
+
+df %>% 
+  group_by(`Class/ASD`) %>% 
+  summarise(Count = n()) %>% 
+  ggplot(aes(x = `Class/ASD`, y = Count)) +
+  geom_bar(stat = "identity", width = 0.3, fill = "steelblue", color = "white") +
+  labs(title = 'Autism Disorder Distribution in the Data') +
+  theme(title = element_text(family = "Sans", face = "bold", size = 16),
+        axis.title = element_text(family = "sans", size = 10, face = "plain")) +
+  theme_clean()
+
+```
+
+```{r}
+#| warning: false
+#| message: false
+#| comment: ""
+
+#Correlation plot of the A1-10 Scores
+
+df %>% 
+  select(2:11) %>% 
+  cor() %>% 
+  ggcorrplot(type = "lower", lab = TRUE, lab_size = 3) +
+  labs(title = 'Correlation plot of the A1-10 Scores') +
+  theme(title = element_text(family = "Sans", face = "bold", size = 16),
+        legend.title = element_text(family = "sans", size = 10, face = "plain"))
+
+
+
+```
+
+```{r}
+#| warning: false
+#| message: false
+#| comment: ""
+
+
+# Distribution Autism Disorder Grouped by Age
+
+df %>% 
+  group_by(age_desc, `Class/ASD`) %>% 
+  summarise(Count = n()) %>% 
+  ggplot(aes(x = age_desc, y = Count, fill = `Class/ASD`), color = "white") +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(title = 'Distribution Autism Disorder Grouped by Age',
+       x = "Age group") +
+  theme(title = element_text(family = "Sans", face = "bold", size = 16),
+        axis.title = element_text(family = "sans", size = 10, face = "plain")) +
+  theme_clean()
+
+
+```
+
+```{r}
+#| warning: false
+#| message: false
+#| comment: ""
+
+
+#Boxplot of Age Distribution
+
+ggplot(data = df, aes(x = `Class/ASD`, y = age)) +
+  geom_boxplot(fill = "steelblue", color = "white", na.rm = TRUE) +
+  labs(title = 'Boxplot of Age Distribution',
+       x = "Class/ASD",
+       y = "Age") +
+  theme(title = element_text(family = "Sans", face = "bold", size = 16),
+        axis.title = element_text(family = "sans", size = 10, face = "plain")) +
+  theme_clean()
+  
+
+```
+
+```{r}
+#| warning: false
+#| message: false
+#| comment: ""
+
+
+
+# Gender Distribution
+
+df %>% 
+  mutate(gender = case_when(gender == "f" ~ "Female",
+                            TRUE ~ "Male")) %>% 
+  group_by(gender) %>%
+  summarise(Freq = n()) %>% 
+  mutate(prop = Freq/sum(Freq)) %>% 
+  filter(Freq != 0) %>% 
+  
+  ggplot(mapping = aes(x = 2, y = prop, fill = gender))+
+  geom_bar(width = 1, color = "white", stat = "identity") +
+  xlim(0.5, 2.5) +
+  coord_polar(theta = "y", start = 0) +
+  theme_void() +
+  scale_y_continuous(labels = scales::percent) +
+  geom_text(aes(label = paste0(round(prop*100, 1), "%")), size = 4, position = position_stack(vjust = 0.5)) +
+  scale_fill_manual(values = c("#fc0394","#03adfc")) +
+  #theme(axis.text.x = element_text(angle = 90), legend.position = "top")+
+  labs(title = "Gender Distribution",
+       x = "",
+       y = "",
+       fill = "") +
+  theme(legend.position = "top") +
+   theme(title = element_text(family = "Sans", face = "bold", size = 16))
+
+
+```
+
+```{r}
+#| warning: false
+#| message: false
+#| comment: ""
+
+
+# Gender Distribution Grouped by Autism Disorder 
+
+df %>% 
+  mutate(gender = case_when(gender == "f" ~ "Female",
+                            TRUE ~ "Male")) %>% 
+  group_by(gender, `Class/ASD`) %>% 
+  summarise(Count = n()) %>% 
+  ggplot(aes(x = gender, y = Count, fill = `Class/ASD`), color = "white") +
+  geom_bar(stat = "identity", position = "dodge", width = 0.5) +
+  labs(title = 'Gender Distribution Grouped by Autism Disorder',
+       x = "Gender") +
+  theme(title = element_text(family = "Sans", face = "bold", size = 16),
+        axis.title = element_text(family = "sans", size = 10, face = "plain")) +
+  theme_clean()
+
+```
+
+```{r}
+#| warning: false
+#| message: false
+#| comment: ""
+
+
+# Distribution of Ethnic Groups by Autism Distribution
+
+df %>% 
+  filter(ethnicity != "?") %>% 
+  group_by(ethnicity, `Class/ASD`) %>% 
+  summarise(Count = n()) %>% 
+  ggplot(aes(x = ethnicity, y = Count, fill = `Class/ASD`), color = "white") +
+  geom_bar(stat = "identity", position = "dodge", width = 0.5) +
+  labs(title = 'Distribution of Ethnic Groups by Autism',
+       x = "Ethnicity") +
+  theme(title = element_text(family = "Sans", face = "bold", size = 16),
+        axis.title = element_text(family = "sans", size = 10, face = "plain")) +
+  theme_clean() +
+  theme(axis.text.x = element_text(angle = 45, vjust = 0.9, hjust = 0.9)) 
+
+```
+
+```{r}
+#| warning: false
+#| message: false
+#| comment: ""
+
+
+#Barplot of Country Counts
+
+df %>% 
+  group_by(contry_of_res) %>% 
+  summarise(Count = n()) %>% 
+  arrange(desc(Count)) %>% 
+  slice_head(n = 20) %>% 
+  ggplot(aes(x = reorder(contry_of_res, Count), y = Count)) +
+  geom_bar(stat = "identity", width = 0.3, fill = "steelblue", color = "white") +
+  labs(title = 'Barplot of Top 20 Countries',
+       x = "") +
+  coord_flip() +
+  theme(title = element_text(family = "Sans", face = "bold", size = 16),
+        axis.title = element_text(family = "sans", size = 10, face = "plain")) +
+  theme_clean()
+
+```
+
+```{r}
+#| warning: false
+#| message: false
+#| comment: ""
+
+
+#Donut plot of Jaundice Distribution
+
+
+df %>% 
+  mutate(jundice = case_when(jundice == "no" ~ "Not Jaundiced",
+                            TRUE ~ "Jaundiced")) %>% 
+  group_by(jundice) %>%
+  summarise(Freq = n()) %>% 
+  mutate(prop = Freq/sum(Freq)) %>% 
+  filter(Freq != 0) %>% 
+  
+  ggplot(mapping = aes(x = 2, y = prop, fill = jundice))+
+  geom_bar(width = 1, color = "white", stat = "identity") +
+  xlim(0.5, 2.5) +
+  coord_polar(theta = "y", start = 0) +
+  theme_void() +
+  scale_y_continuous(labels = scales::percent) +
+  geom_text(aes(label = paste0(round(prop*100, 1), "%")), size = 4, position = position_stack(vjust = 0.5)) +
+  scale_fill_manual(values = c('#FF0000', '#0000FF')) +
+  #theme(axis.text.x = element_text(angle = 90), legend.position = "top")+
+  labs(title = 'Donut plot of Jaundice Distribution',
+       x = "",
+       y = "",
+       fill = "") +
+  theme(legend.position = "top") +
+   theme(title = element_text(family = "Sans", face = "bold", size = 16))
+
+```
+
+```{r}
+#| warning: false
+#| message: false
+#| comment: ""
+
+# jaundice distribution grouped by Autism disorder
+
+df %>% 
+  mutate(jundice = case_when(jundice == "no" ~ "Not Jaundiced",
+                            TRUE ~ "Jaundiced")) %>% 
+  group_by(jundice, `Class/ASD`) %>% 
+  summarise(Count = n()) %>% 
+  ggplot(aes(x = jundice, y = Count, fill = `Class/ASD`), color = "white") +
+  geom_bar(stat = "identity", position = "dodge", width = 0.5) +
+  labs(title = 'Jaundice distribution grouped by Autism disorder',
+       x = "Jundice") +
+  theme(title = element_text(family = "Sans", face = "bold", size = 16),
+        axis.title = element_text(family = "sans", size = 10, face = "plain")) +
+  theme_clean()
+
+```
+
+```{r}
+#| warning: false
+#| message: false
+#| comment: ""
+
+#Proportion of those who have used an Autism Detector App Before
+
+df %>% 
+  mutate(used_app_before = str_to_title(used_app_before)) %>% 
+  group_by(used_app_before) %>%
+  summarise(Freq = n()) %>% 
+  mutate(prop = Freq/sum(Freq)) %>% 
+  filter(Freq != 0) %>% 
+  
+  ggplot(mapping = aes(x = 2, y = prop, fill = used_app_before))+
+  geom_bar(width = 1, color = "white", stat = "identity") +
+  xlim(0.5, 2.5) +
+  coord_polar(theta = "y", start = 0) +
+  theme_void() +
+  scale_y_continuous(labels = scales::percent) +
+  geom_text(aes(label = paste0(round(prop*100, 1), "%")), size = 4, position = position_stack(vjust = 0.5)) +
+  scale_fill_manual(values = c('#FF0000', '#0000FF')) +
+  #theme(axis.text.x = element_text(angle = 90), legend.position = "top")+
+  labs(title = 'Proportion of those who have used an \nAutism Detector App Before',
+       x = "",
+       y = "",
+       fill = "") +
+  theme(legend.position = "top") +
+   theme(title = element_text(family = "Sans", face = "bold", size = 16))
+
+
+
+```
+
+```{r}
+#| warning: false
+#| message: false
+#| comment: ""
+#Distribution of the results for A1-A10scores
+
+df %>% 
+  group_by(result) %>% 
+  summarise(Count = n()) %>% 
+  mutate(Prop = Count/sum(Count)) %>% 
+  ggplot(aes(x = factor(result), y = Prop)) +
+  geom_bar(stat = "identity", fill = "steelblue", color = "white") +
+  labs(title = 'Distribution of the results for A1-A10 scores',
+       x = "",
+       y = "") +
+  scale_y_continuous(labels = scales::percent) +
+  coord_flip() +
+  geom_text(aes(label = paste0(round(Prop*100), "%"))) +
+  theme(title = element_text(family = "Sans", face = "bold", size = 16),
+        axis.title = element_text(family = "sans", size = 10, face = "plain")) +
+  theme_clean()
+  
+```
+
+## Data Cleaning
+
+Handling Missing Values
+
+```{r}
+#| warning: false
+#| message: false
+#| comment: ""
+
+df %<>% replace_with_na(replace = list(ethnicity = "?", relation = "?"))
+
+```
+
+```{r}
+#| warning: false
+#| message: false
+#| comment: ""
+
+
+#Missing values count
+
+sum(is.na(df))
+
+```
+
+```{r}
+#| warning: false
+#| message: false
+#| comment: ""
+
+
+df$age <- na.aggregate(df$age) # replace all NA in age column by mean age
+
+df %<>%
+  mutate(age = as.integer(age),
+         ethnicity = case_when(is.na(ethnicity) ~ "White-European",
+                               TRUE ~ ethnicity),
+         relation = case_when(is.na(relation) ~ "Self",
+                              TRUE ~ relation))
+
+# check for any NA
+
+any(is.na(df))
+```
+
+Handling Categorical Variables with Label encoding
+
+```{r}
+#| warning: false
+#| message: false
+#| comment: ""
+
+
+glimpse(df)
+```
+
+```{r}
+#| warning: false
+#| message: false
+#| comment: ""
+#| eval: true
+
+
+# Encode the target variable as factor
+
+df%<>%
+mutate(`Class/ASD` = factor(`Class/ASD`))
+
+```
+
+```{r}
+#| warning: false
+#| message: false
+#| comment: ""
+
+
+#Drop the id and austim column
+
+df%<>%
+  select(-id, -austim)
+
+```
+
+# **Modelling**
+
+```{r}
+#| warning: false
+#| message: false
+#| comment: ""
+
+# split data to train and test set
+set.seed(1234)
+split <- rsample::initial_split(df, prop = 0.80, strata = `Class/ASD`)
+
+df_train <- training(split)
+df_test <- testing(split)
+
+```
+
+## Model Recipe
+
+```{r}
+#| warning: false
+#| message: false
+#| comment: ""
+
+
+rec <- recipe(`Class/ASD` ~ ., data = df_train)
+
+# add preprocessing
+
+prepro <- rec %>% 
+  step_normalize(all_numeric_predictors()) %>% 
+  step_dummy(all_nominal_predictors()) %>% 
+  step_other(all_nominal_predictors()) %>% 
+  step_impute_knn(all_nominal_predictors()) %>% 
+  step_filter_missing(all_nominal_predictors(),threshold = 0) %>% 
+  prep()
+
+prepro
+
+
+```
+
+## Define the model with parsnip
+
+```{r}
+#| warning: false
+#| message: false
+#| comment: ""
+
+## Logistic Regression
+
+lr <- logistic_reg(
+  mode = "classification"
+) %>% 
+  set_engine("glm")
+
+
+## Nearest Neighbor
+
+knn <- nearest_neighbor(
+  mode = "classification"
+) %>% 
+  set_engine("kknn")
+```
+
+## Define models workflow
+
+```{r}
+#| warning: false
+#| message: false
+#| comment: ""
+
+## Logistic Regression
+
+lr_wf <- workflow() %>% 
+  add_recipe(prepro) %>% 
+  add_model(lr)
+
+
+## Nearest Neighbor
+
+knn_wf <- workflow() %>% 
+  add_recipe(prepro) %>% 
+  add_model(knn)
+
+```
+
+## Obtaining Predictions
+
+```{r}
+#| warning: false
+#| message: false
+#| comment: ""
+
+set.seed(1234)
+
+## Logistic Regression
+
+lr_pred <- lr_wf %>% 
+  fit(df_train) %>% 
+  predict(df_test) %>% 
+  bind_cols(df_test)
+
+
+## Nearest Neighbor
+
+knn_pred <- knn_wf %>% 
+  fit(df_train) %>% 
+  predict(df_test) %>% 
+  bind_cols(df_test[c(1:214),])
+
+```
+
+## Evaluating model performance
+
+-   `kap`: Kappa
+-   `sens`: Sensitivity
+-   `spec`: Specificity
+-   `f_meas`: F1
+-   `mcc`: Matthews correlation coefficient
+
+### Logistic Regression
+
+```{r}
+#| warning: false
+#| message: false
+#| comment: ""
+
+lr_pred %>% 
+  conf_mat(truth = `Class/ASD`, estimate = .pred_class) %>% 
+  summary()
+
+
+```
+
+### Nearest Neighbor
+
+```{r}
+#| warning: false
+#| message: false
+#| comment: ""
+
+knn_pred %>% 
+  conf_mat(truth = `Class/ASD`, estimate = .pred_class) %>% 
+  summary()
+
+
+```
+
+## Logistic Regression Roc Curve
+
+```{r}
+#| warning: false
+#| message: false
+#| comment: ""
+
+
+## logistic regression
+
+prob_preds <- lr_wf %>% 
+  fit(df_train) %>% 
+  predict(df_test, type = "prob") %>% 
+  bind_cols(df_test)
+
+
+threshold_df <- prob_preds %>% 
+  roc_curve(truth = `Class/ASD`, estimate = .pred_NO)
+
+threshold_df %>% 
+  autoplot()
+
+
+roc_auc(prob_preds, truth = `Class/ASD`, estimate = .pred_NO)
+```
